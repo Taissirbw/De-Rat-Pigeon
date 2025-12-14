@@ -1,3 +1,18 @@
-[gd_scene format=3 uid="uid://qi5sgrgq52ih"]
+[gd_scene load_steps=3 format=3 uid="uid://qi5sgrgq52ih"]
+
+[ext_resource type="Texture2D" uid="uid://b31j02xgrqmje" path="res://Assets/player_placeholder.png" id="1_80nbo"]
+[ext_resource type="Texture2D" uid="uid://bmxm0aiid4f6u" path="res://Assets/plateforme-placeholder.png" id="2_e2o6t"]
 
 [node name="game" type="Node"]
+
+[node name="platform" type="Node2D" parent="."]
+
+[node name="sprite" type="Node" parent="platform"]
+
+[node name="bonhomme" type="Sprite2D" parent="platform/sprite"]
+position = Vector2(-45, -130)
+texture = ExtResource("1_80nbo")
+
+[node name="bloc" type="Sprite2D" parent="platform/sprite"]
+position = Vector2(26, 302)
+texture = ExtResource("2_e2o6t")
