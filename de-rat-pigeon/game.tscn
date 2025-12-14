@@ -1,8 +1,7 @@
-[gd_scene load_steps=10 format=4 uid="uid://qi5sgrgq52ih"]
+[gd_scene load_steps=9 format=4 uid="uid://qi5sgrgq52ih"]
 
 [ext_resource type="Script" uid="uid://drf3w115vbgqc" path="res://game.gd" id="1_fc0e3"]
 [ext_resource type="Script" uid="uid://dnvxrkor82gqb" path="res://player.gd" id="2_feb5d"]
-[ext_resource type="Script" uid="uid://cq4o23e7qwo0v" path="res://tapette_a_souris.gd" id="5_7jktm"]
 [ext_resource type="Texture2D" uid="uid://51flqe3naxye" path="res://Assets/Player/rat-3.png" id="5_j5wjh"]
 [ext_resource type="PackedScene" uid="uid://truyffsrng0" path="res://tile_map_layer.tscn" id="6_ryrav"]
 [ext_resource type="Texture2D" uid="uid://cewe7g5c20ipo" path="res://Assets/Player/rat-1.png" id="6_vef74"]
@@ -62,11 +61,17 @@ shape = SubResource("RectangleShape2D_feb5d")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player"]
 position = Vector2(-29, -26)
 sprite_frames = SubResource("SpriteFrames_mfdv2")
-frame_progress = 0.082086
+frame_progress = 0.6090141
 
 [node name="Level" type="Node2D" parent="."]
 
-[node name="tapette_a_souris" type="Node2D" parent="Level"]
-script = ExtResource("5_7jktm")
+[node name="mort_au_rats" type="Area2D" parent="Level"]
 
-[node name="mort_au_rats" type="Node2D" parent="Level"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/mort_au_rats"]
+
+[node name="tapette_a_souris" type="Area2D" parent="Level"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/tapette_a_souris"]
+
+[connection signal="area_entered" from="Level/mort_au_rats" to="Player" method="_on_mort_au_rats_area_entered"]
+[connection signal="area_entered" from="Level/tapette_a_souris" to="Player" method="_on_tapette_a_souris_area_entered"]
