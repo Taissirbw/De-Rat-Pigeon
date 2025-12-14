@@ -49,3 +49,7 @@ func open() -> void:
 		1.0,
 		fade_out_duration
 	).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+
+func _on_quit_button_pressed() -> void:
+	if visible:
+		get_tree().quit()

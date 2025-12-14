@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://drf3w115vbgqc" path="res://game.gd" id="1_fc0e3"]
 [ext_resource type="Texture2D" uid="uid://bmxm0aiid4f6u" path="res://Assets/plateforme-placeholder.png" id="2_e2o6t"]
 [ext_resource type="Script" uid="uid://dnvxrkor82gqb" path="res://player.gd" id="2_feb5d"]
-[ext_resource type="Script" uid="uid://xepjcu15u11t" path="res://pause_menu.gd" id="5_7jktm"]
+[ext_resource type="Script" uid="uid://xepjcu15u11t" path="res://menu_pause.gd" id="5_7jktm"]
 [ext_resource type="PackedScene" uid="uid://truyffsrng0" path="res://tile_map_layer.tscn" id="6_ryrav"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fc0e3"]
@@ -46,9 +46,9 @@ position = Vector2(-298, -12.999992)
 scale = Vector2(0.16000006, 0.1533333)
 texture = ExtResource("1_80nbo")
 
-[node name="InterfaceLayer" type="CanvasLayer" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="pause_menu" type="Control" parent="InterfaceLayer"]
+[node name="menu_pause" type="Control" parent="CanvasLayer"]
 layout_mode = 3
 anchor_right = 0.768
 anchor_bottom = 0.89800006
@@ -56,42 +56,28 @@ offset_right = -884.736
 offset_bottom = -581.90405
 script = ExtResource("5_7jktm")
 
-[node name="ColorRect" type="ColorRect" parent="InterfaceLayer/pause_menu"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = 800.0
-offset_bottom = 480.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.2509804, 0.07058824, 0.2, 1)
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/menu_pause"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0.25044203, 0.0701934, 0.20108974, 0)
 
-[node name="CenterContainer" type="CenterContainer" parent="InterfaceLayer/pause_menu/ColorRect"]
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/menu_pause/ColorRect"]
 layout_mode = 0
 offset_left = -3.0
 offset_right = 797.0
 offset_bottom = 480.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="InterfaceLayer/pause_menu/ColorRect/CenterContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/menu_pause/ColorRect/CenterContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="InterfaceLayer/pause_menu/ColorRect/CenterContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="CanvasLayer/menu_pause/ColorRect/CenterContainer/VBoxContainer"]
 layout_mode = 2
 text = "Pause"
 horizontal_alignment = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="InterfaceLayer/pause_menu/ColorRect/CenterContainer/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/menu_pause/ColorRect/CenterContainer/VBoxContainer"]
 layout_mode = 2
-
-[node name="ResumeButton" type="Button" parent="InterfaceLayer/pause_menu/ColorRect/CenterContainer/VBoxContainer"]
-layout_mode = 2
-text = "Reprendre"
-
-[node name="Button2" type="Button" parent="InterfaceLayer/pause_menu/ColorRect/CenterContainer/VBoxContainer"]
-layout_mode = 2
-text = "Quitter
-"
 
 [node name="TileMapLayer" parent="." instance=ExtResource("6_ryrav")]
 tile_map_data = PackedByteArray("AAAAAAIAAAABAAMAAAABAAIAAAACAAMAAAACAAIAAAACAAMAAAADAAIAAAADAAMAAAAEAAEAAAABAAEAAAAEAAIAAAABAAIAAAAEAAAAAAABAAEAAAD//wIAAAAAAAMAAAD//wEAAAAAAAIAAAD//wAAAAAAAAIAAAADAAEAAAADAAIAAAADAAAAAAADAAEAAAADAP//AAADAAAAAAAEAP//AAABAAEAAAACAP//AAACAAAAAAABAP//AAACAAAAAAAAAP//AAACAAAAAAD/////AAAAAAAAAAA=")
