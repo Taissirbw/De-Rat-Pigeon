@@ -5,7 +5,7 @@ extends CharacterBody2D
 @export var gravity = 6000
 @export_range(0.0, 1.0) var friction = 0.1
 @export_range(0.0 , 1.0) var acceleration = 0.25
-var compteur = 1
+@export var compteur = 1
 func _physics_process(delta):
 	velocity.y += gravity * delta
 	var dir = Input.get_axis("walk_left", "walk_right")
@@ -15,9 +15,9 @@ func _physics_process(delta):
 	else:
 		velocity.x = lerp(velocity.x, 0.0, friction)
 		#$AnimatedSprite2D.set_animation("default")
-	if absf(velocity.x) > 0.4:
+	if absf(velocity.x) > 1:
 		$AnimatedSprite2D.play("run")
-	if absf(velocity.x) < 0.4 :
+	if absf(velocity.x) < 1 :
 		$AnimatedSprite2D.play("default")
 	move_and_slide()
 	if compteur==1:
@@ -38,7 +38,7 @@ func _physics_process(delta):
 
 
 func _on_tapette_a_souris_area_entered(area: Area2D) -> void:
-	pass # on peut plus sauter
+	compteur =0
 
 
 func _on_mort_au_rats_area_entered(area: Area2D) -> void:
