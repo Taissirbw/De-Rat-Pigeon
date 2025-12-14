@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=4 uid="uid://qi5sgrgq52ih"]
 
-[ext_resource type="Texture2D" uid="uid://b31j02xgrqmje" path="res://Assets/player_placeholder.png" id="1_80nbo"]
+[ext_resource type="Texture2D" uid="uid://cigxebwf5wrli" path="res://Assets/player_placeholder.png" id="1_80nbo"]
 [ext_resource type="Script" uid="uid://drf3w115vbgqc" path="res://game.gd" id="1_fc0e3"]
-[ext_resource type="Script" uid="uid://dnvxrkor82gqb" path="res://player.gd" id="2_feb5d"]
+[ext_resource type="Script" path="res://player.gd" id="2_feb5d"]
 [ext_resource type="PackedScene" uid="uid://truyffsrng0" path="res://tile_map_layer.tscn" id="6_ryrav"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_feb5d"]
