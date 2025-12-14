@@ -1,10 +1,10 @@
 [gd_scene load_steps=9 format=4 uid="uid://qi5sgrgq52ih"]
 
-[ext_resource type="Texture2D" uid="uid://b31j02xgrqmje" path="res://Assets/player_placeholder.png" id="1_80nbo"]
+[ext_resource type="Texture2D" uid="uid://cigxebwf5wrli" path="res://Assets/player_placeholder.png" id="1_80nbo"]
 [ext_resource type="Script" uid="uid://drf3w115vbgqc" path="res://game.gd" id="1_fc0e3"]
-[ext_resource type="Texture2D" uid="uid://bmxm0aiid4f6u" path="res://Assets/plateforme-placeholder.png" id="2_e2o6t"]
-[ext_resource type="Script" uid="uid://dnvxrkor82gqb" path="res://player.gd" id="2_feb5d"]
-[ext_resource type="Script" uid="uid://xepjcu15u11t" path="res://pause_menu.gd" id="5_7jktm"]
+[ext_resource type="Texture2D" uid="uid://emqnmhbvxpxx" path="res://Assets/plateforme-placeholder.png" id="2_e2o6t"]
+[ext_resource type="Script" path="res://player.gd" id="2_feb5d"]
+[ext_resource type="Script" path="res://pause_menu.gd" id="5_7jktm"]
 [ext_resource type="PackedScene" uid="uid://truyffsrng0" path="res://tile_map_layer.tscn" id="6_ryrav"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fc0e3"]
@@ -94,4 +94,4 @@ text = "Quitter
 "
 
 [node name="TileMapLayer" parent="." instance=ExtResource("6_ryrav")]
-tile_map_data = PackedByteArray("AAAAAAIAAAABAAAAAAABAAIAAAAFAAAAAAACAAIAAAACAAIAAAADAAIAAAAAAAAAAAAEAAEAAAAAAAEAAAAEAAIAAAAEAAMAAAAEAAAAAAAAAAEAAAD//wIAAAABAAMAAAD//wEAAAAFAAIAAAD//wAAAAAFAAIAAAADAP//AAACAAQAAAAEAP//AAAEAAEAAAACAP//AAACAAQAAAABAP//AAACAAQAAAAAAP//AAACAAQAAAD/////AAABAAEAAAACAAEAAAABAAAAAAA=")
+tile_map_data = PackedByteArray("AAAAAAIAAAABAAAAAAABAAIAAAAFAAAAAAACAAIAAAACAAIAAAADAAIAAAAAAAAAAAAEAAEAAAAAAAEAAAAEAAIAAAAEAAMAAAAEAAAAAAAAAAEAAAD//wIAAAABAAMAAAD//wEAAAAFAAIAAAD//wAAAAAFAAIAAAADAP//AAACAAQAAAAEAP//AAAEAAEAAAACAP//AAACAAQAAAABAP//AAACAAQAAAAAAP//AAACAAQAAAD/////AAABAAEAAAA=")
