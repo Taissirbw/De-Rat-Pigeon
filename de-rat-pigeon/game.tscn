@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=4 uid="uid://qi5sgrgq52ih"]
+[gd_scene load_steps=7 format=4 uid="uid://qi5sgrgq52ih"]
 
 [ext_resource type="Texture2D" uid="uid://b31j02xgrqmje" path="res://Assets/player_placeholder.png" id="1_80nbo"]
 [ext_resource type="Script" uid="uid://drf3w115vbgqc" path="res://game.gd" id="1_fc0e3"]
 [ext_resource type="Script" uid="uid://dnvxrkor82gqb" path="res://player.gd" id="2_feb5d"]
+[ext_resource type="Script" uid="uid://cq4o23e7qwo0v" path="res://tapette_a_souris.gd" id="5_7jktm"]
 [ext_resource type="PackedScene" uid="uid://truyffsrng0" path="res://tile_map_layer.tscn" id="6_ryrav"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_feb5d"]
@@ -29,3 +30,14 @@ shape = SubResource("RectangleShape2D_feb5d")
 texture = ExtResource("1_80nbo")
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
+
+[node name="Level" type="Node2D" parent="."]
+
+[node name="tapette_a_souris" type="CharacterBody2D" parent="Level"]
+script = ExtResource("5_7jktm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/tapette_a_souris"]
+
+[node name="mort_au_rats" type="CharacterBody2D" parent="Level"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/mort_au_rats"]
