@@ -1,18 +1,44 @@
-[gd_scene load_steps=3 format=3 uid="uid://qi5sgrgq52ih"]
+[gd_scene load_steps=6 format=3 uid="uid://qi5sgrgq52ih"]
 
 [ext_resource type="Texture2D" uid="uid://b31j02xgrqmje" path="res://Assets/player_placeholder.png" id="1_80nbo"]
 [ext_resource type="Texture2D" uid="uid://bmxm0aiid4f6u" path="res://Assets/plateforme-placeholder.png" id="2_e2o6t"]
+[ext_resource type="Script" uid="uid://dnvxrkor82gqb" path="res://player.gd" id="2_feb5d"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fc0e3"]
+size = Vector2(780, 40)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_feb5d"]
+size = Vector2(49, 47)
 
 [node name="game" type="Node"]
 
 [node name="platform" type="Node2D" parent="."]
+position = Vector2(445, 387)
 
 [node name="sprite" type="Node" parent="platform"]
 
-[node name="bonhomme" type="Sprite2D" parent="platform/sprite"]
-position = Vector2(-45, -130)
-texture = ExtResource("1_80nbo")
+[node name="bloc" type="StaticBody2D" parent="platform/sprite"]
+position = Vector2(445, 387)
 
-[node name="bloc" type="Sprite2D" parent="platform/sprite"]
-position = Vector2(26, 302)
+[node name="bloc_sprite" type="Sprite2D" parent="platform/sprite/bloc"]
+position = Vector2(-32.00003, 171)
+scale = Vector2(0.87111104, 0.12666667)
 texture = ExtResource("2_e2o6t")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="platform/sprite/bloc"]
+position = Vector2(-31, 171)
+shape = SubResource("RectangleShape2D_fc0e3")
+
+[node name="Player" type="CharacterBody2D" parent="platform/sprite"]
+position = Vector2(372, 505)
+script = ExtResource("2_feb5d")
+metadata/_custom_type_script = "uid://dnvxrkor82gqb"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="platform/sprite/Player"]
+position = Vector2(80.5, -3.5)
+shape = SubResource("RectangleShape2D_feb5d")
+
+[node name="bonhomme" type="Sprite2D" parent="platform/sprite/Player"]
+position = Vector2(80.99999, -2.9999924)
+scale = Vector2(0.16000006, 0.1533333)
+texture = ExtResource("1_80nbo")
