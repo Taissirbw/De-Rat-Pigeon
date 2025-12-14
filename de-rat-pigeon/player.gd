@@ -37,9 +37,17 @@ func _physics_process(delta):
 
 
 
-func _on_tapette_a_souris_area_entered(area: Area2D) -> void:
+func _on_tapette_a_souris_area_entered(area: Area2D) -> int:
 	compteur =0
+	print("ui")
+	return compteur
 
 
 func _on_mort_au_rats_area_entered(area: Area2D) -> void:
 	pass # faudra modifier l'écran
+
+
+func _on_tapette_a_souris_body_shape_entered(body_rid: RID, body: Node2D, body_shape_index: int, local_shape_index: int) -> void:
+	compteur =0
+	print("ui")
+# Replace with function body.

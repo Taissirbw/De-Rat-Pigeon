@@ -1,11 +1,11 @@
 [gd_scene load_steps=11 format=4 uid="uid://qi5sgrgq52ih"]
 
-[ext_resource type="Texture2D" uid="uid://b31j02xgrqmje" path="res://Assets/player_placeholder.png" id="1_80nbo"]
 [ext_resource type="Script" uid="uid://drf3w115vbgqc" path="res://game.gd" id="1_fc0e3"]
 [ext_resource type="Script" uid="uid://dnvxrkor82gqb" path="res://player.gd" id="2_feb5d"]
 [ext_resource type="Texture2D" uid="uid://51flqe3naxye" path="res://Assets/Player/rat-3.png" id="5_j5wjh"]
 [ext_resource type="PackedScene" uid="uid://truyffsrng0" path="res://tile_map_layer.tscn" id="6_ryrav"]
 [ext_resource type="Texture2D" uid="uid://cewe7g5c20ipo" path="res://Assets/Player/rat-1.png" id="6_vef74"]
+[ext_resource type="Texture2D" uid="uid://bwv01e5c1n0vl" path="res://Assets/mortauxrat.png" id="7_eow3j"]
 [ext_resource type="Texture2D" uid="uid://dpyi7rus6rsvq" path="res://Assets/Player/rat-2.png" id="7_hve3p"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_feb5d"]
@@ -65,7 +65,7 @@ shape = SubResource("RectangleShape2D_feb5d")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player"]
 position = Vector2(-29, -26)
 sprite_frames = SubResource("SpriteFrames_mfdv2")
-frame_progress = 0.0979279
+frame_progress = 0.46619803
 
 [node name="Level" type="Node2D" parent="."]
 
@@ -76,12 +76,19 @@ frame_progress = 0.0979279
 [node name="tapette_a_souris" type="Area2D" parent="Level"]
 
 [node name="Sprite2D" type="Sprite2D" parent="Level/tapette_a_souris"]
-position = Vector2(92, 238)
-texture = ExtResource("1_80nbo")
+position = Vector2(88.5, 240)
+scale = Vector2(0.45999998, 0.72)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Level/tapette_a_souris"]
-position = Vector2(88, 239)
+position = Vector2(87, 238)
 shape = SubResource("RectangleShape2D_eow3j")
+
+[node name="Mortauxrat" type="Sprite2D" parent="Level/tapette_a_souris"]
+position = Vector2(91, 238.00002)
+rotation = -1.5707964
+scale = Vector2(0.46666664, 0.73)
+texture = ExtResource("7_eow3j")
 
 [connection signal="area_entered" from="Level/mort_au_rats" to="Player" method="_on_mort_au_rats_area_entered"]
 [connection signal="area_entered" from="Level/tapette_a_souris" to="Player" method="_on_tapette_a_souris_area_entered"]
+[connection signal="body_shape_entered" from="Level/tapette_a_souris" to="Player" method="_on_tapette_a_souris_body_shape_entered"]
