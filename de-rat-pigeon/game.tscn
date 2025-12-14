@@ -10,11 +10,14 @@
 [ext_resource type="Texture2D" uid="uid://bi03x2pymkolq" path="res://Assets/Player/rat-2.png" id="7_hve3p"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_feb5d"]
-size = Vector2(41, 56)
+size = Vector2(40, 24)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_mfdv2"]
 animations = [{
-"frames": [],
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_vef74")
+}],
 "loop": true,
 "name": &"default",
 "speed": 5.0
@@ -47,16 +50,17 @@ position = Vector2(-24, 593)
 tile_map_data = PackedByteArray("AAAAAAAAAAABAAMAAAAAAP//AAAFAAIAAAAAAPj/AAAFAAIAAAAAAPn/AAAFAAIAAAAAAPr/AAAFAAEAAAAAAPv/AAAFAAIAAAAAAPz/AAAFAAIAAAAAAP3/AAAFAAIAAAAAAP7/AAAFAAEAAAADAPj/AAAEAAIAAAADAPn/AAAAAAIAAAADAPr/AAAAAAIAAAADAPv/AAAAAAIAAAADAPz/AAAEAAIAAAADAP3/AAAAAAQAAAABAAAAAAAEAAAAAAACAAAAAAAEAAAAAAADAAAAAAAEAAAAAAAEAAAAAAAEAAAAAAAFAAAAAAAEAAAAAAAGAAAAAAAEAAAAAAAHAAAAAAAEAAAAAAAIAAAAAAAEAAAAAAAEAP3/AAACAAQAAAAFAP3/AAACAAQAAAAGAP3/AAAEAAEAAAAGAP7/AAAAAAQAAAAHAP7/AAAFAAQAAAAJAP7/AAAAAAQAAAAJAAAAAAABAAAAAAAKAAAAAAAEAAMAAAAKAP7/AAAEAAEAAAAKAP//AAAAAAEAAAAHAP3/AAAFAAEAAAAHAPz/AAABAAIAAAAHAPv/AAABAAIAAAAHAPr/AAABAAIAAAAHAPn/AAAFAAEAAAAHAPj/AAABAAIAAAAJAP3/AAAAAAIAAAAJAPz/AAAAAAIAAAAJAPv/AAAAAAEAAAAJAPr/AAAAAAIAAAAJAPn/AAAAAAIAAAAJAPj/AAAAAAIAAAA=")
 
 [node name="Player" type="CharacterBody2D" parent="."]
-position = Vector2(208, 556)
+position = Vector2(208, 538)
 floor_stop_on_slope = false
 floor_constant_speed = true
 script = ExtResource("2_feb5d")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
-position = Vector2(-2.5, 5)
+position = Vector2(33, 34)
 shape = SubResource("RectangleShape2D_feb5d")
 
 [node name="bonhomme" type="Sprite2D" parent="Player"]
+visible = false
 texture = ExtResource("1_80nbo")
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
@@ -64,6 +68,7 @@ texture = ExtResource("1_80nbo")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player"]
 sprite_frames = SubResource("SpriteFrames_mfdv2")
 animation = &"run"
+frame_progress = 0.47611123
 
 [node name="Level" type="Node2D" parent="."]
 

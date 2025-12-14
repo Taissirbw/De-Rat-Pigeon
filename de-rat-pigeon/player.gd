@@ -8,15 +8,21 @@ extends CharacterBody2D
 @onready var camera := $Camera as Camera2D
 
 func _physics_process(delta):
-	velocity.y += gravity * delta
-	var dir = Input.get_axis("walk_left", "walk_right")
-	if dir != 0:
-		velocity.x = lerp(velocity.x, dir * speed, acceleration)
-	else:
-		velocity.x = lerp(velocity.x, 0.0, friction)
+    velocity.y += gravity * delta
+    var dir = Input.get_axis("walk_left", "walk_right")
+    if dir != 0:
+        velocity.x = lerp(velocity.x, dir * speed, acceleration)
+        $AnimatedSprite2D.set_animation("run")
+    else:
+        velocity.x = lerp(velocity.x, 0.0, friction)
+        #$AnimatedSprite2D.set_animation("default")
 
-	move_and_slide()
-	if Input.is_action_just_pressed("jump") and is_on_floor():
-		velocity.y = jump_speed
-	if Input.is_action_just_pressed("jump") and is_on_wall():
-		velocity.y = jump_speed
+    move_and_slide()
+    if Input.is_action_just_pressed("jump") and is_on_floor():
+        velocity.y = jump_speed
+        $AnimatedSprite2D.set_animation("jump") # ca ne marche pas
+        rotation_degrees = 0.
+    if Input.is_action_just_pressed("jump") and is_on_wall():
+        velocity.y = jump_speed
+        $AnimatedSprite2D.set_animation("run")
+        rotation_degrees = 90.
