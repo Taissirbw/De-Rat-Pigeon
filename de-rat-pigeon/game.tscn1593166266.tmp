@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://truyffsrng0" path="res://tile_map_layer.tscn" id="6_ryrav"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_feb5d"]
-size = Vector2(41, 56)
+size = Vector2(25, 52)
 
 [node name="game" type="Node"]
 script = ExtResource("1_fc0e3")
@@ -20,12 +20,13 @@ position = Vector2(208, 556)
 floor_stop_on_slope = false
 floor_constant_speed = true
 script = ExtResource("2_feb5d")
+gravity = 20
+friction = 0.055
+acceleration = 0.054
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
-position = Vector2(-2.5, 5)
+position = Vector2(-1.5, 7)
 shape = SubResource("RectangleShape2D_feb5d")
 
 [node name="bonhomme" type="Sprite2D" parent="Player"]
 texture = ExtResource("1_80nbo")
-
-[node name="Camera2D" type="Camera2D" parent="Player"]
