@@ -1,97 +1,32 @@
-[gd_scene load_steps=9 format=4 uid="uid://qi5sgrgq52ih"]
+[gd_scene load_steps=6 format=4 uid="uid://qi5sgrgq52ih"]
 
-[ext_resource type="Texture2D" uid="uid://cigxebwf5wrli" path="res://Assets/player_placeholder.png" id="1_80nbo"]
+[ext_resource type="Texture2D" uid="uid://b31j02xgrqmje" path="res://Assets/player_placeholder.png" id="1_80nbo"]
 [ext_resource type="Script" uid="uid://drf3w115vbgqc" path="res://game.gd" id="1_fc0e3"]
-[ext_resource type="Texture2D" uid="uid://emqnmhbvxpxx" path="res://Assets/plateforme-placeholder.png" id="2_e2o6t"]
-[ext_resource type="Script" path="res://player.gd" id="2_feb5d"]
-[ext_resource type="Script" path="res://pause_menu.gd" id="5_7jktm"]
+[ext_resource type="Script" uid="uid://dnvxrkor82gqb" path="res://player.gd" id="2_feb5d"]
 [ext_resource type="PackedScene" uid="uid://truyffsrng0" path="res://tile_map_layer.tscn" id="6_ryrav"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_fc0e3"]
-size = Vector2(783, 40)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_feb5d"]
-size = Vector2(49, 47)
+size = Vector2(271, 275)
 
 [node name="game" type="Node"]
 script = ExtResource("1_fc0e3")
 
 [node name="platform" type="Node2D" parent="."]
-position = Vector2(445, 387)
+position = Vector2(388, 914)
 
 [node name="sprite" type="Node" parent="platform"]
 
-[node name="bloc" type="StaticBody2D" parent="platform/sprite"]
-position = Vector2(445, 387)
-
-[node name="bloc_sprite" type="Sprite2D" parent="platform/sprite/bloc"]
-position = Vector2(-32.00003, 171)
-scale = Vector2(0.87111104, 0.12666667)
-texture = ExtResource("2_e2o6t")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="platform/sprite/bloc"]
-position = Vector2(-32.5, 171)
-shape = SubResource("RectangleShape2D_fc0e3")
-
 [node name="Player" type="CharacterBody2D" parent="platform/sprite"]
-position = Vector2(372, 505)
+position = Vector2(315, 1032)
 script = ExtResource("2_feb5d")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="platform/sprite/Player"]
-position = Vector2(-298, -13)
+position = Vector2(-0.5, 18.5)
 shape = SubResource("RectangleShape2D_feb5d")
 
 [node name="bonhomme" type="Sprite2D" parent="platform/sprite/Player"]
-position = Vector2(-298, -12.999992)
-scale = Vector2(0.16000006, 0.1533333)
 texture = ExtResource("1_80nbo")
 
-[node name="InterfaceLayer" type="CanvasLayer" parent="."]
-
-[node name="pause_menu" type="Control" parent="InterfaceLayer"]
-layout_mode = 3
-anchor_right = 0.768
-anchor_bottom = 0.89800006
-offset_right = -884.736
-offset_bottom = -581.90405
-script = ExtResource("5_7jktm")
-
-[node name="ColorRect" type="ColorRect" parent="InterfaceLayer/pause_menu"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = 800.0
-offset_bottom = 480.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.2509804, 0.07058824, 0.2, 1)
-
-[node name="CenterContainer" type="CenterContainer" parent="InterfaceLayer/pause_menu/ColorRect"]
-layout_mode = 0
-offset_left = -3.0
-offset_right = 797.0
-offset_bottom = 480.0
-
-[node name="VBoxContainer" type="VBoxContainer" parent="InterfaceLayer/pause_menu/ColorRect/CenterContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="InterfaceLayer/pause_menu/ColorRect/CenterContainer/VBoxContainer"]
-layout_mode = 2
-text = "Pause"
-horizontal_alignment = 1
-
-[node name="MarginContainer" type="MarginContainer" parent="InterfaceLayer/pause_menu/ColorRect/CenterContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="ResumeButton" type="Button" parent="InterfaceLayer/pause_menu/ColorRect/CenterContainer/VBoxContainer"]
-layout_mode = 2
-text = "Reprendre"
-
-[node name="Button2" type="Button" parent="InterfaceLayer/pause_menu/ColorRect/CenterContainer/VBoxContainer"]
-layout_mode = 2
-text = "Quitter
-"
-
 [node name="TileMapLayer" parent="." instance=ExtResource("6_ryrav")]
+position = Vector2(-24, 593)
 tile_map_data = PackedByteArray("AAAAAAIAAAABAAAAAAABAAIAAAAFAAAAAAACAAIAAAACAAIAAAADAAIAAAAAAAAAAAAEAAEAAAAAAAEAAAAEAAIAAAAEAAMAAAAEAAAAAAAAAAEAAAD//wIAAAABAAMAAAD//wEAAAAFAAIAAAD//wAAAAAFAAIAAAADAP//AAACAAQAAAAEAP//AAAEAAEAAAACAP//AAACAAQAAAABAP//AAACAAQAAAAAAP//AAACAAQAAAD/////AAABAAEAAAA=")
