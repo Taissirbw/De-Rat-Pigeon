@@ -44,7 +44,7 @@ void fragment()
     }
     
     // Ajustar transparencia: fuego transparente, bordes opacos
-    float alpha = 1.0 - smoothstep(effect_color.a, 1.0, color);
+    float alpha = .30 - smoothstep(effect_color.a, 1., color);
     
     COLOR = vec4(color - (1.0 - effect_color.r), color - (1.0 - effect_color.g), color - (1.0 - effect_color.b), alpha);
 }
