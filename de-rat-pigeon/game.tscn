@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=4 uid="uid://qi5sgrgq52ih"]
+[gd_scene load_steps=22 format=4 uid="uid://qi5sgrgq52ih"]
 
 [ext_resource type="Script" uid="uid://drf3w115vbgqc" path="res://game.gd" id="1_fc0e3"]
 [ext_resource type="Script" uid="uid://dnvxrkor82gqb" path="res://player.gd" id="2_feb5d"]
@@ -7,9 +7,15 @@
 [ext_resource type="Texture2D" uid="uid://cewe7g5c20ipo" path="res://Assets/Player/rat-1.png" id="6_vef74"]
 [ext_resource type="Texture2D" uid="uid://bwv01e5c1n0vl" path="res://Assets/mortauxrat.png" id="7_eow3j"]
 [ext_resource type="Texture2D" uid="uid://dpyi7rus6rsvq" path="res://Assets/Player/rat-2.png" id="7_hve3p"]
+[ext_resource type="Script" uid="uid://dv1x2co14liut" path="res://state_machine.gd" id="8_mfdv2"]
 [ext_resource type="Script" uid="uid://xdnh8lu1w2qg" path="res://tapette_a_souris.gd" id="8_vef74"]
 [ext_resource type="Texture2D" uid="uid://t013n68rywjb" path="res://Assets/tapette.png" id="9_hve3p"]
+[ext_resource type="Script" uid="uid://bs0k7o68pt10r" path="res://idle.gd" id="9_iotsf"]
 [ext_resource type="Shader" uid="uid://b0k1muff474kp" path="res://Assets/poison.gdshader" id="10_hve3p"]
+[ext_resource type="Script" uid="uid://cgealpr012cg0" path="res://running.gd" id="10_lc2xo"]
+[ext_resource type="Script" uid="uid://dct8nfmi65u2x" path="res://jumping.gd" id="11_215e1"]
+[ext_resource type="Script" uid="uid://dex1e20w4td3n" path="res://climbing.gd" id="12_7sc4i"]
+[ext_resource type="Script" uid="uid://kekoy0ue362e" path="res://falling.gd" id="13_80cx4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_feb5d"]
 size = Vector2(25, 25)
@@ -18,10 +24,18 @@ size = Vector2(25, 25)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("5_j5wjh")
+}],
+"loop": true,
+"name": &"fall",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("6_vef74")
 }],
 "loop": true,
-"name": &"default",
+"name": &"idle",
 "speed": 5.0
 }, {
 "frames": [{
@@ -79,8 +93,7 @@ shape = SubResource("RectangleShape2D_feb5d")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player"]
 position = Vector2(-29, -26)
 sprite_frames = SubResource("SpriteFrames_mfdv2")
-animation = &"run"
-frame_progress = 0.5251215
+animation = &"fall"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="Player"]
 
@@ -92,6 +105,25 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="StateMachine" type="Node" parent="Player" node_paths=PackedStringArray("initial_state")]
+script = ExtResource("8_mfdv2")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="Player/StateMachine"]
+script = ExtResource("9_iotsf")
+
+[node name="Running" type="Node" parent="Player/StateMachine"]
+script = ExtResource("10_lc2xo")
+
+[node name="Jumping" type="Node" parent="Player/StateMachine"]
+script = ExtResource("11_215e1")
+
+[node name="Climbing" type="Node" parent="Player/StateMachine"]
+script = ExtResource("12_7sc4i")
+
+[node name="Falling" type="Node" parent="Player/StateMachine"]
+script = ExtResource("13_80cx4")
 
 [node name="Level" type="Node2D" parent="."]
 

@@ -1,0 +1,34 @@
+extends State
+
+var dir
+
+func enter(previous_state_path: String, data := {}) -> void:
+	print("Entered RUNNING")
+	player.animation_player.play("run")
+	
+
+func physics_update(delta: float) -> void:
+	if stateVersion:
+		dir = Input.get_axis("walk_left", "walk_right")
+		if dir != 0:
+			player.velocity.x = lerp(player.velocity.x, dir * player.speed, player.acceleration)
+		else:
+			player.velocity.x = lerp(player.velocity.x, 0.0, player.friction)
+			
+		if player.velocity.x < 0: # cours à droite
+			player.animation_player.flip_h = true
+			player.animation_player.offset.x = 60.
+		if player.velocity.x > 0: #cours à gauche
+			player.animation_player.flip_h = false
+			player.animation_player.offset.x = 0.
+			
+		player.velocity.y += player.gravity * delta
+		player.move_and_slide()
+
+		
+		if Input.is_action_just_pressed("jump"):
+			finished.emit(JUMPING)
+		elif not player.is_on_floor():
+			finished.emit(FALLING)
+		elif absf(player.velocity.x) < 70:
+			finished.emit(IDLE)
