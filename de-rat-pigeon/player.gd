@@ -1,14 +1,26 @@
 class_name Player extends CharacterBody2D
 
+# Active l'implémentation Machine à etats
 @export var UseStateMachine = false
 
 @export_category("Player constants")
 @export var speed = 800
 @export var jump_speed = -1400
-@export_category("Player physics")
+@export_category("Normal physics")
 @export var gravity = 6000
 @export_range(0.0, 1.0) var friction = 0.1
 @export_range(0.0 , 1.0) var acceleration = 0.25
+# Pour wall slide
+@export_category("Wall physics")
+@export var gravity_wall:float = 2000
+@export var wall_jump_push_force: float = 1400
+
+@export var wall_contact_coyote:float = 0.
+@export var wall_contact_coyote_time:float = 0.2
+
+@export var wall_jump_lock:float = 0.
+@export var wall_jump_lock_time:float= 0.05
+var look_dir_x:int = 1
 
 @onready var animation_player = $AnimatedSprite2D
 @onready var state_machine = $StateMachine

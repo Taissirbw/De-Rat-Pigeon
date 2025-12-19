@@ -2,7 +2,7 @@ extends State
 
 
 func enter(previous_state_path: String, data := {}) -> void:
-	print("Entered IDLE")
+	#print("Entered IDLE")
 	player.velocity.x = 0.0
 	player.animation_player.play("idle")
 	player.rotation_degrees = 0. # Remet le rat en mode marche au sol

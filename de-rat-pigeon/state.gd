@@ -7,7 +7,7 @@ const IDLE = "Idle"
 const RUNNING = "Running"
 const JUMPING = "Jumping"
 const FALLING = "Falling"
-const CLIMBING = "Climbing"
+const WALL_SLIDING = "WallSliding"
 
 var player: Player
 var stateVersion:bool

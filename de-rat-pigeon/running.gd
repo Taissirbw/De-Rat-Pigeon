@@ -3,7 +3,7 @@ extends State
 var dir
 
 func enter(previous_state_path: String, data := {}) -> void:
-	print("Entered RUNNING")
+	print("RUNNING")
 	player.animation_player.play("run")
 	
 

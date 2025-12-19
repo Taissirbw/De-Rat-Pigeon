@@ -3,9 +3,9 @@ extends State
 var dir 
 
 func enter(previous_state_path: String, data := {}) -> void:
-	print("Entered JUMPING")
+	print("JUMPING")
 	player.rotation_degrees = 0.
-	player.velocity.y = player.jump_speed
+	player.velocity.y += player.jump_speed
 	
 	player.animation_player.play("jump")
 
@@ -20,10 +20,10 @@ func physics_update(delta: float) -> void:
 		player.move_and_slide()
 		
 		if player.compteur == 1:
-			if Input.is_action_just_pressed("jump"):
+			if Input.is_action_just_pressed("jump") and player.is_on_floor():
 				finished.emit(JUMPING)
 		if player.is_on_wall():
-			finished.emit(CLIMBING)
+			finished.emit(WALL_SLIDING)
 		if player.is_on_floor():
 			if absf(player.velocity.x) > 1:
 				finished.emit(RUNNING)
