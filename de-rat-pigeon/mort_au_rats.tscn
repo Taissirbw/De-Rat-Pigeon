@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://ckg5kpbfsttto"]
+
+[ext_resource type="Texture2D" uid="uid://bwv01e5c1n0vl" path="res://Assets/mortauxrat.png" id="1_esplb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vef74"]
+size = Vector2(120.978165, 35.42218)
+
+[node name="mort_au_rats" type="Area2D"]
+rotation = -3.1351297
+collision_mask = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(5.8770795, -19.03838)
+rotation = 3.125359
+scale = Vector2(0.72564375, 0.45628768)
+texture = ExtResource("1_esplb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(6.4644165, -5.7889404)
+shape = SubResource("RectangleShape2D_vef74")

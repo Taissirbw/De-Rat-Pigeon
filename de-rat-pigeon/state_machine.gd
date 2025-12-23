@@ -5,7 +5,7 @@ class_name StateMachine extends Node
 
 ## The current state of the state machine.
 @onready var current_state: State = initial_state
-
+signal state_transition
 
 func _ready() -> void:
 	# Give every state a reference to the state machine.
@@ -17,7 +17,7 @@ func _ready() -> void:
 	#current_state.enter("")
 
 func init(parent: Player, useStateMachine:bool):
-	for child in get_children():
+	for child in find_children("*", "State"):
 		child.player = parent
 		child.stateVersion = useStateMachine
 
@@ -30,6 +30,7 @@ func _transition_to_next_state(target_state_path: String, data: Dictionary = {})
 	current_state.exit()
 	current_state = get_node(target_state_path)
 	current_state.enter(previous_state_path, data)
+	state_transition.emit()
 
 
 func _unhandled_input(event: InputEvent) -> void:

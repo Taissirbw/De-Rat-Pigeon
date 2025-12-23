@@ -8,8 +8,8 @@ class_name Player extends CharacterBody2D
 @export var jump_speed = -1400
 @export_category("Normal physics")
 @export var gravity = 6000
-@export_range(0.0, 1.0) var friction = 0.1
-@export_range(0.0 , 1.0) var acceleration = 0.25
+@export_range(0.0, 1.0) var friction = 0.3
+@export_range(0.0 , 1.0) var acceleration = 0.1
 # Pour wall slide
 @export_category("Wall physics")
 @export var gravity_wall:float = 2000
@@ -24,12 +24,17 @@ var look_dir_x:int = 1
 
 @onready var animation_player = $AnimatedSprite2D
 @onready var state_machine = $StateMachine
+@onready var state_label = $state_label
+@onready var physic_label = $"CanvasLayer/physic_label"
+
 var compteur = 1
 
 func _ready():
 	state_machine.init(self, UseStateMachine)
+	physic_label.text = "Velocity X : " + str(velocity.x) + "\n Velocity Y : " + str(velocity.y)
 
 func _physics_process(delta):
+	physic_label_update()
 	if not UseStateMachine:
 		velocity.y += gravity * delta
 		var dir = Input.get_axis("walk_left", "walk_right")
@@ -75,4 +80,11 @@ func _on_tapette_a_souris_body_entered(body: Node2D, source: Area2D) -> void:
 
 func _on_mort_au_rats_body_entered(body: Node2D) -> void:
 	$CanvasLayer/ColorRect.visible = true
-	# todo : mettre un timer pour désactiver le poison au bout d'un moment
+	# todo  : mettre un timer pour désactiver le poison au bout d'un moment
+
+
+func _on_state_machine_state_transition() -> void:
+	state_label.text = state_machine.current_state.name
+
+func physic_label_update():
+	physic_label.text = "Velocity X : " + str(int(velocity.x)) + "\n Velocity Y : " + str(int(velocity.y))
