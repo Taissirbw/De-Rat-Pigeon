@@ -19,7 +19,7 @@ func physics_update(delta: float) -> void:
 			player.velocity.x = lerp(player.velocity.x, 0.0, player.friction)
 		
 		
-		if player.is_on_wall() and player.velocity.x !=0.:
+		if (player.is_on_wall() or player.wall_contact_coyote > 0.) and player.velocity.x !=0.:
 			#player.wall_contact_coyote = player.wall_contact_coyote_time
 			#player.velocity.y += player.gravity_wall * delta
 			finished.emit(WALL_SLIDING)

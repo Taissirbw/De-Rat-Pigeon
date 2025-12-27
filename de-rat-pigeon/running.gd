@@ -17,7 +17,7 @@ func physics_update(delta: float) -> void:
 
 		if player.velocity.x < 0: # cours à droite
 			player.animation_player.flip_h = true
-			player.animation_player.offset.x = 60.
+			player.animation_player.offset.x = 30.
 		if player.velocity.x > 0: #cours à gauche
 			player.animation_player.flip_h = false
 			player.animation_player.offset.x = 0.
@@ -26,7 +26,9 @@ func physics_update(delta: float) -> void:
 			#player.wall_contact_coyote = player.wall_contact_coyote_time
 			#player.velocity.y = player.gravity_wall
 			finished.emit(WALL_SLIDING)
-		
+		else:
+			if player.wall_contact_coyote > 0.:
+				player.wall_contact_coyote -= delta
 		if Input.is_action_just_pressed("jump") :
 			#if (player.is_on_wall() or player.wall_contact_coyote > 0.) and player.velocity.x != 0:
 			#	print("wall/ coyote")

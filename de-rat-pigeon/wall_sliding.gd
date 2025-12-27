@@ -6,11 +6,11 @@ func enter(previous_state_path: String, data := {}) -> void:
 	#print("Entered CLIMBING")		
 	#player.velocity.y = player.jump_speed
 	player.look_dir_x = sign(player.velocity.x)
-	#print("CLIMBING : ", player.look_dir_x)
+	print("CLIMBING : ", player.look_dir_x)
 	#if absf(player.velocity.x) > 1:
 	player.animation_player.play("run")
 	player.animation_player.flip_h = bool(player.look_dir_x)
-	player.animation_player.offset.x = 60. * int(player.look_dir_x == -1)
+	player.animation_player.offset.x = 30. * int(player.look_dir_x == -1)
 	player.rotation_degrees = -90. * player.look_dir_x
 	#if player.velocity.x >0:
 		#player.animation_player.flip_h = true
@@ -28,7 +28,7 @@ func physics_update(delta: float) -> void:
 			player.velocity.x = lerp(player.velocity.x, 0.0, player.friction)
 		player.look_dir_x = sign(player.velocity.x)
 		
-		if player.look_dir_x == 0:
+		if player.look_dir_x == 0 or (player.velocity.y > 70 and not player.is_on_wall):
 			if player.is_on_floor():
 				finished.emit(IDLE)
 			else:
@@ -36,7 +36,7 @@ func physics_update(delta: float) -> void:
 				
 				
 		player.animation_player.flip_h = bool(player.look_dir_x < 0)
-		player.animation_player.offset.x = 60. * int(player.look_dir_x == -1)
+		player.animation_player.offset.x = 30. * int(player.look_dir_x == -1)
 		player.rotation_degrees = -90. * player.look_dir_x
 		
 		if player.wall_jump_lock > 0.:
@@ -65,8 +65,8 @@ func physics_update(delta: float) -> void:
 				
 			player.wall_contact_coyote = player.wall_contact_coyote_time
 			player.velocity.y += player.gravity_wall * delta
-		elif player.velocity.y > 70 or (player.look_dir_x == 0):
-			finished.emit(FALLING)
+		#elif player.velocity.y > 20 or (player.look_dir_x == 0):
+		#	finished.emit(FALLING)
 
 			
 		player.move_and_slide()

@@ -9,9 +9,10 @@ func enter(previous_state_path: String, data := {}) -> void:
 	#player.compteur = 1 # Reset le compteur de sautg
 
 
-func physics_update(_delta: float) -> void:
+func physics_update(delta: float) -> void:
 	if stateVersion:
-		player.velocity.y += player.gravity * _delta
+		player.velocity.y += player.gravity * delta
+		player.wall_contact_coyote -= delta
 		player.move_and_slide()
 		
 		var dir = Input.get_axis("walk_left", "walk_right")

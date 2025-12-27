@@ -2,6 +2,7 @@ class_name Player extends CharacterBody2D
 
 # Active l'implémentation Machine à etats
 @export var UseStateMachine = false
+@export var show_wall_debug = false
 
 @export_category("Player constants")
 @export var speed = 800
@@ -15,15 +16,17 @@ class_name Player extends CharacterBody2D
 @export var gravity_wall:float = 2000
 @export var wall_jump_push_force: float = 1400
 
-@export var wall_contact_coyote:float = 0.
+var wall_contact_coyote:float = 0.
 @export var wall_contact_coyote_time:float = 0.2
 
-@export var wall_jump_lock:float = 0.
+var wall_jump_lock:float = 0.
 @export var wall_jump_lock_time:float= 0.05
 var look_dir_x:int = 1
 
 @onready var animation_player = $AnimatedSprite2D
+
 @onready var state_machine = $StateMachine
+
 @onready var state_label = $state_label
 @onready var physic_label = $"CanvasLayer/physic_label"
 
@@ -35,6 +38,8 @@ func _ready():
 
 func _physics_process(delta):
 	physic_label_update()
+	if show_wall_debug:
+		update_shader_coyote()
 	if not UseStateMachine:
 		velocity.y += gravity * delta
 		var dir = Input.get_axis("walk_left", "walk_right")
@@ -82,9 +87,14 @@ func _on_mort_au_rats_body_entered(body: Node2D) -> void:
 	$CanvasLayer/ColorRect.visible = true
 	# todo  : mettre un timer pour désactiver le poison au bout d'un moment
 
-
+# debug : affiche l'état actuel sous le rat
 func _on_state_machine_state_transition() -> void:
 	state_label.text = state_machine.current_state.name
 
+# Affichage de la Vélocité pour debug
 func physic_label_update():
 	physic_label.text = "Velocity X : " + str(int(velocity.x)) + "\n Velocity Y : " + str(int(velocity.y))
+
+func update_shader_coyote():
+	animation_player.material.set_shader_parameter("on_wall", is_on_wall())
+	animation_player.material.set_shader_parameter("coyote_pos", wall_contact_coyote > 0.)
