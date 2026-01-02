@@ -10,10 +10,14 @@ void vertex() {
 void fragment() {
 	float r = on_wall ? 1. : 0. ;
 	float g = coyote_pos ? 1. : 0.;
-	if (r + g > 0.){
-	 COLOR.rgb = vec3(r, mod(g + r, 2.), 0.);
+	if (r + g == 2.){
+	 COLOR.rgb = vec3(0,0 ,1.);
+	} else if (r > 0.){
+		COLOR.rgb = vec3(1.,0., 0.);
+	} else if(g > 0.){
+		COLOR.rgb = vec3(0.,1., 0.);
 	}
-	
+
 	// Called for every pixel the material is visible on.
 }
 
