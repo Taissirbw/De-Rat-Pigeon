@@ -13,13 +13,21 @@ class_name Player extends CharacterBody2D
 @export_range(0.0, 1.0) var friction = 0.3
 @export_range(0.0 , 1.0) var acceleration = 0.1
 
+
 # Pour wall slide
 @export_category("Wall physics")
 @export var gravity_wall:float = 2000
 @export var wall_jump_push_force: float = 1400
+@export var wall_jump_height:float = -2000
 
-var wall_contact_coyote:float = 0.
+@export var wall_jump_buffer_time = 0.5
+@export var wall_change_coyote_time = 0.1
 @export var wall_contact_coyote_time:float = 0.2
+var wall_change_coyote:float = 0.
+var wall_jump_buffer:float = 0.
+var wall_contact_coyote:float = 0.
+
+
 
 var wall_jump_lock:float = 0.
 @export var wall_jump_lock_time:float= 0.05

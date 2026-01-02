@@ -1,12 +1,16 @@
 extends State
 
+
+
 var dir 
+var last_wall_dir
 
 func enter(previous_state_path: String, data := {}) -> void:	
 	#print("Entered CLIMBING")		
 	#player.velocity.y = player.jump_speed
 	player.look_dir_x = sign(player.velocity.x)
 	print("CLIMBING : ", player.look_dir_x)
+	last_wall_dir = player.look_dir_x
 	#if absf(player.velocity.x) > 1:
 	player.animation_player.play("run")
 	player.animation_player.flip_h = bool(player.look_dir_x)
@@ -23,11 +27,13 @@ func physics_update(delta: float) -> void:
 	if stateVersion:
 		# Gère les inputs pour déterminer si le joueur va vers le mur
 		dir = Input.get_axis("walk_left", "walk_right")
+		var previous_dir = player.look_dir_x
 		if dir != 0:
 			player.velocity.x = lerp(player.velocity.x, dir * player.speed, player.acceleration)
 		else:
 			player.velocity.x = lerp(player.velocity.x, 0.0, player.friction)
 		player.look_dir_x = sign(player.velocity.x)
+		
 		
 		# Le joueur tombe du mur si
 		# soit sa vélocité x est nulle (player.look_dir_x == 0)
@@ -44,8 +50,8 @@ func physics_update(delta: float) -> void:
 		player.rotation_degrees = -90. * player.look_dir_x
 		
 		# jsp ce que ça fait
-		if player.wall_jump_lock > 0.:
-			player.wall_jump_lock -= delta
+		if player.player.wall_jump_lock > 0.:
+			player.player.wall_jump_lock -= delta
 			player.velocity.x = lerp(player.velocity.x, dir * player.speed, player.acceleration * 0.5)
 		
 		
@@ -61,14 +67,30 @@ func physics_update(delta: float) -> void:
 		# Derniers cas : le joueur reste dans l'état wall sliding
 		elif (player.is_on_wall() or player.wall_contact_coyote >0.):
 			# Wall jump
+			if sign(dir) != last_wall_dir:
+				player.wall_change_coyote = player.wall_change_coyote_time
+			else:
+				if player.wall_change_coyote > 0.:
+					player.wall_change_coyote -= delta
+					
 			if Input.is_action_just_pressed("jump"):
-				print("Jump on wall")
-				player.velocity.y = player.jump_speed
-				# Reposuse vers la direction opposée au mur
-				player.velocity.x = -player.look_dir_x * player.wall_jump_push_force
-				player.wall_jump_lock = player.wall_jump_lock_time
+				player.wall_jump_buffer = player.wall_jump_buffer_time
+			else:
+				player.wall_jump_buffer -= delta
+				#if player.wall_change_coyote > 0.:
+			if player.wall_change_coyote > 0. and player.wall_jump_buffer >0.:
+					print("Jump on wall")
+					player.velocity.y = player.jump_speed
+					# Reposuse vers la direction opposée au mur
+					player.velocity.x = -player.look_dir_x * player.player.wall_jump_push_force
+					player.player.wall_jump_lock = player.player.wall_jump_lock_time
+					player.wall_change_coyote = 0.
+					player.wall_jump_buffer = 0.
+			#elif player.player.wall_jump_lock > 0.:
+			#	player.wall_change_coyote = 0.
 			if player.is_on_wall(): # Maj du dernier temps de contact avec un mur
 				player.wall_contact_coyote = player.wall_contact_coyote_time
+				last_wall_dir = player.look_dir_x
 			else:
 				player.wall_contact_coyote -= delta
 			player.velocity.y += player.gravity_wall * delta

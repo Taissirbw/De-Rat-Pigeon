@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://truyffsrng0"]
+[gd_scene load_steps=12 format=3 uid="uid://truyffsrng0"]
 
 [ext_resource type="Texture2D" uid="uid://cqevc8jde8ylr" path="res://Assets/Tiles/tile_map.png" id="1_0ugm7"]
 
@@ -21,6 +21,9 @@ tile_data = PackedInt32Array(0, 131072, 4, 65536, 327680, 3, 131072, 327680, 0, 
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_bik5n"]
 tile_data = PackedInt32Array(0, 327680, 3, 65536, 327680, 3, 131072, 327680, 3, 1, 0, 2, 65537, 0, 4, 131073, 327680, 3, 2, 131072, 2, 65538, 131072, 4, 131074, 327680, 3)
+
+[sub_resource type="TileMapPattern" id="TileMapPattern_xeyxs"]
+tile_data = PackedInt32Array(0, 262144, 2, 1, 327680, 3, 2, 65536, 2)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vqaso"]
 texture = ExtResource("1_0ugm7")
@@ -64,7 +67,7 @@ texture_region_size = Vector2i(75, 75)
 1:2/0 = 0
 1:2/0/terrain_set = 0
 1:2/0/terrain = 2
-1:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-37.5, -37.5, 37.5, -37.5, 37.5, 37.5, -37.5, 37.5)
+1:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(9, -37.5, 37.5, -37.5, 37.5, 37.5, 11, 37.5)
 1:2/0/terrains_peering_bit/right_side = 0
 1:2/0/terrains_peering_bit/bottom_right_corner = 0
 1:2/0/terrains_peering_bit/bottom_side = 2
@@ -184,7 +187,7 @@ texture_region_size = Vector2i(75, 75)
 4:0/0 = 0
 4:0/0/terrain_set = 0
 4:0/0/terrain = 2
-4:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-37.5, -37.5, 37.5, -37.5, 37.5, 37.5, -37.5, 37.5)
+4:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-37.5, -37.5, 37.5, -37.5, 37.5, -8, -37.5, -8)
 4:0/0/terrains_peering_bit/right_side = 2
 4:0/0/terrains_peering_bit/bottom_right_corner = 2
 4:0/0/terrains_peering_bit/bottom_side = 2
@@ -208,7 +211,7 @@ texture_region_size = Vector2i(75, 75)
 4:2/0 = 0
 4:2/0/terrain_set = 0
 4:2/0/terrain = 2
-4:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-37.5, -37.5, 37.5, -37.5, 37.5, 37.5, -37.5, 37.5)
+4:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-37.5, -37.5, -9, -37.5, -8, 37.5, -37.5, 37.5)
 4:2/0/terrains_peering_bit/right_side = 2
 4:2/0/terrains_peering_bit/bottom_right_corner = 2
 4:2/0/terrains_peering_bit/bottom_side = 2
@@ -438,6 +441,7 @@ pattern_2 = SubResource("TileMapPattern_uuaxm")
 pattern_3 = SubResource("TileMapPattern_c3an2")
 pattern_4 = SubResource("TileMapPattern_vjcy3")
 pattern_5 = SubResource("TileMapPattern_bik5n")
+pattern_6 = SubResource("TileMapPattern_xeyxs")
 
 [node name="TileMapLayer" type="TileMapLayer"]
 material = SubResource("ShaderMaterial_vjcy3")
