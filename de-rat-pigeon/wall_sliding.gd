@@ -62,15 +62,18 @@ func physics_update(delta: float) -> void:
 		elif (player.is_on_wall() or player.wall_contact_coyote >0.):
 			# Wall jump
 			if Input.is_action_just_pressed("jump"):
+				print("Jump on wall")
 				player.velocity.y = player.jump_speed
 				# Reposuse vers la direction opposée au mur
 				player.velocity.x = -player.look_dir_x * player.wall_jump_push_force
 				player.wall_jump_lock = player.wall_jump_lock_time
-				
 			if player.is_on_wall(): # Maj du dernier temps de contact avec un mur
 				player.wall_contact_coyote = player.wall_contact_coyote_time
+			else:
+				player.wall_contact_coyote -= delta
 			player.velocity.y += player.gravity_wall * delta
-		
+		else:
+			player.velocity.y += player.gravity * delta
 
 			
 		player.move_and_slide()

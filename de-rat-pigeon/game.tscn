@@ -91,7 +91,7 @@ tile_map_data = PackedByteArray("AAAAAAAAAAABAAMAAAAAAP//AAAFAAIAAAAAAPz/AAABAAE
 
 [node name="Player" type="CharacterBody2D" parent="."]
 material = SubResource("ShaderMaterial_e8heu")
-position = Vector2(183, 564)
+position = Vector2(1254, -1007)
 slide_on_ceiling = false
 platform_wall_layers = 1
 script = ExtResource("2_feb5d")

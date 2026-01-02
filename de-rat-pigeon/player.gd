@@ -7,6 +7,7 @@ class_name Player extends CharacterBody2D
 @export_category("Player constants")
 @export var speed = 800
 @export var jump_speed = -1400
+
 @export_category("Normal physics")
 @export var gravity = 6000
 @export_range(0.0, 1.0) var friction = 0.3
