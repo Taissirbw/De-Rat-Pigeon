@@ -16,8 +16,8 @@ class_name Player extends CharacterBody2D
 # Pour wall slide
 @export_category("Wall physics")
 @export var gravity_wall:float = 2000
-@export var wall_jump_push_force: float = 1400
-@export var wall_jump_height:float = -2000
+@export var wall_jump_speed_x: float = 1400
+@export var wall_jump_speed_y:float = -2000
 
 @export var wall_jump_buffer_time = 0.5
 @export var wall_change_coyote_time = 0.1
@@ -98,7 +98,6 @@ func _physics_process(delta):
 func _on_tapette_a_souris_body_entered(body: Node2D, source: Area2D) -> void:
 	source.activate()
 	compteur = 0
-
 
 func _on_mort_au_rats_body_entered(body: Node2D) -> void:
 	$CanvasLayer/ColorRect.visible = true

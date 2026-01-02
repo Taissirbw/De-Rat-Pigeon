@@ -23,6 +23,9 @@ func enter(previous_state_path: String, data := {}) -> void:
 		#player.animation_player.flip_h = false
 		#player.rotation_degrees = -90.
 
+func linear_jump(a, b):
+	return Vector2(a*player.wall_jump_speed_x, b*player.wall_jump_speed_y)
+
 func physics_update(delta: float) -> void:
 	if stateVersion:
 		# Gère les inputs pour déterminer si le joueur va vers le mur
@@ -66,23 +69,28 @@ func physics_update(delta: float) -> void:
 			
 		# Derniers cas : le joueur reste dans l'état wall sliding
 		elif (player.is_on_wall() or player.wall_contact_coyote >0.):
-			# Wall jump
-			if sign(dir) != last_wall_dir:
+			#print("player.get_wall_normal :", player.get_wall_normal())
+
+			if sign(dir) == sign(player.get_wall_normal().x):
 				player.wall_change_coyote = player.wall_change_coyote_time
 			else:
 				if player.wall_change_coyote > 0.:
 					player.wall_change_coyote -= delta
-					
+			
+			# Stocke le dernier saut
 			if Input.is_action_just_pressed("jump"):
 				player.wall_jump_buffer = player.wall_jump_buffer_time
 			else:
 				player.wall_jump_buffer -= delta
-				#if player.wall_change_coyote > 0.:
+			
+			# Wall jump
 			if player.wall_change_coyote > 0. and player.wall_jump_buffer >0.:
 					print("Jump on wall")
-					player.velocity.y = player.jump_speed_y
+					var jump = linear_jump(1.5, 0.75)
+					
+					player.velocity.y = jump.y
 					# Reposuse vers la direction opposée au mur
-					player.velocity.x = -player.look_dir_x * player.wall_jump_push_force
+					player.velocity.x = -player.look_dir_x * jump.x
 					player.wall_jump_lock = player.wall_jump_lock_time
 					player.wall_change_coyote = 0.
 					player.wall_jump_buffer = 0.
