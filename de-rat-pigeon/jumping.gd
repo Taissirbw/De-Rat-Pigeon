@@ -6,7 +6,8 @@ func enter(previous_state_path: String, data := {}) -> void:
 	print("JUMPING")
 	player.rotation_degrees = 0.
 	player.velocity.y = player.jump_speed
-	
+	dir = Input.get_axis("walk_left", "walk_right")
+	player.velocity.x=dir*800
 	player.animation_player.play("jump")
 
 func physics_update(delta: float) -> void:
