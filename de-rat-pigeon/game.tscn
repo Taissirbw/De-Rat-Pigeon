@@ -3,19 +3,19 @@
 [ext_resource type="Script" uid="uid://drf3w115vbgqc" path="res://game.gd" id="1_fc0e3"]
 [ext_resource type="Script" uid="uid://dnvxrkor82gqb" path="res://player.gd" id="2_feb5d"]
 [ext_resource type="Shader" uid="uid://d2byo77143sro" path="res://Assets/player_hilghlight_debug.gdshader" id="3_80cx4"]
-[ext_resource type="Texture2D" uid="uid://cta0ovw17yi4i" path="res://Assets/Player/ANIMATIONS/FALL.png" id="5_e36ub"]
-[ext_resource type="Texture2D" uid="uid://bnt42v5njvngp" path="res://Assets/Player/ANIMATIONS/IDLE.png" id="6_e36ub"]
+[ext_resource type="Texture2D" uid="uid://uiaaep83tqbs" path="res://Assets/Player/ANIMATIONS/FALL.png" id="5_e36ub"]
+[ext_resource type="Texture2D" uid="uid://cjidjt0gy08bd" path="res://Assets/Player/ANIMATIONS/IDLE.png" id="6_e36ub"]
 [ext_resource type="PackedScene" uid="uid://truyffsrng0" path="res://tile_map_layer.tscn" id="6_ryrav"]
-[ext_resource type="Texture2D" uid="uid://drrmjl8auol51" path="res://Assets/Player/ANIMATIONS/JUMP.png" id="7_hb5m1"]
+[ext_resource type="Texture2D" uid="uid://favx6d2tqbd8" path="res://Assets/Player/ANIMATIONS/JUMP.png" id="7_hb5m1"]
 [ext_resource type="Script" uid="uid://dv1x2co14liut" path="res://state_machine.gd" id="8_mfdv2"]
-[ext_resource type="Texture2D" uid="uid://1c3iqsmbkmli" path="res://Assets/Player/ANIMATIONS/RUN_1.png" id="8_x5p1p"]
+[ext_resource type="Texture2D" uid="uid://dmmufkxm4u5xt" path="res://Assets/Player/ANIMATIONS/RUN_1.png" id="8_x5p1p"]
 [ext_resource type="Script" uid="uid://bs0k7o68pt10r" path="res://idle.gd" id="9_iotsf"]
-[ext_resource type="Texture2D" uid="uid://b5ohwu18uiy84" path="res://Assets/Player/ANIMATIONS/RUN_2.png" id="9_qhcbd"]
-[ext_resource type="Texture2D" uid="uid://djvslcaptwbfa" path="res://Assets/Player/ANIMATIONS/RUN_3.png" id="10_f1jbl"]
+[ext_resource type="Texture2D" uid="uid://lpj84yale2pm" path="res://Assets/Player/ANIMATIONS/RUN_2.png" id="9_qhcbd"]
+[ext_resource type="Texture2D" uid="uid://bitua2tjtfq6v" path="res://Assets/Player/ANIMATIONS/RUN_3.png" id="10_f1jbl"]
 [ext_resource type="Shader" uid="uid://b0k1muff474kp" path="res://Assets/poison.gdshader" id="10_hve3p"]
 [ext_resource type="Script" uid="uid://cgealpr012cg0" path="res://running.gd" id="10_lc2xo"]
 [ext_resource type="Script" uid="uid://dct8nfmi65u2x" path="res://jumping.gd" id="11_215e1"]
-[ext_resource type="Texture2D" uid="uid://curqd2e6svixm" path="res://Assets/Player/ANIMATIONS/RUN_4.png" id="11_vaj68"]
+[ext_resource type="Texture2D" uid="uid://cbxqo5te5gpn" path="res://Assets/Player/ANIMATIONS/RUN_4.png" id="11_vaj68"]
 [ext_resource type="Script" uid="uid://dex1e20w4td3n" path="res://wall_sliding.gd" id="12_7sc4i"]
 [ext_resource type="Script" uid="uid://kekoy0ue362e" path="res://falling.gd" id="13_80cx4"]
 [ext_resource type="PackedScene" uid="uid://ckg5kpbfsttto" path="res://mort_au_rats.tscn" id="14_7sc4i"]
@@ -102,7 +102,6 @@ platform_wall_layers = 1
 script = ExtResource("2_feb5d")
 UseStateMachine = true
 show_wall_debug = true
-jump_speed = -1000
 wall_jump_lock_time = 0.1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]

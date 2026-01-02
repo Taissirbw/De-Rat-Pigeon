@@ -6,14 +6,13 @@ class_name Player extends CharacterBody2D
 
 @export_category("Player constants")
 @export var speed = 800
-@export var jump_speed = -1400
-
+@export var jump_speed_y = -1400
+@export var jump_speed_x = 800
 @export_category("Normal physics")
 @export var gravity = 6000
 @export_range(0.0, 1.0) var friction = 0.3
 @export_range(0.0 , 1.0) var acceleration = 0.1
-
-
+@export var VariableJumpMultiplier = 0.5
 # Pour wall slide
 @export_category("Wall physics")
 @export var gravity_wall:float = 2000
@@ -39,8 +38,8 @@ var look_dir_x:int = 1
 
 @onready var state_label = $state_label
 @onready var physic_label = $"CanvasLayer/physic_label"
-
 var compteur = 1
+
 
 func _ready():
 	state_machine.init(self, UseStateMachine)
@@ -80,11 +79,11 @@ func _physics_process(delta):
 		
 		if compteur==1:
 			if Input.is_action_just_pressed("jump") and is_on_floor():
-				velocity.y = jump_speed
+				velocity.y = jump_speed_y
 				$AnimatedSprite2D.set_animation("jump")
 				rotation_degrees = 0.
 			if Input.is_action_just_pressed("jump") and is_on_wall():
-				velocity.y = jump_speed
+				velocity.y = jump_speed_y
 				if absf(velocity.y) > 1:
 					$AnimatedSprite2D.play("run")
 						

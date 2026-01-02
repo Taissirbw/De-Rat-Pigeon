@@ -50,8 +50,8 @@ func physics_update(delta: float) -> void:
 		player.rotation_degrees = -90. * player.look_dir_x
 		
 		# jsp ce que ça fait
-		if player.player.wall_jump_lock > 0.:
-			player.player.wall_jump_lock -= delta
+		if player.wall_jump_lock > 0.:
+			player.wall_jump_lock -= delta
 			player.velocity.x = lerp(player.velocity.x, dir * player.speed, player.acceleration * 0.5)
 		
 		
@@ -80,13 +80,13 @@ func physics_update(delta: float) -> void:
 				#if player.wall_change_coyote > 0.:
 			if player.wall_change_coyote > 0. and player.wall_jump_buffer >0.:
 					print("Jump on wall")
-					player.velocity.y = player.jump_speed
+					player.velocity.y = player.jump_speed_y
 					# Reposuse vers la direction opposée au mur
-					player.velocity.x = -player.look_dir_x * player.player.wall_jump_push_force
-					player.player.wall_jump_lock = player.player.wall_jump_lock_time
+					player.velocity.x = -player.look_dir_x * player.wall_jump_push_force
+					player.wall_jump_lock = player.wall_jump_lock_time
 					player.wall_change_coyote = 0.
 					player.wall_jump_buffer = 0.
-			#elif player.player.wall_jump_lock > 0.:
+			#elif player.wall_jump_lock > 0.:
 			#	player.wall_change_coyote = 0.
 			if player.is_on_wall(): # Maj du dernier temps de contact avec un mur
 				player.wall_contact_coyote = player.wall_contact_coyote_time
