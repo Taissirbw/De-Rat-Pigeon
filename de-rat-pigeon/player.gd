@@ -11,6 +11,7 @@ class_name Player extends CharacterBody2D
 @export var gravity = 6000
 @export_range(0.0, 1.0) var friction = 0.3
 @export_range(0.0 , 1.0) var acceleration = 0.1
+
 # Pour wall slide
 @export_category("Wall physics")
 @export var gravity_wall:float = 2000
@@ -37,9 +38,17 @@ func _ready():
 	physic_label.text = "Velocity X : " + str(velocity.x) + "\n Velocity Y : " + str(velocity.y)
 
 func _physics_process(delta):
+	
+	# Met à jour l'affichage de la velocité
 	physic_label_update()
+	
 	if show_wall_debug:
-		update_shader_coyote()
+		# Permet de visualiser (en utilisant des couleurs) l'état du joueur :
+		# Rouge si le joueur est sur le mur, vert si le coyote >0, et jaune si
+		# le joueur est sur le mur ET coyote > 0.
+		update_shader_coyote() 
+		
+		
 	if not UseStateMachine:
 		velocity.y += gravity * delta
 		var dir = Input.get_axis("walk_left", "walk_right")

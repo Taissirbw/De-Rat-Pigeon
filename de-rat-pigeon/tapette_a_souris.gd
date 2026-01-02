@@ -16,9 +16,11 @@ func activate():
 	
 	# Tween : fonction variant avec le temps pour animer des paramètres.
 	# Ici, le premier tween module la valeur de la couleur du Sprite2D
-	var tween = create_tween()
-	tween.tween_property($Sprite2D, "modulate:v", 0., 0.2) #Valeur à 0 -> sprite noire
-	tween.tween_property($Sprite2D, "modulate:v", 1.0, 0.1) #Valeur à 1 -> sprite normale
+	var tween = create_tween().set_ease(Tween.EASE_OUT)
+	tween.set_trans(Tween.TRANS_CUBIC)
+	tween.tween_property($Sprite2D, "scale", Vector2(1,1), 0.25)
+	#tween.tween_property($Sprite2D, "modulate:v", 0., 0.2) #Valeur à 0 -> sprite noire
+	#tween.tween_property($Sprite2D, "modulate:v", 1.0, 0.1) #Valeur à 1 -> sprite normale
 	
 	# Un deuxième tween pour faire screenshake la caméra
 	# D'après le tuto https://www.youtube.com/watch?v=QfojEwv7iRk

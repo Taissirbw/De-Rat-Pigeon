@@ -1,8 +1,26 @@
-[gd_scene load_steps=5 format=3 uid="uid://truyffsrng0"]
+[gd_scene load_steps=11 format=3 uid="uid://truyffsrng0"]
 
 [ext_resource type="Texture2D" uid="uid://cqevc8jde8ylr" path="res://Assets/Tiles/tile_map.png" id="1_0ugm7"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vjcy3"]
+
+[sub_resource type="TileMapPattern" id="TileMapPattern_0ugm7"]
+tile_data = PackedInt32Array(0, 327680, 1, 1, 327680, 3, 2, 0, 2)
+
+[sub_resource type="TileMapPattern" id="TileMapPattern_vqaso"]
+tile_data = PackedInt32Array(0, 327680, 2, 1, 327680, 3, 2, 0, 2)
+
+[sub_resource type="TileMapPattern" id="TileMapPattern_uuaxm"]
+tile_data = PackedInt32Array(0, 131072, 4, 65536, 327680, 3, 131072, 65536, 0)
+
+[sub_resource type="TileMapPattern" id="TileMapPattern_c3an2"]
+tile_data = PackedInt32Array(0, 327680, 1, 65536, 327680, 2, 131072, 65536, 3, 1, 327680, 3, 65537, 327680, 3, 131073, 65536, 0, 2, 327680, 3, 65538, 327680, 3, 131074, 65536, 0)
+
+[sub_resource type="TileMapPattern" id="TileMapPattern_vjcy3"]
+tile_data = PackedInt32Array(0, 131072, 4, 65536, 327680, 3, 131072, 327680, 0, 1, 131072, 4, 65537, 327680, 3, 131073, 327680, 3, 2, 262144, 1, 65538, 0, 2, 131074, 0, 2)
+
+[sub_resource type="TileMapPattern" id="TileMapPattern_bik5n"]
+tile_data = PackedInt32Array(0, 327680, 3, 65536, 327680, 3, 131072, 327680, 3, 1, 0, 2, 65537, 0, 4, 131073, 327680, 3, 2, 131072, 2, 65538, 131072, 4, 131074, 327680, 3)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vqaso"]
 texture = ExtResource("1_0ugm7")
@@ -414,6 +432,12 @@ terrain_set_0/terrain_1/color = Color(0.76776737, 0.18939844, 0.33363736, 1)
 terrain_set_0/terrain_2/name = "Terrain 2"
 terrain_set_0/terrain_2/color = Color(0.86207736, 0.86669004, 0.90279675, 1)
 sources/0 = SubResource("TileSetAtlasSource_vqaso")
+pattern_0 = SubResource("TileMapPattern_0ugm7")
+pattern_1 = SubResource("TileMapPattern_vqaso")
+pattern_2 = SubResource("TileMapPattern_uuaxm")
+pattern_3 = SubResource("TileMapPattern_c3an2")
+pattern_4 = SubResource("TileMapPattern_vjcy3")
+pattern_5 = SubResource("TileMapPattern_bik5n")
 
 [node name="TileMapLayer" type="TileMapLayer"]
 material = SubResource("ShaderMaterial_vjcy3")

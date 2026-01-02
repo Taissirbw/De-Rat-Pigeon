@@ -21,6 +21,7 @@ func enter(previous_state_path: String, data := {}) -> void:
 
 func physics_update(delta: float) -> void:
 	if stateVersion:
+		# Gère les inputs pour déterminer si le joueur va vers le mur
 		dir = Input.get_axis("walk_left", "walk_right")
 		if dir != 0:
 			player.velocity.x = lerp(player.velocity.x, dir * player.speed, player.acceleration)
@@ -28,45 +29,48 @@ func physics_update(delta: float) -> void:
 			player.velocity.x = lerp(player.velocity.x, 0.0, player.friction)
 		player.look_dir_x = sign(player.velocity.x)
 		
+		# Le joueur tombe du mur si
+		# soit sa vélocité x est nulle (player.look_dir_x == 0)
+		# soit sa vélocité y est élevée et le joueur n'est pas sur un mur
 		if player.look_dir_x == 0 or (player.velocity.y > 70 and not player.is_on_wall):
 			if player.is_on_floor():
 				finished.emit(IDLE)
 			else:
 				finished.emit(FALLING)
 				
-				
+		# Mets à jour le sens des sprites
 		player.animation_player.flip_h = bool(player.look_dir_x < 0)
 		player.animation_player.offset.x = 30. * int(player.look_dir_x == -1)
 		player.rotation_degrees = -90. * player.look_dir_x
 		
+		# jsp ce que ça fait
 		if player.wall_jump_lock > 0.:
-			
 			player.wall_jump_lock -= delta
 			player.velocity.x = lerp(player.velocity.x, dir * player.speed, player.acceleration * 0.5)
 		
+		
 		if player.is_on_floor():
 			if Input.is_action_just_pressed("jump"):
-				#player.velocity.y = player.jump_speed
 				finished.emit(JUMPING)
 			else:
-				#player.wall_contact_coyote -= delta
-				#player.velocity.y += player.gravity * delta
 				if absf(player.velocity.x) > 1:
 					finished.emit(RUNNING)
 				else:
 					finished.emit(IDLE)
 			
-
+		# Derniers cas : le joueur reste dans l'état wall sliding
 		elif (player.is_on_wall() or player.wall_contact_coyote >0.):
+			# Wall jump
 			if Input.is_action_just_pressed("jump"):
 				player.velocity.y = player.jump_speed
+				# Reposuse vers la direction opposée au mur
 				player.velocity.x = -player.look_dir_x * player.wall_jump_push_force
 				player.wall_jump_lock = player.wall_jump_lock_time
 				
-			player.wall_contact_coyote = player.wall_contact_coyote_time
+			if player.is_on_wall(): # Maj du dernier temps de contact avec un mur
+				player.wall_contact_coyote = player.wall_contact_coyote_time
 			player.velocity.y += player.gravity_wall * delta
-		#elif player.velocity.y > 20 or (player.look_dir_x == 0):
-		#	finished.emit(FALLING)
+		
 
 			
 		player.move_and_slide()
