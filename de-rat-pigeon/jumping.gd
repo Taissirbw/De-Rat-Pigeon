@@ -27,19 +27,22 @@ func physics_update(delta: float) -> void:
 		else:
 			player.wall_contact_coyote -= delta
 			player.velocity.y += player.gravity * delta
-		
+			
+		if Input.is_action_just_released("jump"):
+			player.velocity.y *= player.VariableJumpMultiplier
+			
 		player.move_and_slide()
 		
 		if player.velocity.y>=0:
 			finished.emit(FALLING)
 		
-		if Input.is_action_just_released("jump"):
-			player.velocity.y *= player.VariableJumpMultiplier
+		
 		 
 		if Input.is_action_just_pressed("jump") and player.compteur == 1 :
 			if player.is_on_floor():
 				finished.emit(JUMPING)
 			elif (player.is_on_wall() or player.wall_contact_coyote >0.) and player.velocity.x != 0:
+				player.wall_land_coyote_time = player.wall_land_coyote
 				finished.emit(WALL_SLIDING)
 				
 		elif player.is_on_floor():

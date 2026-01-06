@@ -57,8 +57,11 @@ func physics_update(delta: float) -> void:
 			player.wall_jump_lock -= delta
 			player.velocity.x = lerp(player.velocity.x, dir * player.speed, player.acceleration * 0.5)
 		
+		if player.wall_land_coyote > 0.:
+			player.wall_land_coyote -= delta
 		
 		if player.is_on_floor():
+			print("On floor")
 			if Input.is_action_just_pressed("jump"):
 				finished.emit(JUMPING)
 			else:
@@ -86,10 +89,10 @@ func physics_update(delta: float) -> void:
 			# Wall jump
 			if player.wall_change_coyote > 0. and player.wall_jump_buffer >0.:
 					print("Jump on wall")
-					var jump = linear_jump(1.5, 0.75)
+					var jump = linear_jump(1.25, 1.)
 					
 					player.velocity.y = jump.y
-					# Reposuse vers la direction opposée au mur
+					# Repousse vers la direction opposée au mur
 					player.velocity.x = -player.look_dir_x * jump.x
 					player.wall_jump_lock = player.wall_jump_lock_time
 					player.wall_change_coyote = 0.
@@ -97,11 +100,13 @@ func physics_update(delta: float) -> void:
 			#elif player.wall_jump_lock > 0.:
 			#	player.wall_change_coyote = 0.
 			if player.is_on_wall(): # Maj du dernier temps de contact avec un mur
+				print("on wall")
 				player.wall_contact_coyote = player.wall_contact_coyote_time
 				last_wall_dir = player.look_dir_x
 			else:
 				player.wall_contact_coyote -= delta
-			player.velocity.y += player.gravity_wall * delta
+			if !player.wall_land_coyote > 0.:
+				player.velocity.y += player.gravity_wall * delta
 		else:
 			player.velocity.y += player.gravity * delta
 
