@@ -1,7 +1,7 @@
 extends State
 
 func enter(previous_state_path: String, data := {}) -> void:
-	print("FALL")
+	#print("FALL")
 	player.animation_player.play("fall")
 	player.rotation_degrees = 180.
 

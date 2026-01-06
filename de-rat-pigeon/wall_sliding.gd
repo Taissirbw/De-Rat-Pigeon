@@ -9,7 +9,7 @@ func enter(previous_state_path: String, data := {}) -> void:
 	#print("Entered CLIMBING")		
 	#player.velocity.y = player.jump_speed
 	player.look_dir_x = sign(player.velocity.x)
-	print("CLIMBING : ", player.look_dir_x)
+	#print("CLIMBING : ", player.look_dir_x)
 	last_wall_dir = player.look_dir_x
 	#if absf(player.velocity.x) > 1:
 	player.animation_player.play("run")

@@ -3,7 +3,7 @@ extends State
 var dir
 
 func enter(previous_state_path: String, data := {}) -> void:
-	print("RUNNING")
+	#print("RUNNING")
 	player.animation_player.play("run")   
 	player.rotation_degrees = 0.
 
@@ -40,7 +40,7 @@ func physics_update(delta: float) -> void:
 			
 		
 		elif not player.is_on_floor():
-			print("FALLS")
+			print("FALLS from RUNNING")
 			finished.emit(FALLING)
 		elif absf(player.velocity.x) < 70:
 			finished.emit(IDLE)

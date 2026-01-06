@@ -30,6 +30,7 @@ func _transition_to_next_state(target_state_path: String, data: Dictionary = {})
 	current_state.exit()
 	current_state = get_node(target_state_path)
 	current_state.enter(previous_state_path, data)
+	print(previous_state_path + " >> " + target_state_path)
 	state_transition.emit()
 
 

@@ -3,7 +3,7 @@ extends State
 var dir 
 
 func enter(previous_state_path: String, data := {}) -> void:
-	print("JUMPING")
+	#print("JUMPING")
 	player.rotation_degrees = 0.
 	player.velocity.y = player.jump_speed_y
 	dir = Input.get_axis("walk_left", "walk_right")
