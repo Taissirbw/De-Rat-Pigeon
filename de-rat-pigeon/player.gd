@@ -4,15 +4,19 @@ class_name Player extends CharacterBody2D
 @export var UseStateMachine = false
 @export var show_wall_debug = false
 
-@export_category("Player constants")
-@export var speed = 800
-@export var jump_speed_y = -1400
-@export var jump_speed_x = 800
+
 @export_category("Normal physics")
 @export var gravity = 6000
 @export_range(0.0, 1.0) var friction = 0.3
 @export_range(0.0 , 1.0) var acceleration = 0.1
+
+@export_category("Player constants")
+@export var speed = 800
+@export var jump_speed_y = -1400
+@export var jump_speed_x = 800
 @export var VariableJumpMultiplier = 0.5
+@export var floor_coyote_time:float = 0.5
+var floor_coyote:float = 0.
 # Pour wall slide
 @export_category("Wall physics")
 @export var gravity_wall:float = 4000
