@@ -17,6 +17,11 @@ func physics_update(delta: float) -> void:
 			player.wall_contact_coyote -= delta
 		#player.move_and_slide()
 		
+		if player.is_on_floor():
+			player.floor_coyote = player.floor_coyote_time
+		elif player.floor_coyote > 0.:
+			player.wall_contact_coyote -= delta
+		
 		# gestion des input, et transition depuis l'état IDLE
 		var dir = Input.get_axis("walk_left", "walk_right")
 		if Input.is_action_just_pressed("jump"):

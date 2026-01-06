@@ -37,6 +37,8 @@ func physics_update(delta: float) -> void:
 				finished.emit(IDLE)
 			if player.is_on_floor():
 				player.floor_coyote = player.floor_coyote_time
+			else:
+				player.floor_coyote -= delta
 		else: # Player not on the floor
 			print("FALLS from RUNNING")
 			finished.emit(FALLING)
