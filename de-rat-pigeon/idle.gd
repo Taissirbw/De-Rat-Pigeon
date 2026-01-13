@@ -21,6 +21,8 @@ func physics_update(delta: float) -> void:
 			player.floor_coyote = player.floor_coyote_time
 		elif player.floor_coyote > 0.:
 			player.floor_coyote = 0
+
+		if player.floor_coyote <= 0:
 			finished.emit(FALLING)
 		
 		# gestion des input, et transition depuis l'état IDLE

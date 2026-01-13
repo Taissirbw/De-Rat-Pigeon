@@ -4,7 +4,6 @@ class_name Player extends CharacterBody2D
 @export var UseStateMachine = false
 @export var show_wall_debug = false
 
-
 @export_category("Normal physics")
 @export var gravity = 6000
 @export_range(0.0, 1.0) var friction = 0.3
@@ -15,7 +14,7 @@ class_name Player extends CharacterBody2D
 @export var jump_speed_y = -800
 @export var jump_speed_x = 400
 @export var VariableJumpMultiplier = 0.5
-@export var floor_coyote_time:float = 0.5
+@export var floor_coyote_time:float = 0.05
 var floor_coyote:float = 0.
 # Pour wall slide
 @export_category("Wall physics")
@@ -23,10 +22,16 @@ var floor_coyote:float = 0.
 @export var wall_jump_speed_x: float = 800
 @export var wall_jump_speed_y:float = -800
 
-@export var wall_land_coyote_time = 0.3 # duration of wall-propulsation 
+# Lorsque le joueur viens d'attérir sur un mur, 
+# il a un petit peu de temps avant de subir la gravité à nouveau.
+@export var wall_land_coyote_time = 0.3 
+# Pour wall-jump, il faut un saut enregistré + le joueur change de sens
 @export var wall_jump_buffer_time = 0.5 # temps durant lequel un saut est enregistré
-@export var wall_change_coyote_time = 0.1 
+@export var wall_change_coyote_time = 0.1 # temps durant lequel le changement de dir est valable
+
 @export var wall_contact_coyote_time:float = 0.2 # record last contact with a wall
+# apres un wall-jump, le joueur ne peut pas ressauter immédiatement.
+@export var wall_jump_lock_time:float= 0.05
 
 var wall_land_coyote:float =0.
 var wall_change_coyote:float = 0.
@@ -34,7 +39,7 @@ var wall_jump_buffer:float = 0.
 var wall_contact_coyote:float = 0.
 
 var wall_jump_lock:float = 0.
-@export var wall_jump_lock_time:float= 0.05
+
 var look_dir_x:int = 1
 
 @onready var animation_player = $AnimatedSprite2D
@@ -48,6 +53,7 @@ var compteur = 1
 
 
 func _ready():
+	print("te")
 	state_machine.init(self, UseStateMachine)
 	physic_label.text = "Velocity X : " + str(velocity.x) + "\n Velocity Y : " + str(velocity.y)
 

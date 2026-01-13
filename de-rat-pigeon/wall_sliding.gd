@@ -16,6 +16,8 @@ func enter(previous_state_path: String, data := {}) -> void:
 	player.animation_player.flip_h = bool(player.look_dir_x)
 	player.animation_player.offset.x = 30. * int(player.look_dir_x == -1)
 	player.rotation_degrees = -90. * player.look_dir_x
+	
+	player.wall_land_coyote = player.wall_change_coyote_time
 	#if player.velocity.x >0:
 		#player.animation_player.flip_h = true
 		#player.rotation_degrees = 90. # Cours sur mur à gauche
@@ -72,8 +74,7 @@ func physics_update(delta: float) -> void:
 			
 		# Derniers cas : le joueur reste dans l'état wall sliding
 		elif (player.is_on_wall() or player.wall_contact_coyote >0.):
-			#print("player.get_wall_normal :", player.get_wall_normal())
-
+			
 			if sign(dir) == sign(player.get_wall_normal().x):
 				player.wall_change_coyote = player.wall_change_coyote_time
 			else:
@@ -88,7 +89,7 @@ func physics_update(delta: float) -> void:
 
 			# Wall jump
 			if player.wall_change_coyote > 0. and player.wall_jump_buffer >0.:
-					print("Jump on wall")
+					#print("Jump on wall")
 					var jump = linear_jump(1.25, 1.)
 					
 					player.velocity.y = jump.y
@@ -100,13 +101,16 @@ func physics_update(delta: float) -> void:
 			#elif player.wall_jump_lock > 0.:
 			#	player.wall_change_coyote = 0.
 			if player.is_on_wall(): # Maj du dernier temps de contact avec un mur
-				print("on wall")
+				#print("on wall")
 				player.wall_contact_coyote = player.wall_contact_coyote_time
 				last_wall_dir = player.look_dir_x
 			else:
 				player.wall_contact_coyote -= delta
-			if !player.wall_land_coyote > 0.:
+			if !(player.wall_land_coyote > 0.):
+				
 				player.velocity.y += player.gravity_wall * delta
+			else:
+				print("Land coyote : ", player.wall_land_coyote)
 		else:
 
 			player.wall_change_coyote = 0.
