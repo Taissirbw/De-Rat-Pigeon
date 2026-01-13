@@ -108,6 +108,9 @@ func physics_update(delta: float) -> void:
 			if !player.wall_land_coyote > 0.:
 				player.velocity.y += player.gravity_wall * delta
 		else:
+
+			player.wall_change_coyote = 0.
+			player.wall_jump_buffer = 0.
 			# Fix temporaire : il faudrait décrémenter la vélocité
 			finished.emit(FALLING)
 			#player.velocity.y += player.gravity * delta

@@ -34,7 +34,7 @@ func physics_update(delta: float) -> void:
 				print("FALL -> JUMP")
 				finished.emit(JUMPING)
 			else:
-				if player.velocity.x < 70:
+				if abs(player.velocity.x) < 70:
 					finished.emit(IDLE)
 				else:
 					finished.emit(RUNNING)
