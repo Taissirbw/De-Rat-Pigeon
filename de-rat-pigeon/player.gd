@@ -11,29 +11,27 @@ class_name Player extends CharacterBody2D
 @export_range(0.0 , 1.0) var acceleration = 0.1
 
 @export_category("Player constants")
-@export var speed = 800
-@export var jump_speed_y = -1400
-@export var jump_speed_x = 800
+@export var speed = 600
+@export var jump_speed_y = -800
+@export var jump_speed_x = 400
 @export var VariableJumpMultiplier = 0.5
 @export var floor_coyote_time:float = 0.5
 var floor_coyote:float = 0.
 # Pour wall slide
 @export_category("Wall physics")
-@export var gravity_wall:float = 4000
-@export var wall_jump_speed_x: float = 1400
-@export var wall_jump_speed_y:float = -2000
+@export var gravity_wall:float = 2000
+@export var wall_jump_speed_x: float = 800
+@export var wall_jump_speed_y:float = -800
 
 @export var wall_land_coyote_time = 0.3 # duration of wall-propulsation 
-@export var wall_jump_buffer_time = 0.5
-@export var wall_change_coyote_time = 0.1
-@export var wall_contact_coyote_time:float = 0.2
+@export var wall_jump_buffer_time = 0.5 # temps durant lequel un saut est enregistré
+@export var wall_change_coyote_time = 0.1 
+@export var wall_contact_coyote_time:float = 0.2 # record last contact with a wall
 
 var wall_land_coyote:float =0.
 var wall_change_coyote:float = 0.
 var wall_jump_buffer:float = 0.
 var wall_contact_coyote:float = 0.
-
-
 
 var wall_jump_lock:float = 0.
 @export var wall_jump_lock_time:float= 0.05
