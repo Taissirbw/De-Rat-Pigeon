@@ -33,7 +33,7 @@ func physics_update(delta: float) -> void:
 		if player.is_on_floor() or player.floor_coyote > 0.:
 			if Input.is_action_just_pressed("jump") :
 				finished.emit(JUMPING)
-			elif absf(player.velocity.x) < 70:
+			elif (absf(player.velocity.x) < player.speed/10.) and (dir == 0.):
 				finished.emit(IDLE)
 			if player.is_on_floor():
 				player.floor_coyote = player.floor_coyote_time

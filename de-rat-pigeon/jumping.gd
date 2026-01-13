@@ -46,7 +46,7 @@ func physics_update(delta: float) -> void:
 				finished.emit(WALL_SLIDING)
 				
 		elif player.is_on_floor():
-			if absf(player.velocity.x) > 1:
+			if (absf(player.velocity.x) > player.speed/10.) or (dir != 0.):
 				finished.emit(RUNNING)
 			else:
 				finished.emit(IDLE)
