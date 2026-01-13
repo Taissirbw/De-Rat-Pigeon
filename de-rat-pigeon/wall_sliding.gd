@@ -85,7 +85,7 @@ func physics_update(delta: float) -> void:
 				player.wall_jump_buffer = player.wall_jump_buffer_time
 			else:
 				player.wall_jump_buffer -= delta
-			
+
 			# Wall jump
 			if player.wall_change_coyote > 0. and player.wall_jump_buffer >0.:
 					print("Jump on wall")
@@ -108,7 +108,9 @@ func physics_update(delta: float) -> void:
 			if !player.wall_land_coyote > 0.:
 				player.velocity.y += player.gravity_wall * delta
 		else:
-			player.velocity.y += player.gravity * delta
+			# Fix temporaire : il faudrait décrémenter la vélocité
+			finished.emit(FALLING)
+			#player.velocity.y += player.gravity * delta
 
 			
 		player.move_and_slide()

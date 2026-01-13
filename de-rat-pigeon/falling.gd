@@ -12,6 +12,12 @@ func physics_update(delta: float) -> void:
 			player.velocity.x = lerp(player.velocity.x, dir * player.speed, player.acceleration)
 		else:
 			player.velocity.x = lerp(player.velocity.x, 0.0, player.friction)
+		if player.velocity.x < 0: # cours à droite
+			player.animation_player.flip_h = false
+			#0player.animation_player.offset.x = 30.
+		if player.velocity.x > 0: #cours à gauche
+			player.animation_player.flip_h = true
+			#player.animation_player.offset.x = 0. 
 		
 		if player.is_on_wall() and player.velocity.x != 0:
 			

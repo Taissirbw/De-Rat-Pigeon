@@ -111,13 +111,12 @@ show_wall_debug = true
 gravity = 2200
 jump_speed_y = -800
 jump_speed_x = 400
+floor_coyote_time = 0.1
 gravity_wall = 2000.0
 wall_jump_speed_x = 1200.0
 wall_jump_speed_y = -1200.0
 wall_land_coyote_time = 1.0
 wall_change_coyote_time = 0.3
-wall_contact_coyote_time = 0.02
-wall_jump_lock_time = 0.1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
 shape = SubResource("CircleShape2D_e36ub")
