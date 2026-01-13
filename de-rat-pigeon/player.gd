@@ -45,6 +45,7 @@ var look_dir_x:int = 1
 
 @onready var state_label = $state_label
 @onready var physic_label = $"CanvasLayer/physic_label"
+@onready var coyote_label = $CanvasLayer/change_coyote
 var compteur = 1
 
 
@@ -116,6 +117,7 @@ func _on_state_machine_state_transition() -> void:
 
 # Affichage de la Vélocité pour debug
 func physic_label_update():
+	coyote_label.text = str(wall_change_coyote)
 	physic_label.text = "Velocity X : " + str(int(velocity.x)) + "\n Velocity Y : " + str(int(velocity.y))
 
 func update_shader_coyote():

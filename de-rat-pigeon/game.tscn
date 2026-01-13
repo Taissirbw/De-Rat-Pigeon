@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=4 uid="uid://qi5sgrgq52ih"]
+[gd_scene load_steps=29 format=4 uid="uid://qi5sgrgq52ih"]
 
 [ext_resource type="Script" uid="uid://drf3w115vbgqc" path="res://game.gd" id="1_fc0e3"]
 [ext_resource type="Script" uid="uid://dnvxrkor82gqb" path="res://player.gd" id="2_feb5d"]
@@ -83,6 +83,9 @@ shader_parameter/radius = -0.65
 shader_parameter/speed = 2.7090001286775
 shader_parameter/effect_color = Color(0.5242135, 0.15995362, 0.33694172, 1)
 
+[sub_resource type="LabelSettings" id="LabelSettings_x5p1p"]
+font_size = 45
+
 [node name="game" type="Node"]
 script = ExtResource("1_fc0e3")
 metadata/_edit_horizontal_guides_ = [814.0]
@@ -113,7 +116,7 @@ jump_speed_y = -800
 jump_speed_x = 400
 floor_coyote_time = 0.1
 gravity_wall = 2000.0
-wall_jump_speed_x = 1200.0
+wall_jump_speed_x = 800.0
 wall_jump_speed_y = -1200.0
 wall_land_coyote_time = 1.0
 wall_change_coyote_time = 0.3
@@ -159,6 +162,14 @@ offset_top = 757.20807
 offset_right = 819.728
 offset_bottom = 831.20807
 text = "gfdsfgfs"
+
+[node name="change_coyote" type="Label" parent="Player/CanvasLayer"]
+offset_left = 18.0
+offset_top = 492.0
+offset_right = 301.0
+offset_bottom = 627.0
+text = "0."
+label_settings = SubResource("LabelSettings_x5p1p")
 
 [node name="StateMachine" type="Node" parent="Player" node_paths=PackedStringArray("initial_state")]
 script = ExtResource("8_mfdv2")
