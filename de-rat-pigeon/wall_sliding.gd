@@ -17,7 +17,8 @@ func enter(previous_state_path: String, data := {}) -> void:
 	player.animation_player.offset.x = 30. * int(player.look_dir_x == -1)
 	player.rotation_degrees = -90. * player.look_dir_x
 	
-	player.wall_land_coyote = player.wall_change_coyote_time
+	player.wall_grip_coyote = player.wall_grip_coyote_time
+	#player.velocity.y = 0
 	#if player.velocity.x >0:
 		#player.animation_player.flip_h = true
 		#player.rotation_degrees = 90. # Cours sur mur à gauche
@@ -59,11 +60,10 @@ func physics_update(delta: float) -> void:
 			player.wall_jump_lock -= delta
 			player.velocity.x = lerp(player.velocity.x, dir * player.speed, player.acceleration * 0.5)
 		
-		if player.wall_land_coyote > 0.:
-			player.wall_land_coyote -= delta
+		if player.wall_grip_coyote > 0.:
+			player.wall_grip_coyote -= delta
 		
 		if player.is_on_floor():
-			print("On floor")
 			if Input.is_action_just_pressed("jump"):
 				finished.emit(JUMPING)
 			else:
@@ -98,28 +98,27 @@ func physics_update(delta: float) -> void:
 					player.wall_jump_lock = player.wall_jump_lock_time
 					player.wall_change_coyote = 0.
 					player.wall_jump_buffer = 0.
-			#elif player.wall_jump_lock > 0.:
-			#	player.wall_change_coyote = 0.
-			if player.is_on_wall(): # Maj du dernier temps de contact avec un mur
-				#print("on wall")
+
+			# Maj du dernier temps de contact avec un mur
+			if player.is_on_wall(): 
 				player.wall_contact_coyote = player.wall_contact_coyote_time
 				last_wall_dir = player.look_dir_x
 			else:
 				player.wall_contact_coyote -= delta
-			if !(player.wall_land_coyote > 0.):
-				
-				player.velocity.y += player.gravity_wall * delta
+			
+			## WALL GRIP
+			# Empeche le joueur de glisser vers le bas lors de l'atterissage
+			if player.wall_grip_coyote > 0. and player.is_on_wall():
+				#pass
+				player.velocity.y = min(player.velocity.y, 0)
+			# Au dela de ce temps, il glisse le long du mur
 			else:
-				print("Land coyote : ", player.wall_land_coyote)
+				player.velocity.y += player.gravity_wall * delta
 		else:
-
 			player.wall_change_coyote = 0.
 			player.wall_jump_buffer = 0.
-			# Fix temporaire : il faudrait décrémenter la vélocité
+			#TODO Fix temporaire : il faudrait décrémenter la vélocité
 			finished.emit(FALLING)
-			#player.velocity.y += player.gravity * delta
 
-			
+		# Le moteur physique applique les forces
 		player.move_and_slide()
-		
-	

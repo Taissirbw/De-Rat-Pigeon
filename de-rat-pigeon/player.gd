@@ -1,11 +1,15 @@
 class_name Player extends CharacterBody2D
 
+@export_category("Debug Tools")
 # Active l'implémentation Machine à etats
 @export var UseStateMachine = false
+# Colore la sprite en fonction de l'état par rapport aux murs
 @export var show_wall_debug = false
+# Imprime les transitions d'états dans la console.
+@export var print_state_transition = false
 
 @export_category("Normal physics")
-@export var gravity = 6000
+@export var gravity = 2200
 @export_range(0.0, 1.0) var friction = 0.3
 @export_range(0.0 , 1.0) var acceleration = 0.1
 
@@ -24,7 +28,7 @@ var floor_coyote:float = 0.
 
 # Lorsque le joueur viens d'attérir sur un mur, 
 # il a un petit peu de temps avant de subir la gravité à nouveau.
-@export var wall_land_coyote_time = 0.3 
+@export var wall_grip_coyote_time = 0.3 
 # Pour wall-jump, il faut un saut enregistré + le joueur change de sens
 @export var wall_jump_buffer_time = 0.5 # temps durant lequel un saut est enregistré
 @export var wall_change_coyote_time = 0.1 # temps durant lequel le changement de dir est valable
@@ -33,7 +37,7 @@ var floor_coyote:float = 0.
 # apres un wall-jump, le joueur ne peut pas ressauter immédiatement.
 @export var wall_jump_lock_time:float= 0.05
 
-var wall_land_coyote:float =0.
+var wall_grip_coyote:float =0.
 var wall_change_coyote:float = 0.
 var wall_jump_buffer:float = 0.
 var wall_contact_coyote:float = 0.
@@ -45,7 +49,7 @@ var look_dir_x:int = 1
 @onready var animation_player = $AnimatedSprite2D
 
 @onready var state_machine = $StateMachine
-
+@onready var collision_shape = $CollisionShape2D
 @onready var state_label = $state_label
 @onready var physic_label = $"CanvasLayer/physic_label"
 @onready var coyote_label = $CanvasLayer/change_coyote
