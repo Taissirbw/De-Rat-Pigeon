@@ -1,0 +1,170 @@
+[gd_scene load_steps=24 format=3 uid="uid://cy5an5ksxdq7f"]
+
+[ext_resource type="Script" uid="uid://dnvxrkor82gqb" path="res://scripts/player.gd" id="1_op7ga"]
+[ext_resource type="Texture2D" uid="uid://0y7p3sycq6cs" path="res://Assets/icon.svg" id="2_q13i1"]
+[ext_resource type="Shader" uid="uid://d2byo77143sro" path="res://Assets/player_hilghlight_debug.gdshader" id="3_pylmc"]
+[ext_resource type="Texture2D" uid="uid://cta0ovw17yi4i" path="res://Assets/Player/ANIMATIONS/FALL.png" id="4_pbfsw"]
+[ext_resource type="Texture2D" uid="uid://bnt42v5njvngp" path="res://Assets/Player/ANIMATIONS/IDLE.png" id="5_5tmop"]
+[ext_resource type="Texture2D" uid="uid://drrmjl8auol51" path="res://Assets/Player/ANIMATIONS/JUMP.png" id="6_7ahtn"]
+[ext_resource type="Texture2D" uid="uid://1c3iqsmbkmli" path="res://Assets/Player/ANIMATIONS/RUN_1.png" id="7_7lmhl"]
+[ext_resource type="Texture2D" uid="uid://b5ohwu18uiy84" path="res://Assets/Player/ANIMATIONS/RUN_2.png" id="8_dx0e4"]
+[ext_resource type="Texture2D" uid="uid://djvslcaptwbfa" path="res://Assets/Player/ANIMATIONS/RUN_3.png" id="9_jm5j8"]
+[ext_resource type="Texture2D" uid="uid://curqd2e6svixm" path="res://Assets/Player/ANIMATIONS/RUN_4.png" id="10_7hik5"]
+[ext_resource type="Shader" uid="uid://b0k1muff474kp" path="res://Assets/poison.gdshader" id="11_qtqh7"]
+[ext_resource type="Script" uid="uid://dv1x2co14liut" path="res://scripts/state_machine.gd" id="12_2wuci"]
+[ext_resource type="Script" uid="uid://bs0k7o68pt10r" path="res://scripts/idle.gd" id="13_iruf7"]
+[ext_resource type="Script" uid="uid://cgealpr012cg0" path="res://scripts/running.gd" id="14_j5n4i"]
+[ext_resource type="Script" uid="uid://dct8nfmi65u2x" path="res://scripts/jumping.gd" id="15_634y6"]
+[ext_resource type="Script" uid="uid://dex1e20w4td3n" path="res://scripts/wall_sliding.gd" id="16_efrwb"]
+[ext_resource type="Script" uid="uid://kekoy0ue362e" path="res://scripts/falling.gd" id="17_hiqhm"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_e8heu"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_e36ub"]
+radius = 15.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_80cx4"]
+shader = ExtResource("3_pylmc")
+shader_parameter/on_wall = false
+shader_parameter/coyote_pos = false
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mfdv2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_pbfsw")
+}],
+"loop": true,
+"name": &"fall",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_5tmop")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_7ahtn")
+}],
+"loop": true,
+"name": &"jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_7lmhl")
+}, {
+"duration": 0.6,
+"texture": ExtResource("8_dx0e4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_jm5j8")
+}, {
+"duration": 0.8,
+"texture": ExtResource("10_7hik5")
+}],
+"loop": true,
+"name": &"run",
+"speed": 8.0
+}]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mfdv2"]
+shader = ExtResource("11_qtqh7")
+shader_parameter/radius = -0.65
+shader_parameter/speed = 2.7090001286775
+shader_parameter/effect_color = Color(0.5242135, 0.15995362, 0.33694172, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_x5p1p"]
+font_size = 45
+
+[node name="Player" type="CharacterBody2D"]
+material = SubResource("ShaderMaterial_e8heu")
+slide_on_ceiling = false
+platform_wall_layers = 1
+script = ExtResource("1_op7ga")
+UseStateMachine = true
+show_wall_debug = true
+floor_coyote_time = 0.1
+wall_jump_speed_y = -1200.0
+wall_change_coyote_time = 0.3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_e36ub")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position_smoothing_enabled = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-1.0000019, 9.536725e-07)
+scale = Vector2(0.265625, 0.2656253)
+texture = ExtResource("2_q13i1")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_80cx4")
+position = Vector2(-2, -6)
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_mfdv2")
+animation = &"fall"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+visible = false
+material = SubResource("ShaderMaterial_mfdv2")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="physic_label" type="Label" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_left = -0.439
+anchor_top = -1.0960001
+anchor_right = -0.439
+anchor_bottom = -1.0960001
+offset_left = 546.728
+offset_top = 757.20807
+offset_right = 819.728
+offset_bottom = 831.20807
+text = "gfdsfgfs"
+
+[node name="change_coyote" type="Label" parent="CanvasLayer"]
+offset_left = 18.0
+offset_top = 492.0
+offset_right = 301.0
+offset_bottom = 627.0
+text = "0."
+label_settings = SubResource("LabelSettings_x5p1p")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("12_2wuci")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource("13_iruf7")
+
+[node name="Running" type="Node" parent="StateMachine"]
+script = ExtResource("14_j5n4i")
+
+[node name="Jumping" type="Node" parent="StateMachine"]
+script = ExtResource("15_634y6")
+
+[node name="WallSliding" type="Node" parent="StateMachine"]
+script = ExtResource("16_efrwb")
+
+[node name="Falling" type="Node" parent="StateMachine"]
+script = ExtResource("17_hiqhm")
+
+[node name="state_label" type="Label" parent="."]
+offset_left = -49.0
+offset_top = 32.0
+offset_right = 60.0
+offset_bottom = 55.0
+
+[connection signal="state_transition" from="StateMachine" to="." method="_on_state_machine_state_transition"]

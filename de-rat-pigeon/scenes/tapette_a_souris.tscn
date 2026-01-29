@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://4irxpill6ri2"]
 
-[ext_resource type="Script" uid="uid://xdnh8lu1w2qg" path="res://tapette_a_souris.gd" id="1_6gimj"]
+[ext_resource type="Script" uid="uid://xdnh8lu1w2qg" path="res://scripts/tapette_a_souris.gd" id="1_6gimj"]
 [ext_resource type="Texture2D" uid="uid://t013n68rywjb" path="res://Assets/tapette.png" id="2_q8gjo"]
 [ext_resource type="Texture2D" uid="uid://bwv01e5c1n0vl" path="res://Assets/mortauxrat.png" id="3_0mcsh"]
 
