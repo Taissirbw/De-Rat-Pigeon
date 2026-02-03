@@ -1,7 +1,6 @@
 extends Node2D
 
 @export var delais_shocks := 1.
-@export var duration := 2.
 
 @onready var zap: Area2D = $Zap
 @onready var animated_sprite: AnimatedSprite2D = $Zap/AnimatedSprite
@@ -13,8 +12,6 @@ var zap_size_x
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	zap_collision.disabled = true
-	zap_size_x = zap_collision.shape.size.x
-	zap_collision.shape.size.x = 0
 	
 	timer.wait_time = delais_shocks
 
@@ -25,7 +22,7 @@ func _process(delta: float) -> void:
 
 func _on_zap_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
-		body.get_shock()
+		body.shock()
 
 func _on_timer_timeout() -> void:
 	animated_sprite.play("shock")

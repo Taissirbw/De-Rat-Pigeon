@@ -50,5 +50,5 @@ visible = false
 position = Vector2(1159, -15)
 
 [node name="ElectricTrap" parent="." instance=ExtResource("7_u5sy4")]
-position = Vector2(109, -158)
+position = Vector2(635, -238)
 rotation = 3.1415927

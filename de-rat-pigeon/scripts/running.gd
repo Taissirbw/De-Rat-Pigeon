@@ -16,8 +16,14 @@ func enter(previous_state_path: String, data := {}) -> void:
 
 func physics_update(delta: float) -> void:
 	if stateVersion:
+		
+		if player.shock_state:
+			player.wall_contact_coyote -= delta
+			player.velocity.y += player.gravity * delta
+			finished.emit(FALLING)
+		
 		dir = Input.get_axis("walk_left", "walk_right")
-		if dir != 0:
+		if dir != 0 and ! player.shock_state:
 			player.velocity.x = lerp(player.velocity.x, dir * player.speed, player.acceleration)
 		else:
 			player.velocity.x = lerp(player.velocity.x, 0.0, player.friction)
@@ -46,7 +52,7 @@ func physics_update(delta: float) -> void:
 				player.wall_contact_coyote -= delta
 				
 		if player.is_on_floor() or player.floor_coyote > 0.:
-			if Input.is_action_just_pressed("jump") :
+			if Input.is_action_just_pressed("jump") and ! player.shock_state:
 				finished.emit(JUMPING)
 			elif (absf(player.velocity.x) < player.speed/10.) and (dir == 0.):
 				finished.emit(IDLE)

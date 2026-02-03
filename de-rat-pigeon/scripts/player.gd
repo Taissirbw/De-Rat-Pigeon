@@ -47,6 +47,9 @@ var wall_jump_lock:float = 0.
 
 var look_dir_x:int = 1
 
+var shock_state = false
+@onready var shock_timer: Timer = $shockTimer
+
 @onready var animation_player = $AnimatedSprite2D
 
 @onready var state_machine = $StateMachine
@@ -111,8 +114,13 @@ func _physics_process(delta):
 			rotation_degrees = 0. # Remet le rat en mode marche au sol
 			compteur =1 # Reset le compteur de sautg
 
-func get_shock():
-	print("Aie")
+func shock():
+	velocity.y += 200.
+	move_and_slide()
+	shock_state = true
+	shock_timer.start()
+	await shock_timer.timeout
+	shock_state = false
 
 func _on_tapette_a_souris_body_entered(body: Node2D, source: Area2D) -> void:
 	source.activate()

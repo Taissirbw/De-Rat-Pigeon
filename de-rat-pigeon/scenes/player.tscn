@@ -278,4 +278,7 @@ offset_top = 32.0
 offset_right = 60.0
 offset_bottom = 55.0
 
+[node name="shockTimer" type="Timer" parent="."]
+wait_time = 0.3
+
 [connection signal="state_transition" from="StateMachine" to="." method="_on_state_machine_state_transition"]

@@ -30,7 +30,7 @@ func physics_update(delta: float) -> void:
 		
 		# gestion des input, et transition depuis l'état IDLE
 		var dir = Input.get_axis("walk_left", "walk_right")
-		if Input.is_action_just_pressed("jump"):
+		if Input.is_action_just_pressed("jump") and ! player.shock_state:
 			finished.emit(JUMPING)
-		elif dir != 0:
+		elif dir != 0 and ! player.shock_state:
 			finished.emit(RUNNING)
