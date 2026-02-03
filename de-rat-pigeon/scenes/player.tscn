@@ -183,7 +183,7 @@ shader_parameter/effect_color = Color(0.5242135, 0.15995362, 0.33694172, 1)
 [sub_resource type="LabelSettings" id="LabelSettings_x5p1p"]
 font_size = 45
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["player"]]
 material = SubResource("ShaderMaterial_e8heu")
 collision_layer = 2
 slide_on_ceiling = false
@@ -191,7 +191,6 @@ platform_wall_layers = 1
 script = ExtResource("1_op7ga")
 UseStateMachine = true
 floor_coyote_time = 0.1
-wall_jump_speed_y = -1200.0
 wall_change_coyote_time = 0.3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

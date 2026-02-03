@@ -58,7 +58,6 @@ var compteur = 1
 
 
 func _ready():
-	print("te")
 	state_machine.init(self, UseStateMachine)
 	physic_label.text = "Velocity X : " + str(velocity.x) + "\n Velocity Y : " + str(velocity.y)
 
@@ -111,6 +110,9 @@ func _physics_process(delta):
 		if is_on_floor():
 			rotation_degrees = 0. # Remet le rat en mode marche au sol
 			compteur =1 # Reset le compteur de sautg
+
+func get_shock():
+	print("Aie")
 
 func _on_tapette_a_souris_body_entered(body: Node2D, source: Area2D) -> void:
 	source.activate()

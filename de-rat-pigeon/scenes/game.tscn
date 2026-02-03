@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=4 uid="uid://qi5sgrgq52ih"]
+[gd_scene load_steps=8 format=4 uid="uid://qi5sgrgq52ih"]
 
 [ext_resource type="Script" uid="uid://drf3w115vbgqc" path="res://scripts/game.gd" id="1_fc0e3"]
 [ext_resource type="TileSet" uid="uid://b1c0h6ykoneay" path="res://Ressources/TileSet.tres" id="3_p57ef"]
 [ext_resource type="PackedScene" uid="uid://cy5an5ksxdq7f" path="res://scenes/player.tscn" id="6_j5wjh"]
 [ext_resource type="PackedScene" uid="uid://truyffsrng0" path="res://scenes/tile_map_layer.tscn" id="6_ryrav"]
+[ext_resource type="PackedScene" uid="uid://c4rt56iyjjpx1" path="res://scenes/electric_trap.tscn" id="7_u5sy4"]
 [ext_resource type="PackedScene" uid="uid://ckg5kpbfsttto" path="res://scenes/mort_au_rats.tscn" id="14_7sc4i"]
 [ext_resource type="PackedScene" uid="uid://4irxpill6ri2" path="res://scenes/tapette_a_souris.tscn" id="15_80cx4"]
 
@@ -47,3 +48,7 @@ position = Vector2(655, -158)
 [node name="tapette_a_souris" parent="Level" instance=ExtResource("15_80cx4")]
 visible = false
 position = Vector2(1159, -15)
+
+[node name="ElectricTrap" parent="." instance=ExtResource("7_u5sy4")]
+position = Vector2(109, -158)
+rotation = 3.1415927
