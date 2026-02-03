@@ -4,11 +4,16 @@ var dir
 
 func enter(previous_state_path: String, data := {}) -> void:
 	#print("JUMPING")
-	player.rotation_degrees = 0.
+
 	player.velocity.y = player.jump_speed_y
 	dir = Input.get_axis("walk_left", "walk_right")
 	player.velocity.x= max( player.jump_speed_x, abs(player.velocity.x))*dir 
 	player.animation_player.play("jump")
+
+	# Remet tout bien
+	player.rotation_degrees = 0.
+	player.animation_player.flip_v = false
+	player.animation_player.offset.y = 0.
 
 func physics_update(delta: float) -> void:
 	if stateVersion:

@@ -3,7 +3,11 @@ extends State
 func enter(previous_state_path: String, data := {}) -> void:
 	#print("FALL")
 	player.animation_player.play("fall")
-	player.rotation_degrees = 180.
+	
+	# Remet tout bien
+	player.rotation_degrees = 0.
+	player.animation_player.flip_v = false
+	player.animation_player.offset.y = 0.
 
 func physics_update(delta: float) -> void:
 	if stateVersion:
@@ -13,10 +17,10 @@ func physics_update(delta: float) -> void:
 		else:
 			player.velocity.x = lerp(player.velocity.x, 0.0, player.friction)
 		if player.velocity.x < 0: # cours à droite
-			player.animation_player.flip_h = false
+			player.animation_player.flip_h = true
 			#0player.animation_player.offset.x = 30.
 		if player.velocity.x > 0: #cours à gauche
-			player.animation_player.flip_h = true
+			player.animation_player.flip_h = false
 			#player.animation_player.offset.x = 0. 
 		
 		if player.is_on_wall() and player.velocity.x != 0:

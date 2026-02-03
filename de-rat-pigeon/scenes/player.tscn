@@ -1,27 +1,129 @@
-[gd_scene load_steps=24 format=3 uid="uid://cy5an5ksxdq7f"]
+[gd_scene load_steps=41 format=3 uid="uid://cy5an5ksxdq7f"]
 
 [ext_resource type="Script" uid="uid://dnvxrkor82gqb" path="res://scripts/player.gd" id="1_op7ga"]
 [ext_resource type="Texture2D" uid="uid://0y7p3sycq6cs" path="res://Assets/icon.svg" id="2_q13i1"]
+[ext_resource type="Texture2D" uid="uid://bb5muevphoe5i" path="res://Assets/Player/RUN/RUN0000.png" id="3_4ni07"]
 [ext_resource type="Shader" uid="uid://d2byo77143sro" path="res://Assets/player_hilghlight_debug.gdshader" id="3_pylmc"]
+[ext_resource type="Texture2D" uid="uid://bnrrcnabowq4" path="res://Assets/Player/IDLE/IDLE.png" id="4_ke2ow"]
+[ext_resource type="Texture2D" uid="uid://brnrwux4hg72i" path="res://Assets/Player/RUN/RUN0003.png" id="4_l71n6"]
 [ext_resource type="Texture2D" uid="uid://cta0ovw17yi4i" path="res://Assets/Player/ANIMATIONS/FALL.png" id="4_pbfsw"]
 [ext_resource type="Texture2D" uid="uid://bnt42v5njvngp" path="res://Assets/Player/ANIMATIONS/IDLE.png" id="5_5tmop"]
+[ext_resource type="Texture2D" uid="uid://dx43xbfglxgcu" path="res://Assets/Player/RUN/RUN0006.png" id="5_ke2ow"]
 [ext_resource type="Texture2D" uid="uid://drrmjl8auol51" path="res://Assets/Player/ANIMATIONS/JUMP.png" id="6_7ahtn"]
+[ext_resource type="Texture2D" uid="uid://24u6vrjcq6a1" path="res://Assets/Player/RUN/RUN0009.png" id="6_ujl30"]
 [ext_resource type="Texture2D" uid="uid://1c3iqsmbkmli" path="res://Assets/Player/ANIMATIONS/RUN_1.png" id="7_7lmhl"]
+[ext_resource type="Texture2D" uid="uid://xwd6u4ujigwu" path="res://Assets/Player/RUN/RUN0012.png" id="7_31cv2"]
 [ext_resource type="Texture2D" uid="uid://b5ohwu18uiy84" path="res://Assets/Player/ANIMATIONS/RUN_2.png" id="8_dx0e4"]
+[ext_resource type="Texture2D" uid="uid://cx1olsleck5i6" path="res://Assets/Player/RUN/RUN0014.png" id="8_pf23h"]
 [ext_resource type="Texture2D" uid="uid://djvslcaptwbfa" path="res://Assets/Player/ANIMATIONS/RUN_3.png" id="9_jm5j8"]
 [ext_resource type="Texture2D" uid="uid://curqd2e6svixm" path="res://Assets/Player/ANIMATIONS/RUN_4.png" id="10_7hik5"]
+[ext_resource type="Texture2D" uid="uid://dhrnx6axtv0k2" path="res://Assets/Player/WALK/WALK0000.png" id="11_487ah"]
 [ext_resource type="Shader" uid="uid://b0k1muff474kp" path="res://Assets/poison.gdshader" id="11_qtqh7"]
 [ext_resource type="Script" uid="uid://dv1x2co14liut" path="res://scripts/state_machine.gd" id="12_2wuci"]
+[ext_resource type="Texture2D" uid="uid://c8clkjmx7ovor" path="res://Assets/Player/WALK/WALK0003.png" id="12_md1ol"]
+[ext_resource type="Texture2D" uid="uid://dyeg24hcv0nkv" path="res://Assets/Player/WALK/WALK0006.png" id="13_bj30b"]
 [ext_resource type="Script" uid="uid://bs0k7o68pt10r" path="res://scripts/idle.gd" id="13_iruf7"]
 [ext_resource type="Script" uid="uid://cgealpr012cg0" path="res://scripts/running.gd" id="14_j5n4i"]
+[ext_resource type="Texture2D" uid="uid://dn822sq2m8bix" path="res://Assets/Player/WALK/WALK0009.png" id="14_jc3p3"]
 [ext_resource type="Script" uid="uid://dct8nfmi65u2x" path="res://scripts/jumping.gd" id="15_634y6"]
+[ext_resource type="Texture2D" uid="uid://6y4i5r6ox4h1" path="res://Assets/Player/WALK/WALK0012.png" id="15_hax0n"]
 [ext_resource type="Script" uid="uid://dex1e20w4td3n" path="res://scripts/wall_sliding.gd" id="16_efrwb"]
 [ext_resource type="Script" uid="uid://kekoy0ue362e" path="res://scripts/falling.gd" id="17_hiqhm"]
+[ext_resource type="Texture2D" uid="uid://c7nagfgdmjdh7" path="res://Assets/Player/WALK/WALK0015.png" id="17_j2b1d"]
+[ext_resource type="Texture2D" uid="uid://due074m5m1qp" path="res://Assets/Player/WALK/WALK0018.png" id="18_cs1tg"]
+[ext_resource type="Texture2D" uid="uid://bkea448dm77qc" path="res://Assets/Player/WALK/WALK0021.png" id="19_2dvfe"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_e8heu"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_e36ub"]
 radius = 15.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4ni07"]
+shader = ExtResource("3_pylmc")
+shader_parameter/on_wall = false
+shader_parameter/coyote_pos = false
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dt7fs"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_ujl30")
+}],
+"loop": false,
+"name": &"fall",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_ke2ow")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_4ni07")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_l71n6")
+}],
+"loop": false,
+"name": &"jump",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_ke2ow")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_ujl30")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_31cv2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_pf23h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_4ni07")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_l71n6")
+}],
+"loop": true,
+"name": &"run",
+"speed": 15.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_487ah")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_md1ol")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_bj30b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_jc3p3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_hax0n")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_j2b1d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_cs1tg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_2dvfe")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 20.0
+}]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_80cx4"]
 shader = ExtResource("3_pylmc")
@@ -83,11 +185,11 @@ font_size = 45
 
 [node name="Player" type="CharacterBody2D"]
 material = SubResource("ShaderMaterial_e8heu")
+collision_layer = 2
 slide_on_ceiling = false
 platform_wall_layers = 1
 script = ExtResource("1_op7ga")
 UseStateMachine = true
-show_wall_debug = true
 floor_coyote_time = 0.1
 wall_jump_speed_y = -1200.0
 wall_change_coyote_time = 0.3
@@ -105,11 +207,21 @@ scale = Vector2(0.265625, 0.2656253)
 texture = ExtResource("2_q13i1")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+material = SubResource("ShaderMaterial_4ni07")
+position = Vector2(2, -11)
+sprite_frames = SubResource("SpriteFrames_dt7fs")
+animation = &"run"
+frame_progress = 0.74522024
+
+[node name="AnimatedSprite2D3" type="AnimatedSprite2D" parent="."]
+visible = false
 material = SubResource("ShaderMaterial_80cx4")
 position = Vector2(-2, -6)
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_mfdv2")
-animation = &"fall"
+animation = &"run"
+frame_progress = 0.706855
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

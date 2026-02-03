@@ -14,6 +14,7 @@ class_name Player extends CharacterBody2D
 @export_range(0.0 , 1.0) var acceleration = 0.1
 
 @export_category("Player constants")
+@export var walk_speed = 200
 @export var speed = 600
 @export var jump_speed_y = -800
 @export var jump_speed_x = 400

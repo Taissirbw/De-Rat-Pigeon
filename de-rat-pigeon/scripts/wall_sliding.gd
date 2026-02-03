@@ -7,24 +7,16 @@ var last_wall_dir
 
 func enter(previous_state_path: String, data := {}) -> void:	
 	#print("Entered CLIMBING")		
-	#player.velocity.y = player.jump_speed
+
 	player.look_dir_x = sign(player.velocity.x)
-	#print("CLIMBING : ", player.look_dir_x)
 	last_wall_dir = player.look_dir_x
-	#if absf(player.velocity.x) > 1:
-	player.animation_player.play("run")
-	player.animation_player.flip_h = bool(player.look_dir_x)
-	player.animation_player.offset.x = 30. * int(player.look_dir_x == -1)
+
+	player.animation_player.play("walk")
+	#player.animation_player.flip_h = ! bool(player.look_dir_x)
 	player.rotation_degrees = -90. * player.look_dir_x
 	
 	player.wall_grip_coyote = player.wall_grip_coyote_time
-	#player.velocity.y = 0
-	#if player.velocity.x >0:
-		#player.animation_player.flip_h = true
-		#player.rotation_degrees = 90. # Cours sur mur à gauche
-	#if player.velocity.x < 0:
-		#player.animation_player.flip_h = false
-		#player.rotation_degrees = -90.
+
 
 func linear_jump(a, b):
 	return Vector2(a*player.wall_jump_speed_x, b*player.wall_jump_speed_y)
@@ -39,8 +31,7 @@ func physics_update(delta: float) -> void:
 		else:
 			player.velocity.x = lerp(player.velocity.x, 0.0, player.friction)
 		player.look_dir_x = sign(player.velocity.x)
-		
-		
+
 		# Le joueur tombe du mur si
 		# soit sa vélocité x est nulle (player.look_dir_x == 0)
 		# soit sa vélocité y est élevée et le joueur n'est pas sur un mur
@@ -49,12 +40,12 @@ func physics_update(delta: float) -> void:
 				finished.emit(IDLE)
 			else:
 				finished.emit(FALLING)
-				
+
 		# Mets à jour le sens des sprites
-		player.animation_player.flip_h = bool(player.look_dir_x < 0)
-		player.animation_player.offset.x = 30. * int(player.look_dir_x == -1)
+		#player.animation_player.flip_h = ! bool(player.look_dir_x)
 		player.rotation_degrees = -90. * player.look_dir_x
-		
+
+
 		# jsp ce que ça fait
 		if player.wall_jump_lock > 0.:
 			player.wall_jump_lock -= delta
@@ -74,13 +65,13 @@ func physics_update(delta: float) -> void:
 			
 		# Derniers cas : le joueur reste dans l'état wall sliding
 		elif (player.is_on_wall() or player.wall_contact_coyote >0.):
-			
+
 			if sign(dir) == sign(player.get_wall_normal().x):
 				player.wall_change_coyote = player.wall_change_coyote_time
 			else:
 				if player.wall_change_coyote > 0.:
 					player.wall_change_coyote -= delta
-			
+
 			# Stocke le dernier saut
 			if Input.is_action_just_pressed("jump"):
 				player.wall_jump_buffer = player.wall_jump_buffer_time
