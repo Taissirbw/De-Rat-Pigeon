@@ -31,6 +31,7 @@ func physics_update(delta: float) -> void:
 
 
 		if (player.is_on_wall() or player.wall_contact_coyote > 0.) and player.velocity.x !=0.:
+			print("Wall slide from jump")
 			finished.emit(WALL_SLIDING)
 		else:
 			player.wall_contact_coyote -= delta

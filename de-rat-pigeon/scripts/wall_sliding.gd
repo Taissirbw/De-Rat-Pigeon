@@ -68,7 +68,7 @@ func physics_update(delta: float) -> void:
 					finished.emit(IDLE)
 			
 		# Derniers cas : le joueur reste dans l'état wall sliding
-		elif (player.is_on_wall() or player.wall_contact_coyote >0.):
+		elif (player.is_on_wall_only() or player.wall_contact_coyote >0.):
 
 			if sign(dir) == sign(player.get_wall_normal().x):
 				player.wall_change_coyote = player.wall_change_coyote_time
@@ -95,7 +95,7 @@ func physics_update(delta: float) -> void:
 					player.wall_jump_buffer = 0.
 
 			# Maj du dernier temps de contact avec un mur
-			if player.is_on_wall(): 
+			if player.is_on_wall_only(): 
 				player.wall_contact_coyote = player.wall_contact_coyote_time
 				last_wall_dir = player.look_dir_x
 			else:
@@ -103,7 +103,7 @@ func physics_update(delta: float) -> void:
 			
 			## WALL GRIP
 			# Empeche le joueur de glisser vers le bas lors de l'atterissage
-			if player.wall_grip_coyote > 0. and player.is_on_wall():
+			if player.wall_grip_coyote > 0. and player.is_on_wall_only():
 				#pass
 				player.velocity.y = min(player.velocity.y, 0)
 			# Au dela de ce temps, il glisse le long du mur

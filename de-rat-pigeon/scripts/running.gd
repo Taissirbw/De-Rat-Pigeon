@@ -43,9 +43,10 @@ func physics_update(delta: float) -> void:
 
 		
 		
-		if player.is_on_wall_only() and sign(dir) != sign(player.get_wall_normal().x):
+		if player.is_on_wall_only() and sign(dir) != sign(player.get_wall_normal().x) and player.velocity.x !=0.:
 			#player.wall_contact_coyote = player.wall_contact_coyote_time
 			#player.velocity.y = player.gravity_wall
+			print("Jumped from wall")
 			finished.emit(WALL_SLIDING)
 		else:
 			if player.wall_contact_coyote > 0.:
@@ -53,6 +54,7 @@ func physics_update(delta: float) -> void:
 				
 		if player.is_on_floor() or player.floor_coyote > 0.:
 			if Input.is_action_just_pressed("jump") and ! player.shock_state:
+				print("Jumped from floor")
 				finished.emit(JUMPING)
 			elif (absf(player.velocity.x) < player.speed/10.) and (dir == 0.):
 				finished.emit(IDLE)
