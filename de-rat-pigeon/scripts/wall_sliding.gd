@@ -7,7 +7,7 @@ var last_wall_dir
 
 func enter(previous_state_path: String, data := {}) -> void:	
 	#print("Entered CLIMBING")		
-
+	print("Velocite entrée Wall Slide ", player.velocity.x)
 	player.look_dir_x = sign(player.velocity.x)
 	last_wall_dir = player.look_dir_x
 
@@ -105,7 +105,8 @@ func physics_update(delta: float) -> void:
 			# Empeche le joueur de glisser vers le bas lors de l'atterissage
 			if player.wall_grip_coyote > 0. and player.is_on_wall_only():
 				#pass
-				player.velocity.y = min(player.velocity.y, 0)
+				var max_jump = max(player.velocity.y, player.wall_jump_speed_y)
+				player.velocity.y = min(max_jump, 0.)
 			# Au dela de ce temps, il glisse le long du mur
 			else:
 				player.velocity.y += player.gravity_wall * delta

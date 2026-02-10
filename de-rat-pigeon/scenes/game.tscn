@@ -4,7 +4,7 @@
 [ext_resource type="TileSet" uid="uid://b1c0h6ykoneay" path="res://Ressources/TileSet.tres" id="3_p57ef"]
 [ext_resource type="PackedScene" uid="uid://cy5an5ksxdq7f" path="res://scenes/player.tscn" id="6_j5wjh"]
 [ext_resource type="PackedScene" uid="uid://truyffsrng0" path="res://scenes/tile_map_layer.tscn" id="6_ryrav"]
-[ext_resource type="Script" path="res://scripts/camera_area.gd" id="7_gee14"]
+[ext_resource type="Script" uid="uid://ccsfs81eaeamc" path="res://scripts/camera_area.gd" id="7_gee14"]
 [ext_resource type="PackedScene" uid="uid://c4rt56iyjjpx1" path="res://scenes/electric_trap.tscn" id="7_u5sy4"]
 [ext_resource type="PackedScene" uid="uid://ckg5kpbfsttto" path="res://scenes/mort_au_rats.tscn" id="14_7sc4i"]
 [ext_resource type="PackedScene" uid="uid://4irxpill6ri2" path="res://scenes/tapette_a_souris.tscn" id="15_80cx4"]

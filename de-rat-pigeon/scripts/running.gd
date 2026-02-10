@@ -54,7 +54,7 @@ func physics_update(delta: float) -> void:
 				
 		if player.is_on_floor() or player.floor_coyote > 0.:
 			if Input.is_action_just_pressed("jump") and ! player.shock_state:
-				print("Jumped from floor")
+				print("Jumped from floor")	
 				finished.emit(JUMPING)
 			elif (absf(player.velocity.x) < player.speed/10.) and (dir == 0.):
 				finished.emit(IDLE)
