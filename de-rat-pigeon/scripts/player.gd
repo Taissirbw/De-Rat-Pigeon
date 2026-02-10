@@ -51,7 +51,8 @@ var shock_state = false
 @onready var shock_timer: Timer = $shockTimer
 
 @onready var animation_player = $AnimatedSprite2D
-@onready var shock_animation: AnimationPlayer = $AnimatedSprite2D/ShockAnimation
+@onready var shocked_sprite: AnimatedSprite2D = $ShockedSprite
+@onready var shock_animation: AnimationPlayer = $ShockAnimation
 
 @onready var state_machine = $StateMachine
 @onready var collision_shape = $CollisionShape2D
@@ -124,14 +125,17 @@ func _physics_process(delta):
 func shock():
 	shock_state = true
 	# Joue l'animation qui fait clignotter
+	shocked_sprite.play('default')
 	shock_animation.play("Shock")
-	
+
 	# Shock Timer controle la durée de l'état de choc
 	shock_timer.start()
 	await shock_timer.timeout
 	shock_state = false
 	
 	shock_animation.play("RESET")
+	shocked_sprite.pause()
+
 
 func _on_tapette_a_souris_body_entered(body: Node2D, source: Area2D) -> void:
 	source.activate()
