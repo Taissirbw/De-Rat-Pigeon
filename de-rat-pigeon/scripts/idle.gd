@@ -13,6 +13,8 @@ func enter(previous_state_path: String, data := {}) -> void:
 
 func physics_update(delta: float) -> void:
 	if stateVersion:
+		if player.shock_state:
+			finished.emit(SHOCKED)
 		# Décremente le timer coyote
 		if player.is_on_wall():
 			player.wall_contact_coyote = player.wall_contact_coyote_time

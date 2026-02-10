@@ -8,6 +8,7 @@ const RUNNING = "Running"
 const JUMPING = "Jumping"
 const FALLING = "Falling"
 const WALL_SLIDING = "WallSliding"
+const SHOCKED = "Shocked"
 
 var player: Player
 var stateVersion:bool

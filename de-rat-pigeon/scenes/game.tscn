@@ -1,12 +1,19 @@
-[gd_scene load_steps=8 format=4 uid="uid://qi5sgrgq52ih"]
+[gd_scene load_steps=11 format=4 uid="uid://qi5sgrgq52ih"]
 
 [ext_resource type="Script" uid="uid://drf3w115vbgqc" path="res://scripts/game.gd" id="1_fc0e3"]
 [ext_resource type="TileSet" uid="uid://b1c0h6ykoneay" path="res://Ressources/TileSet.tres" id="3_p57ef"]
 [ext_resource type="PackedScene" uid="uid://cy5an5ksxdq7f" path="res://scenes/player.tscn" id="6_j5wjh"]
 [ext_resource type="PackedScene" uid="uid://truyffsrng0" path="res://scenes/tile_map_layer.tscn" id="6_ryrav"]
-[ext_resource type="PackedScene" path="res://scenes/electric_trap.tscn" id="7_u5sy4"]
+[ext_resource type="Script" uid="uid://ccsfs81eaeamc" path="res://scripts/camera_area.gd" id="7_gee14"]
+[ext_resource type="PackedScene" uid="uid://c4rt56iyjjpx1" path="res://scenes/electric_trap.tscn" id="7_u5sy4"]
 [ext_resource type="PackedScene" uid="uid://ckg5kpbfsttto" path="res://scenes/mort_au_rats.tscn" id="14_7sc4i"]
 [ext_resource type="PackedScene" uid="uid://4irxpill6ri2" path="res://scenes/tapette_a_souris.tscn" id="15_80cx4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u5sy4"]
+size = Vector2(1055.5, 769)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gee14"]
+size = Vector2(804, 156)
 
 [node name="game" type="Node"]
 script = ExtResource("1_fc0e3")
@@ -37,7 +44,7 @@ enabled = false
 tile_set = ExtResource("3_p57ef")
 
 [node name="Player" parent="." instance=ExtResource("6_j5wjh")]
-position = Vector2(198, -154)
+position = Vector2(1002, -3666)
 
 [node name="Level" type="Node2D" parent="."]
 
@@ -49,6 +56,27 @@ position = Vector2(655, -158)
 visible = false
 position = Vector2(1159, -15)
 
-[node name="ElectricTrap" parent="." instance=ExtResource("7_u5sy4")]
-position = Vector2(635, -238)
-rotation = 3.1415927
+[node name="LabyrinthArea" type="Area2D" parent="Level"]
+collision_mask = 2
+script = ExtResource("7_gee14")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/LabyrinthArea"]
+position = Vector2(1639.75, -4411.5)
+shape = SubResource("RectangleShape2D_u5sy4")
+debug_color = Color(0.7354857, 0.82893395, 0.71405244, 0.41960785)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Level/LabyrinthArea"]
+position = Vector2(1293, -4185)
+shape = SubResource("RectangleShape2D_gee14")
+
+[node name="CameraLabyrinth" type="Camera2D" parent="Level/LabyrinthArea"]
+position = Vector2(1540, -4412)
+enabled = false
+zoom = Vector2(0.85, 0.85)
+
+[node name="ElectricTrap" parent="Level" instance=ExtResource("7_u5sy4")]
+position = Vector2(626, -238)
+rotation = -3.1415925
+
+[connection signal="body_entered" from="Level/LabyrinthArea" to="Level/LabyrinthArea" method="_on_body_entered"]
+[connection signal="body_exited" from="Level/LabyrinthArea" to="Level/LabyrinthArea" method="_on_body_exited"]

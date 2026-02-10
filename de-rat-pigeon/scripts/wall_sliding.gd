@@ -25,9 +25,7 @@ func physics_update(delta: float) -> void:
 	if stateVersion:
 		
 		if player.shock_state:
-			player.wall_contact_coyote -= delta
-			player.velocity.y += 3. * player.gravity * delta
-			finished.emit(FALLING)
+			finished.emit(SHOCKED)
 		
 		# Gère les inputs pour déterminer si le joueur va vers le mur
 		dir = Input.get_axis("walk_left", "walk_right")

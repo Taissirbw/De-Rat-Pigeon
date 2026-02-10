@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://c4rt56iyjjpx1"]
+[gd_scene load_steps=17 format=3 uid="uid://c4rt56iyjjpx1"]
 
 [ext_resource type="Texture2D" uid="uid://cb4lti03e12du" path="res://Assets/Tiles/Elec/shock0000.png" id="1_c16r2"]
 [ext_resource type="Script" uid="uid://cqsnth7vm2epq" path="res://scripts/electric_trap.gd" id="1_qshd7"]
@@ -8,7 +8,6 @@
 [ext_resource type="Texture2D" uid="uid://d3lsacoxw15ep" path="res://Assets/Tiles/Elec/shock0004.png" id="5_ukind"]
 [ext_resource type="Texture2D" uid="uid://cmief6iihas7i" path="res://Assets/Tiles/Elec/shock0005.png" id="6_ep3q3"]
 [ext_resource type="Texture2D" uid="uid://ddjirmxra8kss" path="res://Assets/Tiles/Elec/shock0006.png" id="7_glfuy"]
-[ext_resource type="Texture2D" uid="uid://de43qimnbfqx1" path="res://Assets/Tiles/Elec/shock0007.png" id="8_wy4ae"]
 [ext_resource type="Texture2D" uid="uid://dxmvyh8hiyoxo" path="res://Assets/Tiles/Elec/shock0008.png" id="9_ruuu4"]
 [ext_resource type="Texture2D" uid="uid://dwdcnvvx8v3o" path="res://Assets/Tiles/Elec/shock0009.png" id="10_wogrq"]
 [ext_resource type="Texture2D" uid="uid://d2848m483pw3a" path="res://Assets/Tiles/Elec/shock0010.png" id="11_1edyu"]
@@ -24,20 +23,26 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("3_cptbt")
 }, {
-"duration": 1.0,
+"duration": 1.5,
 "texture": ExtResource("4_ojytt")
 }, {
-"duration": 1.0,
+"duration": 1.5,
 "texture": ExtResource("5_ukind")
 }, {
-"duration": 1.0,
+"duration": 1.5,
+"texture": ExtResource("4_ojytt")
+}, {
+"duration": 1.5,
+"texture": ExtResource("6_ep3q3")
+}, {
+"duration": 1.5,
+"texture": ExtResource("4_ojytt")
+}, {
+"duration": 1.5,
 "texture": ExtResource("6_ep3q3")
 }, {
 "duration": 1.0,
 "texture": ExtResource("7_glfuy")
-}, {
-"duration": 1.0,
-"texture": ExtResource("8_wy4ae")
 }, {
 "duration": 1.0,
 "texture": ExtResource("9_ruuu4")
@@ -70,6 +75,7 @@ size = Vector2(12, 12)
 
 [node name="ElectricTrap" type="Node2D"]
 script = ExtResource("1_qshd7")
+delais_shocks = 3.0
 
 [node name="Zap" type="Area2D" parent="."]
 collision_layer = 4
@@ -79,7 +85,7 @@ collision_mask = 2
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_betum")
 animation = &"shock"
-frame = 12
+frame = 14
 frame_progress = 1.0
 
 [node name="ZapCollision" type="CollisionShape2D" parent="Zap"]

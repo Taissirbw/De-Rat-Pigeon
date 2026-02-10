@@ -18,9 +18,9 @@ func physics_update(delta: float) -> void:
 	if stateVersion:
 		
 		if player.shock_state:
-			player.wall_contact_coyote -= delta
-			player.velocity.y += player.gravity * delta
-			finished.emit(FALLING)
+			#player.wall_contact_coyote -= delta
+			#player.velocity.y += player.gravity * delta
+			finished.emit(SHOCKED)
 		
 		dir = Input.get_axis("walk_left", "walk_right")
 		if dir != 0 and ! player.shock_state:

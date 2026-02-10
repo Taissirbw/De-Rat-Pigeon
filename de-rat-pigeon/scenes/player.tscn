@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://cy5an5ksxdq7f"]
+[gd_scene load_steps=45 format=3 uid="uid://cy5an5ksxdq7f"]
 
 [ext_resource type="Script" uid="uid://dnvxrkor82gqb" path="res://scripts/player.gd" id="1_op7ga"]
 [ext_resource type="Texture2D" uid="uid://0y7p3sycq6cs" path="res://Assets/icon.svg" id="2_q13i1"]
@@ -32,6 +32,7 @@
 [ext_resource type="Texture2D" uid="uid://c7nagfgdmjdh7" path="res://Assets/Player/WALK/WALK0015.png" id="17_j2b1d"]
 [ext_resource type="Texture2D" uid="uid://due074m5m1qp" path="res://Assets/Player/WALK/WALK0018.png" id="18_cs1tg"]
 [ext_resource type="Texture2D" uid="uid://bkea448dm77qc" path="res://Assets/Player/WALK/WALK0021.png" id="19_2dvfe"]
+[ext_resource type="Script" uid="uid://ctuncl2m8jou7" path="res://scripts/shocked.gd" id="33_487ah"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_e8heu"]
 
@@ -125,6 +126,56 @@ animations = [{
 "speed": 20.0
 }]
 
+[sub_resource type="Animation" id="Animation_md1ol"]
+resource_name = "Shock"
+length = 0.1
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Shock:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Shock:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.06666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Color(1, 1, 1, 1), Color(0.0018410678, 0.0018410682, 0.0018410678, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_bj30b"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Shock:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jc3p3"]
+_data = {
+&"RESET": SubResource("Animation_bj30b"),
+&"Shock": SubResource("Animation_md1ol")
+}
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_80cx4"]
 shader = ExtResource("3_pylmc")
 shader_parameter/on_wall = false
@@ -206,12 +257,24 @@ scale = Vector2(0.265625, 0.2656253)
 texture = ExtResource("2_q13i1")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+clip_children = 2
 texture_filter = 1
 material = SubResource("ShaderMaterial_4ni07")
 position = Vector2(2, -11)
 sprite_frames = SubResource("SpriteFrames_dt7fs")
-animation = &"run"
-frame_progress = 0.74522024
+animation = &"fall"
+
+[node name="Shock" type="ColorRect" parent="AnimatedSprite2D"]
+visible = false
+offset_left = -40.0
+offset_top = -8.0
+offset_right = 40.0
+offset_bottom = 32.0
+
+[node name="ShockAnimation" type="AnimationPlayer" parent="AnimatedSprite2D"]
+libraries = {
+&"": SubResource("AnimationLibrary_jc3p3")
+}
 
 [node name="AnimatedSprite2D3" type="AnimatedSprite2D" parent="."]
 visible = false
@@ -220,7 +283,7 @@ position = Vector2(-2, -6)
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_mfdv2")
 animation = &"run"
-frame_progress = 0.706855
+frame_progress = 0.7479846
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -272,6 +335,9 @@ script = ExtResource("16_efrwb")
 [node name="Falling" type="Node" parent="StateMachine"]
 script = ExtResource("17_hiqhm")
 
+[node name="Shocked" type="Node" parent="StateMachine"]
+script = ExtResource("33_487ah")
+
 [node name="state_label" type="Label" parent="."]
 offset_left = -49.0
 offset_top = 32.0
@@ -279,6 +345,6 @@ offset_right = 60.0
 offset_bottom = 55.0
 
 [node name="shockTimer" type="Timer" parent="."]
-wait_time = 0.3
+wait_time = 0.5
 
 [connection signal="state_transition" from="StateMachine" to="." method="_on_state_machine_state_transition"]

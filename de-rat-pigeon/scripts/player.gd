@@ -51,12 +51,19 @@ var shock_state = false
 @onready var shock_timer: Timer = $shockTimer
 
 @onready var animation_player = $AnimatedSprite2D
+@onready var shock_animation: AnimationPlayer = $AnimatedSprite2D/ShockAnimation
 
 @onready var state_machine = $StateMachine
 @onready var collision_shape = $CollisionShape2D
 @onready var state_label = $state_label
 @onready var physic_label = $"CanvasLayer/physic_label"
 @onready var coyote_label = $CanvasLayer/change_coyote
+
+@onready var camera_2d: Camera2D = $Camera2D
+
+@onready var camera_labyrinth: Camera2D = $"../Level/LabyrinthArea/CameraLabyrinth"
+
+
 var compteur = 1
 
 
@@ -115,12 +122,16 @@ func _physics_process(delta):
 			compteur =1 # Reset le compteur de sautg
 
 func shock():
-	velocity.y += 200.
-	move_and_slide()
 	shock_state = true
+	# Joue l'animation qui fait clignotter
+	shock_animation.play("Shock")
+	
+	# Shock Timer controle la durée de l'état de choc
 	shock_timer.start()
 	await shock_timer.timeout
 	shock_state = false
+	
+	shock_animation.play("RESET")
 
 func _on_tapette_a_souris_body_entered(body: Node2D, source: Area2D) -> void:
 	source.activate()
