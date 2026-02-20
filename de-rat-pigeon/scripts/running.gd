@@ -3,8 +3,8 @@ extends State
 var dir
 
 func enter(previous_state_path: String, data := {}) -> void:
-	#print("RUNNING")
-	if abs(player.velocity.x) < player.walk_speed:
+	#state_print("RUNNING")
+	if abs(player.velocity.x) < player.WALK_SPEED:
 		player.animation_player.play("walk") 
 	else:  
 		player.animation_player.play("run") 
@@ -24,7 +24,7 @@ func physics_update(delta: float) -> void:
 		
 		dir = Input.get_axis("walk_left", "walk_right")
 		if dir != 0 and ! player.shock_state:
-			player.velocity.x = lerp(player.velocity.x, dir * player.speed, player.acceleration)
+			player.velocity.x = lerp(player.velocity.x, dir * player.SPEED, player.acceleration)
 		else:
 			player.velocity.x = lerp(player.velocity.x, 0.0, player.friction)
 		
@@ -36,7 +36,7 @@ func physics_update(delta: float) -> void:
 			player.animation_player.flip_h = false
 			#player.animation_player.offset.x = 0.
 
-		if abs(player.velocity.x) < player.walk_speed:
+		if abs(player.velocity.x) < player.WALK_SPEED:
 			player.animation_player.play("walk") 
 		else:  
 			player.animation_player.play("run") 
@@ -44,9 +44,7 @@ func physics_update(delta: float) -> void:
 		
 		
 		if player.is_on_wall_only() and sign(dir) != sign(player.get_wall_normal().x) and player.velocity.x !=0.:
-			#player.wall_contact_coyote = player.wall_contact_coyote_time
-			#player.velocity.y = player.gravity_wall
-			print("Jumped from wall")
+			# state_print("Jumped from wall")
 			finished.emit(WALL_SLIDING)
 		else:
 			if player.wall_contact_coyote > 0.:
@@ -54,18 +52,24 @@ func physics_update(delta: float) -> void:
 				
 		if player.is_on_floor() or player.floor_coyote > 0.:
 			if Input.is_action_just_pressed("jump") and ! player.shock_state:
-				print("Jumped from floor")	
-				finished.emit(JUMPING)
-			elif (absf(player.velocity.x) < player.speed/10.) and (dir == 0.):
+					
+				if player.is_on_wall() and sign(dir) != sign(player.get_wall_normal().x) and player.velocity.x !=0.:
+					state_print("Jumped from wall+floor")
+					player.wall_jump_buffer = player.WALL_JUMP_BUFFER_TIME
+					finished.emit(WALL_SLIDING)
+				else:
+					state_print("Jumped from floor")
+					finished.emit(JUMPING)
+			elif (absf(player.velocity.x) < player.SPEED/10.) and (dir == 0.):
 				finished.emit(IDLE)
 			if player.is_on_floor():
-				player.floor_coyote = player.floor_coyote_time
+				player.floor_coyote = player.FLOOR_COYOTE_TIME
 			else:
 				player.floor_coyote -= delta
 		else: # Player not on the floor
-			print("FALLS from RUNNING")
+			state_print("FALLS from RUNNING")
 			finished.emit(FALLING)
 		
 		
-		#print("floor ?", player.is_on_floor(), " wall ?", player.is_on_wall())
+		#state_print("floor ?", player.is_on_floor(), " wall ?", player.is_on_wall())
 		player.move_and_slide()

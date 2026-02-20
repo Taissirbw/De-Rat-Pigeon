@@ -268,13 +268,15 @@ slide_on_ceiling = false
 platform_wall_layers = 1
 script = ExtResource("1_op7ga")
 UseStateMachine = true
-floor_coyote_time = 0.1
-wall_change_coyote_time = 0.3
+WALL_JUMP_BUFFER_TIME = 1.0
+WALL_CHANGE_COYOTE_TIME = 0.2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_e36ub")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+process_callback = 0
+limit_enabled = false
 position_smoothing_enabled = true
 
 [node name="ShockAnimation" type="AnimationPlayer" parent="."]
@@ -373,5 +375,7 @@ offset_bottom = 55.0
 
 [node name="shockTimer" type="Timer" parent="."]
 wait_time = 0.5
+
+[node name="oilTimer" type="Timer" parent="."]
 
 [connection signal="state_transition" from="StateMachine" to="." method="_on_state_machine_state_transition"]

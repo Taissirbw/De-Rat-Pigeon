@@ -44,3 +44,6 @@ func enter(previous_state_path: String, data := {}) -> void:
 ## to clean up the state.
 func exit() -> void:
 	pass
+	
+func state_print(message:String):
+	print(name, " : ", message)

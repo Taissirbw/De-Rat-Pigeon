@@ -1,7 +1,7 @@
 extends State
 
 func enter(previous_state_path: String, data := {}) -> void:
-	#print("FALL")
+	#state_print("FALL")
 	player.animation_player.play("fall")
 	
 	# Remet tout bien
@@ -14,7 +14,7 @@ func physics_update(delta: float) -> void:
 		var dir = Input.get_axis("walk_left", "walk_right")
 		if !player.shock_state:
 			if dir != 0:
-				player.velocity.x = lerp(player.velocity.x, dir * player.speed, player.acceleration)
+				player.velocity.x = lerp(player.velocity.x, dir * player.SPEED, player.acceleration)
 			else:
 				player.velocity.x = lerp(player.velocity.x, 0.0, player.friction)
 			if player.velocity.x < 0: # cours à droite
@@ -31,7 +31,7 @@ func physics_update(delta: float) -> void:
 				if player.wall_contact_coyote > 0.:
 					player.wall_contact_coyote -= delta
 				if Input.is_action_just_pressed("jump") and ! player.shock_state:
-					print("FALL -> JUMP")
+					state_print("FALL -> JUMP")
 					finished.emit(JUMPING)
 				else:
 					if abs(player.velocity.x) < 70:
@@ -39,5 +39,5 @@ func physics_update(delta: float) -> void:
 					else:
 						finished.emit(RUNNING)
 			
-		player.velocity.y += player.gravity * delta
+		player.velocity.y += player.GRAVITY * delta
 		player.move_and_slide()

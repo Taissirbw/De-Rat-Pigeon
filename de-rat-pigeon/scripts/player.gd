@@ -9,34 +9,47 @@ class_name Player extends CharacterBody2D
 @export var print_state_transition = false
 
 @export_category("Normal physics")
-@export var gravity = 2200
+@export var GRAVITY = 2200
 @export_range(0.0, 1.0) var friction = 0.3
 @export_range(0.0 , 1.0) var acceleration = 0.1
 
 @export_category("Player constants")
-@export var walk_speed = 200
-@export var speed = 600
-@export var jump_speed_y = -800
-@export var jump_speed_x = 400
-@export var VariableJumpMultiplier = 0.5
-@export var floor_coyote_time:float = 0.05
+@export var WALK_SPEED = 200
+@export var SPEED = 600
+@export var JUMP_SPEED_Y = -800
+@export var JUMP_SPEED_X = 400
+@export var VARIABLE_JUMP_MULTIPLIER = 0.5
+@export var FLOOR_COYOTE_TIME:float = 0.05
 var floor_coyote:float = 0.
 # Pour wall slide
 @export_category("Wall physics")
-@export var gravity_wall:float = 2000
-@export var wall_jump_speed_x: float = 800
-@export var wall_jump_speed_y:float = -800
+@export var GRAVITY_WALL:float = 2000
+@export var WALL_JUMP_SPEED_X: float = 800
+@export var WALL_JUMP_SPEED_Y:float = -800
+
+# Petit saut supplémentaire sur les murs
+@export var SMALL_WALL_JUMP_Y:float = - 600
+@export var MAX_SMALL_WALL_JUMP = 1
+var small_wall_jump_cpt = MAX_SMALL_WALL_JUMP
+
+# Permet de ramper sur long d'un mur en partant du sol
+@export var FLOOR_WALL_JUMP_Y:float = - 400
+@export var MAX_FLOOR_WALL_JUMP = 1
+var floor_wall_jump_cpt = MAX_FLOOR_WALL_JUMP
+
 
 # Lorsque le joueur viens d'attérir sur un mur, 
 # il a un petit peu de temps avant de subir la gravité à nouveau.
-@export var wall_grip_coyote_time = 0.3 
+@export var WALL_GRIP_COYOTE_TIME = 0.3 
 # Pour wall-jump, il faut un saut enregistré + le joueur change de sens
-@export var wall_jump_buffer_time = 0.5 # temps durant lequel un saut est enregistré
-@export var wall_change_coyote_time = 0.1 # temps durant lequel le changement de dir est valable
+@export var WALL_JUMP_BUFFER_TIME = 0.5 # temps durant lequel un saut est enregistré
+@export var WALL_CHANGE_COYOTE_TIME = 0.1 # temps durant lequel le changement de dir est valable
 
-@export var wall_contact_coyote_time:float = 0.2 # record last contact with a wall
+@export var WALL_CONTACT_COYOTE_TIME:float = 0.2 # record last contact with a wall
 # apres un wall-jump, le joueur ne peut pas ressauter immédiatement.
-@export var wall_jump_lock_time:float= 0.05
+@export var WALL_JUMP_LOCK_TIME:float= 0.05
+
+
 
 var wall_grip_coyote:float =0.
 var wall_change_coyote:float = 0.
@@ -47,8 +60,14 @@ var wall_jump_lock:float = 0.
 
 var look_dir_x:int = 1
 
+
 var shock_state = false
+var glissade_state = false
+
+var compteur = 1
+
 @onready var shock_timer: Timer = $shockTimer
+@onready var oil_timer: Timer = $oilTimer
 
 @onready var animation_player = $AnimatedSprite2D
 @onready var shocked_sprite: AnimatedSprite2D = $ShockedSprite
@@ -65,7 +84,7 @@ var shock_state = false
 @onready var camera_labyrinth: Camera2D = $"../Level/LabyrinthArea/CameraLabyrinth"
 
 
-var compteur = 1
+
 
 
 func _ready():
@@ -77,6 +96,7 @@ func _physics_process(delta):
 	# Met à jour l'affichage de la velocité
 	physic_label_update()
 	
+	
 	if show_wall_debug:
 		# Permet de visualiser (en utilisant des couleurs) l'état du joueur :
 		# Rouge si le joueur est sur le mur, vert si le coyote >0, et jaune si
@@ -85,11 +105,11 @@ func _physics_process(delta):
 		
 		
 	if not UseStateMachine:
-		velocity.y += gravity * delta
+		velocity.y += GRAVITY * delta
 		var dir = Input.get_axis("walk_left", "walk_right")
 		if dir != 0:
 			
-			velocity.x = lerp(velocity.x, dir * speed, acceleration)
+			velocity.x = lerp(velocity.x, dir * SPEED, acceleration)
 			$AnimatedSprite2D.play("run")
 			if velocity.x < 0:
 				$AnimatedSprite2D.flip_h = true
@@ -106,11 +126,11 @@ func _physics_process(delta):
 		
 		if compteur==1:
 			if Input.is_action_just_pressed("jump") and is_on_floor():
-				velocity.y = jump_speed_y
+				velocity.y = JUMP_SPEED_Y
 				$AnimatedSprite2D.set_animation("jump")
 				rotation_degrees = 0.
 			if Input.is_action_just_pressed("jump") and is_on_wall():
-				velocity.y = jump_speed_y
+				velocity.y = JUMP_SPEED_Y
 				if absf(velocity.y) > 1:
 					$AnimatedSprite2D.play("run")
 						
@@ -136,6 +156,19 @@ func shock():
 	shock_animation.play("RESET")
 	shocked_sprite.pause()
 
+func glissade():
+	# TODO : 
+	# 1 - Enregistrer la dir actuelle du joueur (ou à défaut, la vélocité X)
+	# 2 - Dans l'état running, empecher la lecture de dir, et à la place, faire glisser
+	# 3 - désactiver le saut et le wall sliding.
+	if !glissade_state:
+		glissade_state = true
+		var buf_speed = SPEED
+		SPEED *= 3.
+		oil_timer.start()
+		await oil_timer.timeout
+		glissade_state = false
+		SPEED = buf_speed
 
 func _on_tapette_a_souris_body_entered(body: Node2D, source: Area2D) -> void:
 	source.activate()

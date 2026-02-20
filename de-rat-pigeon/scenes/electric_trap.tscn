@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://c4rt56iyjjpx1"]
+[gd_scene load_steps=16 format=3 uid="uid://c4rt56iyjjpx1"]
 
 [ext_resource type="Texture2D" uid="uid://cb4lti03e12du" path="res://Assets/Tiles/Elec/shock0000.png" id="1_c16r2"]
 [ext_resource type="Script" uid="uid://cqsnth7vm2epq" path="res://scripts/electric_trap.gd" id="1_qshd7"]
@@ -70,9 +70,6 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ajo4f"]
 size = Vector2(19, 56)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_a71i6"]
-size = Vector2(12, 12)
-
 [node name="ElectricTrap" type="Node2D"]
 script = ExtResource("1_qshd7")
 delais_shocks = 3.0
@@ -95,16 +92,6 @@ debug_color = Color(0.28544828, 0.63087994, 3.85046e-07, 0.41960785)
 
 [node name="Timer" type="Timer" parent="Zap"]
 autostart = true
-
-[node name="FixParts" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="FixParts"]
-position = Vector2(18, -31)
-shape = SubResource("RectangleShape2D_a71i6")
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="FixParts"]
-position = Vector2(18, 31)
-shape = SubResource("RectangleShape2D_a71i6")
 
 [connection signal="body_entered" from="Zap" to="." method="_on_zap_body_entered"]
 [connection signal="timeout" from="Zap/Timer" to="." method="_on_timer_timeout"]

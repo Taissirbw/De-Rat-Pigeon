@@ -6,20 +6,23 @@ var dir
 var last_wall_dir
 
 func enter(previous_state_path: String, data := {}) -> void:	
-	#print("Entered CLIMBING")		
-	print("Velocite entrée Wall Slide ", player.velocity.x)
-	player.look_dir_x = sign(player.velocity.x)
-	last_wall_dir = player.look_dir_x
-
+	#state_print("Entered CLIMBING")		
+	
 	player.animation_player.play("walk")
 	#player.animation_player.flip_h = ! bool(player.look_dir_x)
 	player.rotation_degrees = -90. * player.look_dir_x
 	
-	player.wall_grip_coyote = player.wall_grip_coyote_time
-
+	player.look_dir_x = sign(player.velocity.x)
+	last_wall_dir = player.look_dir_x
+	
+	player.wall_grip_coyote = player.WALL_GRIP_COYOTE_TIME
+	
+	if previous_state_path != "Falling":
+		player.small_wall_jump_cpt = player.MAX_SMALL_WALL_JUMP
+		player.floor_wall_jump_cpt = player.MAX_FLOOR_WALL_JUMP
 
 func linear_jump(a, b):
-	return Vector2(a*player.wall_jump_speed_x, b*player.wall_jump_speed_y)
+	return Vector2(a*player.WALL_JUMP_SPEED_X, b*player.WALL_JUMP_SPEED_Y)
 
 func physics_update(delta: float) -> void:
 	if stateVersion:
@@ -31,7 +34,7 @@ func physics_update(delta: float) -> void:
 		dir = Input.get_axis("walk_left", "walk_right")
 		var previous_dir = player.look_dir_x
 		if dir != 0:
-			player.velocity.x = lerp(player.velocity.x, dir * player.speed, player.acceleration)
+			player.velocity.x = lerp(player.velocity.x, dir * player.SPEED, player.acceleration)
 		else:
 			player.velocity.x = lerp(player.velocity.x, 0.0, player.friction)
 		player.look_dir_x = sign(player.velocity.x)
@@ -53,7 +56,7 @@ func physics_update(delta: float) -> void:
 		# jsp ce que ça fait
 		if player.wall_jump_lock > 0.:
 			player.wall_jump_lock -= delta
-			player.velocity.x = lerp(player.velocity.x, dir * player.speed, player.acceleration * 0.5)
+			player.velocity.x = lerp(player.velocity.x, dir * player.SPEED, player.acceleration * 0.5)
 		
 		if player.wall_grip_coyote > 0.:
 			player.wall_grip_coyote -= delta
@@ -62,7 +65,13 @@ func physics_update(delta: float) -> void:
 			if Input.is_action_just_pressed("jump"):
 				finished.emit(JUMPING)
 			else:
-				if absf(player.velocity.x) > 1:
+				if player.is_on_wall() and player.floor_wall_jump_cpt > 0:
+					state_print("Floor-Wall jump")
+					player.velocity.y = player.FLOOR_WALL_JUMP_Y 
+					player.floor_wall_jump_cpt = 0
+					player.wall_jump_buffer = 0.
+				elif absf(player.velocity.x) > 1:
+					state_print("to running")
 					finished.emit(RUNNING)
 				else:
 					finished.emit(IDLE)
@@ -71,32 +80,46 @@ func physics_update(delta: float) -> void:
 		elif (player.is_on_wall_only() or player.wall_contact_coyote >0.):
 
 			if sign(dir) == sign(player.get_wall_normal().x):
-				player.wall_change_coyote = player.wall_change_coyote_time
+				player.wall_change_coyote = player.WALL_CHANGE_COYOTE_TIME
 			else:
 				if player.wall_change_coyote > 0.:
 					player.wall_change_coyote -= delta
 
 			# Stocke le dernier saut
 			if Input.is_action_just_pressed("jump"):
-				player.wall_jump_buffer = player.wall_jump_buffer_time
+				player.wall_jump_buffer = player.WALL_JUMP_BUFFER_TIME
 			else:
 				player.wall_jump_buffer -= delta
-
-			# Wall jump
-			if player.wall_change_coyote > 0. and player.wall_jump_buffer >0.:
-					#print("Jump on wall")
-					var jump = linear_jump(1.25, 1.)
+			
+			# Wall jump logic :
+			if player.wall_jump_buffer > 0.:
+				
+				# Grand saut vers le mur opposé
+				if player.wall_change_coyote > 0.:
+						#state_print("Jump on wall")
+						var jump = linear_jump(1.25, 1.)
+						player.velocity.y = jump.y
+						
+						# Repousse vers la direction opposée au mur
+						player.velocity.x = -player.look_dir_x * jump.x
+						# (Re)initialise les compteurs
+						player.wall_jump_lock = player.WALL_JUMP_LOCK_TIME
+						player.small_wall_jump_cpt = player.MAX_SMALL_WALL_JUMP
+						player.floor_wall_jump_cpt = player.MAX_FLOOR_WALL_JUMP
+						player.wall_change_coyote = 0.
+						player.wall_jump_buffer = 0.
+				
+				# Petit saut le long du mur
+				elif player.small_wall_jump_cpt > 0:
+					player.velocity.y = player.SMALL_WALL_JUMP_Y
 					
-					player.velocity.y = jump.y
-					# Repousse vers la direction opposée au mur
-					player.velocity.x = -player.look_dir_x * jump.x
-					player.wall_jump_lock = player.wall_jump_lock_time
-					player.wall_change_coyote = 0.
+					# Reinitialise les compteurs
+					player.small_wall_jump_cpt = 0
 					player.wall_jump_buffer = 0.
-
+			
 			# Maj du dernier temps de contact avec un mur
 			if player.is_on_wall_only(): 
-				player.wall_contact_coyote = player.wall_contact_coyote_time
+				player.wall_contact_coyote = player.WALL_CONTACT_COYOTE_TIME
 				last_wall_dir = player.look_dir_x
 			else:
 				player.wall_contact_coyote -= delta
@@ -104,12 +127,10 @@ func physics_update(delta: float) -> void:
 			## WALL GRIP
 			# Empeche le joueur de glisser vers le bas lors de l'atterissage
 			if player.wall_grip_coyote > 0. and player.is_on_wall_only():
-				#pass
-				var max_jump = max(player.velocity.y, player.wall_jump_speed_y)
-				player.velocity.y = min(max_jump, 0.)
+				player.velocity.y = min(player.velocity.y, 0.)
 			# Au dela de ce temps, il glisse le long du mur
 			else:
-				player.velocity.y += player.gravity_wall * delta
+				player.velocity.y += player.GRAVITY_WALL * delta
 		else:
 			player.wall_change_coyote = 0.
 			player.wall_jump_buffer = 0.

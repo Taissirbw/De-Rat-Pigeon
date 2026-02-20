@@ -2,7 +2,7 @@ extends State
 
 
 func enter(previous_state_path: String, data := {}) -> void:
-	#print("Entered IDLE")
+	#state_print("Entered IDLE")
 	player.velocity.x = 0.0
 	player.animation_player.play("idle")
 	# Remet tout bien
@@ -17,13 +17,13 @@ func physics_update(delta: float) -> void:
 			finished.emit(SHOCKED)
 		# Décremente le timer coyote
 		if player.is_on_wall():
-			player.wall_contact_coyote = player.wall_contact_coyote_time
+			player.wall_contact_coyote = player.WALL_CONTACT_COYOTE_TIME
 		elif player.wall_contact_coyote > 0.:
 			player.wall_contact_coyote -= delta
 		#player.move_and_slide()
 		
 		if player.is_on_floor():
-			player.floor_coyote = player.floor_coyote_time
+			player.floor_coyote = player.FLOOR_COYOTE_TIME
 		elif player.floor_coyote > 0.:
 			player.floor_coyote = 0
 

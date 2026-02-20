@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://bhusu3f2sp4sg"]
+
+[ext_resource type="Script" uid="uid://y8gme5m6ey2g" path="res://scripts/oil.gd" id="1_vcmh2"]
+[ext_resource type="Texture2D" uid="uid://cmegrogo0h1g0" path="res://Assets/Tiles/oil_puddle.png" id="1_vdcy5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vcmh2"]
+size = Vector2(63, 21)
+
+[node name="Oil" type="Area2D"]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("1_vcmh2")
+
+[node name="OilPuddle" type="Sprite2D" parent="."]
+texture = ExtResource("1_vdcy5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-2.5, 26.5)
+shape = SubResource("RectangleShape2D_vcmh2")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
