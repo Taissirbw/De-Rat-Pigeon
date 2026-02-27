@@ -63,6 +63,7 @@ var look_dir_x:int = 1
 
 var shock_state = false
 var glissade_state = false
+var oil_tween:Tween
 
 var compteur = 1
 
@@ -72,6 +73,7 @@ var compteur = 1
 @onready var animation_player = $AnimatedSprite2D
 @onready var shocked_sprite: AnimatedSprite2D = $ShockedSprite
 @onready var shock_animation: AnimationPlayer = $ShockAnimation
+@onready var oil: Sprite2D = $AnimatedSprite2D/Oil
 
 @onready var state_machine = $StateMachine
 @onready var collision_shape = $CollisionShape2D
@@ -170,6 +172,12 @@ func glissade():
 		WALL_JUMP_SPEED_X /=3.
 		WALL_JUMP_SPEED_Y /=3.
 		
+		oil.modulate.a = 90
+	
+		if oil_tween:
+			oil_tween.kill()
+		oil_tween = create_tween()
+		oil_tween.tween_property(oil, "modulate:a", 0., oil_timer.wait_time)
 		oil_timer.start()
 		await oil_timer.timeout
 		glissade_state = false
