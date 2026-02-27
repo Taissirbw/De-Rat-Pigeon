@@ -172,14 +172,16 @@ func glissade():
 		WALL_JUMP_SPEED_X /=3.
 		WALL_JUMP_SPEED_Y /=3.
 		
-		oil.modulate.a = 90
+		oil.modulate.a = 1.
 	
 		if oil_tween:
 			oil_tween.kill()
 		oil_tween = create_tween()
-		oil_tween.tween_property(oil, "modulate:a", 0., oil_timer.wait_time)
-		oil_timer.start()
-		await oil_timer.timeout
+		oil_tween.set_trans(Tween.TRANS_CUBIC)
+		oil_tween.set_ease(Tween.EASE_IN)
+		oil_tween.tween_property($AnimatedSprite2D/Oil, "modulate:a", 0., oil_timer.wait_time)
+		#oil_timer.start()
+		await oil_tween.finished
 		glissade_state = false
 		SPEED = buf_speed
 		WALL_JUMP_SPEED_X = buf_speedwx
