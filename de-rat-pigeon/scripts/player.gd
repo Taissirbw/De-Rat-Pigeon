@@ -164,11 +164,19 @@ func glissade():
 	if !glissade_state:
 		glissade_state = true
 		var buf_speed = SPEED
-		SPEED *= 3.
+		var buf_speedwx = WALL_JUMP_SPEED_X
+		var buf_speedwy = WALL_JUMP_SPEED_Y
+		SPEED /= 3.
+		WALL_JUMP_SPEED_X /=3.
+		WALL_JUMP_SPEED_Y /=3.
+		
 		oil_timer.start()
 		await oil_timer.timeout
 		glissade_state = false
 		SPEED = buf_speed
+		WALL_JUMP_SPEED_X = buf_speedwx
+		WALL_JUMP_SPEED_Y = buf_speedwy
+		
 
 func _on_tapette_a_souris_body_entered(body: Node2D, source: Area2D) -> void:
 	source.activate()
