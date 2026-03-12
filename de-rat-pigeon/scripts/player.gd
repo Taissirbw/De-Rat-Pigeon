@@ -13,7 +13,7 @@ class_name Player extends CharacterBody2D
 @export var land_on_floor_sound:AudioStreamWAV
 @export var wall_touch_sound:AudioStreamWAV
 @export var oil_sound:AudioStreamWAV
-
+@export var sounds_loop =0
 @export_category("Normal physics")
 @export var GRAVITY = 2200
 @export_range(0.0, 1.0) var friction = 0.3
@@ -170,6 +170,7 @@ func glissade():
 	# 1 - Enregistrer la dir actuelle du joueur (ou à défaut, la vélocité X)
 	# 2 - Dans l'état running, empecher la lecture de dir, et à la place, faire glisser
 	# 3 - désactiver le saut et le wall sliding.
+	sounds_loop = 0
 	audio_player.stream = oil_sound
 	audio_player.volume_db=-1
 	audio_player.pitch_scale=1
@@ -219,3 +220,11 @@ func physic_label_update():
 func update_shader_coyote():
 	animation_player.material.set_shader_parameter("on_wall", is_on_wall())
 	animation_player.material.set_shader_parameter("coyote_pos", wall_contact_coyote > 0.)
+
+
+
+
+func _on_audio_player_finished() -> void:
+	if sounds_loop:
+		audio_player.play()
+	pass # Replace with function body.
