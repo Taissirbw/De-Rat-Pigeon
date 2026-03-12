@@ -77,6 +77,7 @@ var compteur = 1
 @onready var oil_timer: Timer = $oilTimer
 
 @onready var animation_player = $AnimatedSprite2D
+@onready var particles = $Particles
 @onready var shocked_sprite: AnimatedSprite2D = $ShockedSprite
 @onready var shock_animation: AnimationPlayer = $ShockAnimation
 @onready var oil: Sprite2D = $AnimatedSprite2D/Oil
