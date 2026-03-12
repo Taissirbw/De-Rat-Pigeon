@@ -8,6 +8,12 @@ class_name Player extends CharacterBody2D
 # Imprime les transitions d'états dans la console.
 @export var print_state_transition = false
 
+@export_category("Sounds")
+@export var running_sound:AudioStreamWAV
+@export var land_on_floor_sound:AudioStreamWAV
+@export var wall_touch_sound:AudioStreamWAV
+
+
 @export_category("Normal physics")
 @export var GRAVITY = 2200
 @export_range(0.0, 1.0) var friction = 0.3
@@ -82,6 +88,7 @@ var compteur = 1
 @onready var coyote_label = $CanvasLayer/change_coyote
 
 @onready var camera_2d: Camera2D = $Camera2D
+@onready var audio_player = $AudioPlayer
 
 @onready var camera_labyrinth: Camera2D = $"../Level/LabyrinthArea/CameraLabyrinth"
 

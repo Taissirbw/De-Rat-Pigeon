@@ -375,3 +375,5 @@ offset_bottom = 55.0
 wait_time = 0.5
 
 [node name="oilTimer" type="Timer" parent="."]
+
+[node name="AudioPlayer" type="AudioStreamPlayer2D" parent="."]

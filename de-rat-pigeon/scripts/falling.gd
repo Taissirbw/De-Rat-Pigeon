@@ -28,6 +28,9 @@ func physics_update(delta: float) -> void:
 				finished.emit(WALL_SLIDING)
 
 			elif player.is_on_floor():
+				## Bit of code to play a sound once
+				# player.audio_player.stream = player.land_on_floor_sound
+				# player.audio_player.play()
 				if player.wall_contact_coyote > 0.:
 					player.wall_contact_coyote -= delta
 				if Input.is_action_just_pressed("jump") and ! player.shock_state:
