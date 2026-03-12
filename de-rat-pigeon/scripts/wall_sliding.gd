@@ -9,6 +9,8 @@ func enter(previous_state_path: String, data := {}) -> void:
 	#state_print("Entered CLIMBING")		
 	
 	player.animation_player.play("walk")
+	player.particles.play("run")
+	player.particles.show()
 	#player.animation_player.flip_h = ! bool(player.look_dir_x)
 	player.rotation_degrees = -90. * player.look_dir_x
 	
@@ -28,6 +30,7 @@ func physics_update(delta: float) -> void:
 	if stateVersion:
 		
 		if player.shock_state:
+			player.particles.hide()
 			finished.emit(SHOCKED)
 		
 		# Gère les inputs pour déterminer si le joueur va vers le mur
@@ -44,8 +47,10 @@ func physics_update(delta: float) -> void:
 		# soit sa vélocité y est élevée et le joueur n'est pas sur un mur
 		if player.look_dir_x == 0 or (player.velocity.y > 70 and not player.is_on_wall):
 			if player.is_on_floor():
+				player.particles.hide()
 				finished.emit(IDLE)
 			else:
+				player.particles.hide()
 				finished.emit(FALLING)
 
 		# Mets à jour le sens des sprites
@@ -63,6 +68,7 @@ func physics_update(delta: float) -> void:
 		
 		if player.is_on_floor():
 			if Input.is_action_just_pressed("jump"):
+				player.particles.hide()
 				finished.emit(JUMPING)
 			else:
 				if player.is_on_wall() and player.floor_wall_jump_cpt > 0:
@@ -74,6 +80,7 @@ func physics_update(delta: float) -> void:
 					state_print("to running")
 					finished.emit(RUNNING)
 				else:
+					player.particles.hide()
 					finished.emit(IDLE)
 			
 		# Derniers cas : le joueur reste dans l'état wall sliding
@@ -135,6 +142,7 @@ func physics_update(delta: float) -> void:
 			player.wall_change_coyote = 0.
 			player.wall_jump_buffer = 0.
 			#TODO Fix temporaire : il faudrait décrémenter la vélocité
+			player.particles.hide()
 			finished.emit(FALLING)
 
 		# Le moteur physique applique les forces

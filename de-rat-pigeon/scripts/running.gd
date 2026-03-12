@@ -13,6 +13,11 @@ func enter(previous_state_path: String, data := {}) -> void:
 	if abs(player.velocity.x) < player.WALK_SPEED:
 		player.animation_player.play("walk") 
 		player.audio_player.stream_paused =1
+	else:  
+		print("Run")
+		player.animation_player.play("run")
+		
+		player.particles.play("run")
 
 	else:  
 		print("Run")
