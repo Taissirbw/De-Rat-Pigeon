@@ -4,7 +4,7 @@ var dir
 
 func enter(previous_state_path: String, data := {}) -> void:
 	#state_print("RUNNING")
-	player.audio_player.playing = false
+	
 	player.sounds_loop = 1
 	player.audio_player.stream = player.running_sound
 	player.audio_player.volume_db= -18
@@ -67,6 +67,7 @@ func physics_update(delta: float) -> void:
 		if player.is_on_wall_only() and sign(dir) != sign(player.get_wall_normal().x) and player.velocity.x !=0.:
 			# state_print("Jumped from wall")
 			#player.particles.hide()
+			player.audio_player.playing = false
 			finished.emit(WALL_SLIDING)
 		else:
 			if player.wall_contact_coyote > 0.:
@@ -79,13 +80,16 @@ func physics_update(delta: float) -> void:
 					state_print("Jumped from wall+floor")
 					player.wall_jump_buffer = player.WALL_JUMP_BUFFER_TIME
 					#player.particles.hide()
+					player.audio_player.playing = false
 					finished.emit(WALL_SLIDING)
 				else:
 					state_print("Jumped from floor")
 					player.particles.hide()
+					player.audio_player.playing = false
 					finished.emit(JUMPING)
 			elif (absf(player.velocity.x) < player.SPEED/10.) and (dir == 0.):
 				player.particles.hide()
+				player.audio_player.playing = false
 				finished.emit(IDLE)
 			if player.is_on_floor():
 				player.floor_coyote = player.FLOOR_COYOTE_TIME
@@ -94,6 +98,7 @@ func physics_update(delta: float) -> void:
 		else: # Player not on the floor
 			state_print("FALLS from RUNNING")
 			player.particles.hide()
+			player.audio_player.playing = false
 			finished.emit(FALLING)
 		
 		
