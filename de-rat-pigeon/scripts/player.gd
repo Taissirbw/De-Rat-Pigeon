@@ -12,7 +12,7 @@ class_name Player extends CharacterBody2D
 @export var running_sound:AudioStreamWAV
 @export var land_on_floor_sound:AudioStreamWAV
 @export var wall_touch_sound:AudioStreamWAV
-
+@export var oil_sound:AudioStreamWAV
 
 @export_category("Normal physics")
 @export var GRAVITY = 2200
@@ -170,6 +170,10 @@ func glissade():
 	# 1 - Enregistrer la dir actuelle du joueur (ou à défaut, la vélocité X)
 	# 2 - Dans l'état running, empecher la lecture de dir, et à la place, faire glisser
 	# 3 - désactiver le saut et le wall sliding.
+	audio_player.stream = oil_sound
+	audio_player.volume_db=0
+	audio_player.volume_db=4
+	audio_player.play()
 	if !glissade_state:
 		glissade_state = true
 		var buf_speed = SPEED
