@@ -3,6 +3,7 @@ extends State
 
 func enter(previous_state_path: String, data := {}) -> void:
 	#state_print("Entered IDLE")
+	player.audio_player.playing = false
 	player.velocity.x = 0.0
 	player.animation_player.play("idle")
 	# Remet tout bien

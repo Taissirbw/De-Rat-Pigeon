@@ -29,6 +29,7 @@ func physics_update(delta: float) -> void:
 
 			elif player.is_on_floor():
 				## Bit of code to play a sound once
+				player.sounds_loop = 0
 				player.audio_player.stream = player.land_on_floor_sound
 				player.audio_player.volume_db= -12
 				player.audio_player.pitch_scale = 2
@@ -41,6 +42,7 @@ func physics_update(delta: float) -> void:
 				else:
 					if abs(player.velocity.x) < 70:
 						finished.emit(IDLE)
+						
 					else:
 						finished.emit(RUNNING)
 			

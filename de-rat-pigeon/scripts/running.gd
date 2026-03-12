@@ -4,21 +4,23 @@ var dir
 
 func enter(previous_state_path: String, data := {}) -> void:
 	#state_print("RUNNING")
-	player.running_sound.loop_mode= 1
-	player.running_sound.loop_end= 48000
+	player.audio_player.playing = false
+	player.sounds_loop = 1
 	player.audio_player.stream = player.running_sound
-	player.audio_player.volume_db= -12
-	player.audio_player.pitch_scale = 2
+	player.audio_player.volume_db= -18
+	player.audio_player.pitch_scale = 1.5
 	player.audio_player.play()
 	player.particles.show()
 	if abs(player.velocity.x) < player.WALK_SPEED:
 		player.animation_player.play("walk") 
+		player.audio_player.stream_paused =1
+
 	else:  
 		print("Run")
 		player.animation_player.play("run")
 		
+		player.audio_player.stream_paused =1
 		player.particles.play("run")
-
 	
 	# Remet tout bien
 	player.rotation_degrees = 0.
@@ -32,6 +34,7 @@ func physics_update(delta: float) -> void:
 		if player.shock_state:
 			#player.wall_contact_coyote -= delta
 			#player.velocity.y += player.gravity * delta
+			player.audio_player.playing = false
 			finished.emit(SHOCKED)
 		
 		dir = Input.get_axis("walk_left", "walk_right")
@@ -49,8 +52,10 @@ func physics_update(delta: float) -> void:
 			#player.animation_player.offset.x = 0.
 
 		if abs(player.velocity.x) < player.WALK_SPEED:
+			
 			player.animation_player.play("walk") 
 		else:  
+			
 			player.particles.play("run")
 			player.animation_player.play("run") 
 
