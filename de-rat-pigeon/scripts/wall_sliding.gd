@@ -7,7 +7,7 @@ var last_wall_dir
 
 func enter(previous_state_path: String, data := {}) -> void:	
 	#state_print("Entered CLIMBING")		
-	player.audio_player.playing = false
+	
 	player.animation_player.play("walk")
 	player.particles.play("run")
 	player.particles.show()
@@ -31,6 +31,7 @@ func physics_update(delta: float) -> void:
 		
 		if player.shock_state:
 			player.particles.hide()
+			player.audio_player.playing = false
 			finished.emit(SHOCKED)
 		
 		# Gère les inputs pour déterminer si le joueur va vers le mur
@@ -48,9 +49,11 @@ func physics_update(delta: float) -> void:
 		if player.look_dir_x == 0 or (player.velocity.y > 70 and not player.is_on_wall):
 			if player.is_on_floor():
 				player.particles.hide()
+				player.audio_player.playing = false
 				finished.emit(IDLE)
 			else:
 				player.particles.hide()
+				player.audio_player.playing = false
 				finished.emit(FALLING)
 
 		# Mets à jour le sens des sprites
@@ -69,6 +72,7 @@ func physics_update(delta: float) -> void:
 		if player.is_on_floor():
 			if Input.is_action_just_pressed("jump"):
 				player.particles.hide()
+				player.audio_player.playing = false
 				finished.emit(JUMPING)
 			else:
 				if player.is_on_wall() and player.floor_wall_jump_cpt > 0:
@@ -78,9 +82,11 @@ func physics_update(delta: float) -> void:
 					player.wall_jump_buffer = 0.
 				elif absf(player.velocity.x) > 1:
 					state_print("to running")
+					player.audio_player.playing = false
 					finished.emit(RUNNING)
 				else:
 					player.particles.hide()
+					player.audio_player.playing = false
 					finished.emit(IDLE)
 			
 		# Derniers cas : le joueur reste dans l'état wall sliding
@@ -143,6 +149,7 @@ func physics_update(delta: float) -> void:
 			player.wall_jump_buffer = 0.
 			#TODO Fix temporaire : il faudrait décrémenter la vélocité
 			player.particles.hide()
+			player.audio_player.playing = false
 			finished.emit(FALLING)
 
 		# Le moteur physique applique les forces

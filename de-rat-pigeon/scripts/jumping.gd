@@ -4,7 +4,6 @@ var dir
 
 func enter(previous_state_path: String, data := {}) -> void:
 	#state_print("JUMPING")
-	player.audio_player.playing = false
 	player.velocity.y = player.JUMP_SPEED_Y
 	dir = Input.get_axis("walk_left", "walk_right")
 	player.velocity.x = max( player.JUMP_SPEED_X, abs(player.velocity.x))*dir 
@@ -21,6 +20,7 @@ func physics_update(delta: float) -> void:
 		if player.shock_state:
 			#player.wall_contact_coyote -= delta
 			#player.velocity.y += player.gravity * delta
+			player.audio_player.playing = false
 			finished.emit(SHOCKED)
 		
 		dir = Input.get_axis("walk_left", "walk_right")
@@ -34,6 +34,7 @@ func physics_update(delta: float) -> void:
 			state_print("Wall slide from jump 1/2: " + str(player.velocity.y))
 			player.velocity.y = max(player.velocity.y, player.WALL_JUMP_SPEED_Y/2.)
 			state_print("Wall slide from jump 2/2: " + str(player.velocity.y))
+			player.audio_player.playing = false
 			finished.emit(WALL_SLIDING)
 		else:
 			player.wall_contact_coyote -= delta
@@ -45,6 +46,7 @@ func physics_update(delta: float) -> void:
 		player.move_and_slide()
 		
 		if player.velocity.y>=0:
+			player.audio_player.playing = false
 			finished.emit(FALLING)
 		
 		
@@ -52,15 +54,19 @@ func physics_update(delta: float) -> void:
 		if Input.is_action_just_pressed("jump") and player.compteur == 1 :
 			if player.is_on_floor():
 				state_print("Jumping from floor")
+				player.audio_player.playing = false
 				finished.emit(JUMPING)
 			elif (player.is_on_wall_only() or player.wall_contact_coyote >0.) and player.velocity.x != 0:
 				state_print("Jump to wall sliding")
 				#player.wall_grip_coyote_time = player.wall_grip_coyote
+				player.audio_player.playing = false
 				finished.emit(WALL_SLIDING)
 				
 		elif player.is_on_floor():
 			if (absf(player.velocity.x) > player.SPEED/10.) or (dir != 0.):
+				player.audio_player.playing = false
 				finished.emit(RUNNING)
 			else:
+				player.audio_player.playing = false
 				finished.emit(IDLE)
 			

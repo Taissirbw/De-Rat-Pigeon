@@ -3,7 +3,6 @@ extends State
 
 func enter(previous_state_path: String, data := {}) -> void:
 	#state_print("Entered IDLE")
-	player.audio_player.playing = false
 	player.velocity.x = 0.0
 	player.animation_player.play("idle")
 	# Remet tout bien
@@ -15,6 +14,7 @@ func enter(previous_state_path: String, data := {}) -> void:
 func physics_update(delta: float) -> void:
 	if stateVersion:
 		if player.shock_state:
+			player.audio_player.playing = false
 			finished.emit(SHOCKED)
 		# Décremente le timer coyote
 		if player.is_on_wall():
@@ -29,11 +29,14 @@ func physics_update(delta: float) -> void:
 			player.floor_coyote = 0
 
 		if player.floor_coyote <= 0:
+			player.audio_player.playing = false
 			finished.emit(FALLING)
 		
 		# gestion des input, et transition depuis l'état IDLE
 		var dir = Input.get_axis("walk_left", "walk_right")
 		if Input.is_action_just_pressed("jump") and ! player.shock_state:
+			player.audio_player.playing = false
 			finished.emit(JUMPING)
 		elif dir != 0 and ! player.shock_state:
+			player.audio_player.playing = false
 			finished.emit(RUNNING)
