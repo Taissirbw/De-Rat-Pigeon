@@ -7,7 +7,7 @@ var last_wall_dir
 
 func enter(previous_state_path: String, data := {}) -> void:	
 	#state_print("Entered CLIMBING")		
-	
+	player.audio_player.playing = false
 	player.animation_player.play("walk")
 	player.particles.play("run")
 	player.particles.show()

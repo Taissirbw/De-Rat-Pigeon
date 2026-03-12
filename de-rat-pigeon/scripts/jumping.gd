@@ -4,7 +4,7 @@ var dir
 
 func enter(previous_state_path: String, data := {}) -> void:
 	#state_print("JUMPING")
-
+	player.audio_player.playing = false
 	player.velocity.y = player.JUMP_SPEED_Y
 	dir = Input.get_axis("walk_left", "walk_right")
 	player.velocity.x = max( player.JUMP_SPEED_X, abs(player.velocity.x))*dir 

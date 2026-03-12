@@ -4,10 +4,11 @@ var dir
 
 func enter(previous_state_path: String, data := {}) -> void:
 	#state_print("RUNNING")
+	player.audio_player.playing = false
 	player.sounds_loop = 1
 	player.audio_player.stream = player.running_sound
-	player.audio_player.volume_db= -12
-	player.audio_player.pitch_scale = 2
+	player.audio_player.volume_db= -18
+	player.audio_player.pitch_scale = 1.5
 	player.audio_player.play()
 	player.particles.show()
 	if abs(player.velocity.x) < player.WALK_SPEED:
@@ -54,7 +55,7 @@ func physics_update(delta: float) -> void:
 			
 			player.animation_player.play("walk") 
 		else:  
-			player.audio_player.playing = false
+			
 			player.particles.play("run")
 			player.animation_player.play("run") 
 
