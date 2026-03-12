@@ -4,10 +4,17 @@ var dir
 
 func enter(previous_state_path: String, data := {}) -> void:
 	#state_print("RUNNING")
+	player.running_sound.loop_mode= 1
+	player.running_sound.loop_end= 48000
+	player.audio_player.stream = player.running_sound
+	player.audio_player.volume_db= -12
+	player.audio_player.pitch_scale = 2
+	player.audio_player.play()
 	if abs(player.velocity.x) < player.WALK_SPEED:
 		player.animation_player.play("walk") 
 	else:  
 		player.animation_player.play("run") 
+
 	
 	# Remet tout bien
 	player.rotation_degrees = 0.
@@ -15,6 +22,7 @@ func enter(previous_state_path: String, data := {}) -> void:
 	player.animation_player.offset.y = 0.
 
 func physics_update(delta: float) -> void:
+
 	if stateVersion:
 		
 		if player.shock_state:
@@ -39,6 +47,7 @@ func physics_update(delta: float) -> void:
 		if abs(player.velocity.x) < player.WALK_SPEED:
 			player.animation_player.play("walk") 
 		else:  
+
 			player.animation_player.play("run") 
 
 		

@@ -1,7 +1,8 @@
-[gd_scene load_steps=50 format=3 uid="uid://cy5an5ksxdq7f"]
+[gd_scene load_steps=51 format=3 uid="uid://cy5an5ksxdq7f"]
 
 [ext_resource type="Script" uid="uid://dnvxrkor82gqb" path="res://scripts/player.gd" id="1_op7ga"]
 [ext_resource type="AudioStream" uid="uid://clka62atn24vy" path="res://Assets/Sounds/body hits metal 12.wav" id="2_jc3p3"]
+[ext_resource type="AudioStream" uid="uid://0u40viw6d7ka" path="res://Assets/Sounds/beads dropped onto beads 6.wav" id="2_t4otl"]
 [ext_resource type="Texture2D" uid="uid://bb5muevphoe5i" path="res://Assets/Player/RUN/RUN0000.png" id="3_4ni07"]
 [ext_resource type="AudioStream" uid="uid://dqkbx33nhdytq" path="res://Assets/Sounds/slime movement 3.wav" id="3_hax0n"]
 [ext_resource type="Shader" uid="uid://d2byo77143sro" path="res://Assets/player_hilghlight_debug.gdshader" id="3_pylmc"]
@@ -271,6 +272,7 @@ slide_on_ceiling = false
 platform_wall_layers = 1
 script = ExtResource("1_op7ga")
 UseStateMachine = true
+running_sound = ExtResource("2_t4otl")
 land_on_floor_sound = ExtResource("2_jc3p3")
 oil_sound = ExtResource("3_hax0n")
 WALL_JUMP_BUFFER_TIME = 1.0
