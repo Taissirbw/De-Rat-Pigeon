@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://dnvxrkor82gqb" path="res://scripts/player.gd" id="1_op7ga"]
 [ext_resource type="AudioStream" uid="uid://clka62atn24vy" path="res://Assets/Sounds/body hits metal 12.wav" id="2_jc3p3"]
 [ext_resource type="Texture2D" uid="uid://bb5muevphoe5i" path="res://Assets/Player/RUN/RUN0000.png" id="3_4ni07"]
-[ext_resource type="AudioStream" uid="uid://cayp1wfhqd7eh" path="res://Assets/Sounds/slime membrane 3.wav" id="3_hax0n"]
+[ext_resource type="AudioStream" uid="uid://dqkbx33nhdytq" path="res://Assets/Sounds/slime movement 3.wav" id="3_hax0n"]
 [ext_resource type="Shader" uid="uid://d2byo77143sro" path="res://Assets/player_hilghlight_debug.gdshader" id="3_pylmc"]
 [ext_resource type="Texture2D" uid="uid://cq4g734ofeq7s" path="res://Assets/Player/IDLE/IDLE.png" id="4_ke2ow"]
 [ext_resource type="Texture2D" uid="uid://brnrwux4hg72i" path="res://Assets/Player/RUN/RUN0003.png" id="4_l71n6"]

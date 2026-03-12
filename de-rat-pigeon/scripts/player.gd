@@ -171,8 +171,8 @@ func glissade():
 	# 2 - Dans l'état running, empecher la lecture de dir, et à la place, faire glisser
 	# 3 - désactiver le saut et le wall sliding.
 	audio_player.stream = oil_sound
-	audio_player.volume_db=0
-	audio_player.volume_db=4
+	audio_player.volume_db=3
+	audio_player.pitch_scale=1
 	audio_player.play()
 	if !glissade_state:
 		glissade_state = true
