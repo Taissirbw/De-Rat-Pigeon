@@ -563,6 +563,7 @@ font_size = 45
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 material = SubResource("ShaderMaterial_e8heu")
+rotation = -1.5707964
 collision_layer = 2
 slide_on_ceiling = false
 platform_wall_layers = 1
@@ -595,6 +596,7 @@ material = SubResource("ShaderMaterial_4ni07")
 position = Vector2(2, -11)
 sprite_frames = SubResource("SpriteFrames_dt7fs")
 animation = &"run"
+flip_h = true
 
 [node name="Oil" type="Sprite2D" parent="AnimatedSprite2D"]
 modulate = Color(0.49019608, 0, 0.53333336, 0)
