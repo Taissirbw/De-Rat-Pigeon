@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=4 uid="uid://qi5sgrgq52ih"]
+[gd_scene load_steps=13 format=4 uid="uid://qi5sgrgq52ih"]
 
 [ext_resource type="Script" uid="uid://drf3w115vbgqc" path="res://scripts/game.gd" id="1_fc0e3"]
 [ext_resource type="TileSet" uid="uid://b1c0h6ykoneay" path="res://Ressources/TileSet.tres" id="3_p57ef"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://ccsfs81eaeamc" path="res://scripts/camera_area.gd" id="7_gee14"]
 [ext_resource type="PackedScene" uid="uid://c4rt56iyjjpx1" path="res://scenes/electric_trap.tscn" id="7_u5sy4"]
 [ext_resource type="PackedScene" uid="uid://bhusu3f2sp4sg" path="res://scenes/oil.tscn" id="9_0tnpc"]
+[ext_resource type="Texture2D" uid="uid://cne4owllmhon4" path="res://Assets/carpe/carpe_1.png" id="10_vtaks"]
 [ext_resource type="PackedScene" uid="uid://ckg5kpbfsttto" path="res://scenes/mort_au_rats.tscn" id="14_7sc4i"]
 [ext_resource type="PackedScene" uid="uid://4irxpill6ri2" path="res://scenes/tapette_a_souris.tscn" id="15_80cx4"]
 
@@ -133,6 +134,11 @@ rotation = -3.1341324
 [node name="ElectricTrap4" parent="Level/piege/Elek" instance=ExtResource("7_u5sy4")]
 position = Vector2(6033.289, -14916.765)
 rotation = 0.04324869
+
+[node name="Carpe1" type="Sprite2D" parent="Level"]
+texture_filter = 1
+position = Vector2(510, -1230)
+texture = ExtResource("10_vtaks")
 
 [connection signal="body_entered" from="Level/LabyrinthArea" to="Level/LabyrinthArea" method="_on_body_entered"]
 [connection signal="body_exited" from="Level/LabyrinthArea" to="Level/LabyrinthArea" method="_on_body_exited"]
