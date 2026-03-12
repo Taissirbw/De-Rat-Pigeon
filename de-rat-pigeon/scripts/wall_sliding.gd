@@ -55,7 +55,23 @@ func physics_update(delta: float) -> void:
 
 		# Mets à jour le sens des sprites
 		#player.animation_player.flip_h = ! bool(player.look_dir_x)
-		player.rotation_degrees = -90. * player.look_dir_x
+		#player.rotation_degrees = -90. * player.look_dir_x
+		if player.look_dir_x == 1:
+			player.rotation_degrees = -90.
+			if sign(player.velocity.y) == 1:
+				# Le rat est sur un mur de droite, vers le bas
+				player.scale.x = -1.
+			elif sign(player.velocity.y) == -1:
+				# Le rat est sur un mur de droite, vers le haut
+				player.scale.x = 1.
+		elif player.look_dir_x == -1:
+			player.rotation_degrees = 90.
+			if sign(player.velocity.y) == 1:
+				# Le rat est sur un mur de gauche, vers le bas
+				player.scale.x = 1.
+			elif sign(player.velocity.y) == -1:
+				# Le rat est sur un mur de gauche, vers le haut
+				player.scale.x = -1.
 
 
 		# jsp ce que ça fait
