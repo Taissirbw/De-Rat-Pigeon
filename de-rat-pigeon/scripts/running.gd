@@ -46,11 +46,14 @@ func physics_update(delta: float) -> void:
 		player.look_dir_x = sign(player.velocity.x)
 		if player.look_dir_x < 0: # cours à gauche
 			player.animation_player.flip_h = true
+			player.particles.flip_h = true
 			#player.animation_player.offset.x = 30.
 		if player.look_dir_x > 0: #cours à droite
 			player.animation_player.flip_h = false
+			player.particles.flip_h = false
 			#player.animation_player.offset.x = 0.
 
+		
 		if abs(player.velocity.x) < player.WALK_SPEED:
 			
 			player.animation_player.play("walk") 

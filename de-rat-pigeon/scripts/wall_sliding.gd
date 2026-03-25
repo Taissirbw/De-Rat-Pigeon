@@ -11,8 +11,9 @@ func enter(previous_state_path: String, data := {}) -> void:
 	player.animation_player.play("walk")
 	player.particles.play("run")
 	player.particles.show()
-	#player.animation_player.flip_h = ! bool(player.look_dir_x)
-	player.rotation_degrees = -90. * player.look_dir_x
+	
+	player.animation_player.flip_h = (player.velocity.y < 5)
+	player.particles.flip_h = (player.velocity.y < 5)
 	
 	player.look_dir_x = sign(player.velocity.x)
 	last_wall_dir = player.look_dir_x
@@ -57,8 +58,12 @@ func physics_update(delta: float) -> void:
 				finished.emit(FALLING)
 
 		# Mets à jour le sens des sprites
-		#player.animation_player.flip_h = ! bool(player.look_dir_x)
-		player.rotation_degrees = -90. * player.look_dir_x
+		if abs(player.velocity.y) > 5:
+			player.animation_player.flip_h = (player.velocity.y > 5) or (last_wall_dir== -1) and not ((player.velocity.y > 5) and (last_wall_dir== -1))
+		player.rotation_degrees = -90. * last_wall_dir
+		
+		
+
 
 
 		# jsp ce que ça fait
