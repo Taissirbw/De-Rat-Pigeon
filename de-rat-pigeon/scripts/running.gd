@@ -4,22 +4,27 @@ var dir
 
 func enter(previous_state_path: String, data := {}) -> void:
 	#state_print("RUNNING")
-	
-	player.sounds_loop = 1
-	player.audio_player.stream = player.running_sound
-	player.audio_player.volume_db= -18
-	player.audio_player.pitch_scale = 1.5
-	player.audio_player.play()
+	if previous_state_path == FALLING or previous_state_path ==JUMPING :
+		player.sounds_loop = 0
+		player.audio_player.stream = player.land_on_floor_sound
+#		player.audio_player.volume_db= -12
+		player.audio_player.pitch_scale = 2
+		print(2)
+		player.audio_player.play()
+	else :
+		player.sounds_loop = 1
+		player.audio_player.stream = player.running_sound
+		player.audio_player.volume_db= -18
+		player.audio_player.pitch_scale = 1.5
+		player.audio_player.play()
 	player.particles.show()
 	if abs(player.velocity.x) < player.WALK_SPEED:
-		player.animation_player.play("walk") 
-		player.audio_player.stream_paused =1
+		player.animation_player.play("walk")  
 
 	else:  
 		print("Run")
 		player.animation_player.play("run")
 		
-		player.audio_player.stream_paused =1
 		player.particles.play("run")
 	
 	# Remet tout bien

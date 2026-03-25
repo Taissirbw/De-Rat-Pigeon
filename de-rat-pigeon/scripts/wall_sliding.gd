@@ -7,6 +7,12 @@ var last_wall_dir
 
 func enter(previous_state_path: String, data := {}) -> void:	
 	#state_print("Entered CLIMBING")		
+	if previous_state_path != WALL_SLIDING:
+		player.sounds_loop = 0
+		player.audio_player.stream = player.wall_touch_sound
+		player.audio_player.volume_db= -10
+		player.audio_player.pitch_scale = 0
+		player.audio_player.play()
 	
 	player.animation_player.play("walk")
 	player.particles.play("run")
