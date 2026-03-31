@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=4 uid="uid://qi5sgrgq52ih"]
+[gd_scene load_steps=19 format=4 uid="uid://qi5sgrgq52ih"]
 
 [ext_resource type="Script" uid="uid://drf3w115vbgqc" path="res://scripts/game.gd" id="1_fc0e3"]
 [ext_resource type="TileSet" uid="uid://b1c0h6ykoneay" path="res://Ressources/TileSet.tres" id="3_p57ef"]
@@ -40,6 +40,9 @@ size = Vector2(1055.5, 769)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gee14"]
 size = Vector2(804, 156)
+
+[sub_resource type="LabelSettings" id="LabelSettings_kvuet"]
+font_size = 50
 
 [node name="game" type="Node"]
 script = ExtResource("1_fc0e3")
@@ -184,6 +187,8 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = 1.0
+offset_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("12_dinhu")
@@ -192,12 +197,43 @@ patch_margin_top = 5
 patch_margin_right = 5
 patch_margin_bottom = 5
 
-[node name="volume" type="HSlider" parent="Menu_pause"]
-layout_mode = 0
-offset_right = 8.0
-offset_bottom = 16.0
+[node name="Volume" type="Control" parent="Menu_pause"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -365.0
+offset_top = -234.0
+offset_right = 366.0
+offset_bottom = -44.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="volume" type="HSlider" parent="Menu_pause/Volume"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -488.3333
+offset_bottom = -114.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(3, 3)
+size_flags_horizontal = 4
 max_value = 1.5
 step = 0.001
+metadata/_edit_lock_ = true
+
+[node name="Label" type="Label" parent="Menu_pause/Volume"]
+layout_mode = 1
+offset_right = 184.0
+offset_bottom = 69.0
+text = "Volume"
+label_settings = SubResource("LabelSettings_kvuet")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="body_entered" from="Level/LabyrinthArea" to="Level/LabyrinthArea" method="_on_body_entered"]
 [connection signal="body_exited" from="Level/LabyrinthArea" to="Level/LabyrinthArea" method="_on_body_exited"]
