@@ -89,8 +89,8 @@ var compteur = 1
 @onready var coyote_label = $CanvasLayer/change_coyote
 
 @onready var camera_2d: Camera2D = $Camera2D
-@onready var audio_player = $AudioPlayer
-
+@onready var audio_player = $AudioPlayer1
+@onready var audio_player2 = $AudioPlayer2
 @onready var camera_labyrinth: Camera2D = $"../Level/LabyrinthArea/CameraLabyrinth"
 
 

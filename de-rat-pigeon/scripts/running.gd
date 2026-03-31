@@ -5,18 +5,16 @@ var dir
 func enter(previous_state_path: String, data := {}) -> void:
 	#state_print("RUNNING")
 	if previous_state_path == FALLING or previous_state_path ==JUMPING :
-		player.sounds_loop = 0
-		player.audio_player.stream = player.land_on_floor_sound
-#		player.audio_player.volume_db= -12
-		player.audio_player.pitch_scale = 2
+		player.audio_player2.stream = player.land_on_floor_sound
+		player.audio_player2.volume_db= -12
+		player.audio_player2.pitch_scale = 2
 		print(2)
-		player.audio_player.play()
-	else :
-		player.sounds_loop = 1
-		player.audio_player.stream = player.running_sound
-		player.audio_player.volume_db= -18
-		player.audio_player.pitch_scale = 1.5
-		player.audio_player.play()
+		player.audio_player2.play()
+	player.sounds_loop = 1
+	player.audio_player.stream = player.running_sound
+	player.audio_player.volume_db= -18
+	player.audio_player.pitch_scale = 1.5
+	player.audio_player.play()
 	player.particles.show()
 	if abs(player.velocity.x) < player.WALK_SPEED:
 		player.animation_player.play("walk")  

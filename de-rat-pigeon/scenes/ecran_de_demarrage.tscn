@@ -1,0 +1,119 @@
+[gd_scene load_steps=7 format=3 uid="uid://c3dk4q7ppmou3"]
+
+[ext_resource type="Script" uid="uid://5du7evxrdch5" path="res://scenes/ecran_de_demarrage.gd" id="1_2nkeq"]
+[ext_resource type="Texture2D" uid="uid://cg5prgmeco07d" path="res://Assets/Tiles/wall_tile.png" id="1_kw7x6"]
+
+[sub_resource type="FontFile" id="FontFile_2nkeq"]
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/60/0/ascent = 0.0
+cache/0/60/0/descent = 0.0
+cache/0/60/0/underline_position = 0.0
+cache/0/60/0/underline_thickness = 0.0
+cache/0/60/0/scale = 1.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_x4145"]
+font = SubResource("FontFile_2nkeq")
+font_size = 60
+
+[sub_resource type="FontFile" id="FontFile_na72d"]
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/60/0/ascent = 0.0
+cache/0/60/0/descent = 0.0
+cache/0/60/0/underline_position = 0.0
+cache/0/60/0/underline_thickness = 0.0
+cache/0/60/0/scale = 1.0
+cache/0/61/0/ascent = 0.0
+cache/0/61/0/descent = 0.0
+cache/0/61/0/underline_position = 0.0
+cache/0/61/0/underline_thickness = 0.0
+cache/0/61/0/scale = 1.0
+cache/0/62/0/ascent = 0.0
+cache/0/62/0/descent = 0.0
+cache/0/62/0/underline_position = 0.0
+cache/0/62/0/underline_thickness = 0.0
+cache/0/62/0/scale = 1.0
+cache/0/40/0/ascent = 0.0
+cache/0/40/0/descent = 0.0
+cache/0/40/0/underline_position = 0.0
+cache/0/40/0/underline_thickness = 0.0
+cache/0/40/0/scale = 1.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_kgux8"]
+font = SubResource("FontFile_na72d")
+font_size = 40
+
+[node name="Ecran de demarrage" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_2nkeq")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_kw7x6")
+
+[node name="Titre" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -194.0
+offset_top = 136.0
+offset_right = 194.0
+offset_bottom = 211.0
+grow_horizontal = 2
+text = "De Rat À Pigeon"
+label_settings = SubResource("LabelSettings_x4145")
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="Debut" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -121.5
+offset_top = -34.5
+offset_right = 121.5
+offset_bottom = 28.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 40
+text = "Commencer
+"
+
+[node name="Credit" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -235.0
+offset_top = 394.0
+offset_right = 235.0
+offset_bottom = 469.0
+grow_horizontal = 2
+text = "De Taïssir et de Lazare"
+label_settings = SubResource("LabelSettings_kgux8")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="button_down" from="Debut" to="." method="_on_debut_button_down"]

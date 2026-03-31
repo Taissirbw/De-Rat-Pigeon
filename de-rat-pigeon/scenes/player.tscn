@@ -689,9 +689,15 @@ wait_time = 0.5
 
 [node name="oilTimer" type="Timer" parent="."]
 
-[node name="AudioPlayer" type="AudioStreamPlayer2D" parent="."]
+[node name="AudioPlayer2" type="AudioStreamPlayer2D" parent="."]
 volume_db = -12.071
 pitch_scale = 1.75
+bus = &"SFX2"
 
-[connection signal="finished" from="AudioPlayer" to="." method="_on_audio_player_finished"]
-[connection signal="finished" from="AudioPlayer" to="StateMachine/Running" method="_on_audio_player_finished"]
+[node name="AudioPlayer1" type="AudioStreamPlayer2D" parent="."]
+volume_db = -12.071
+pitch_scale = 1.75
+bus = &"SFX1"
+
+[connection signal="finished" from="AudioPlayer1" to="." method="_on_audio_player_finished"]
+[connection signal="finished" from="AudioPlayer1" to="StateMachine/Running" method="_on_audio_player_finished"]
