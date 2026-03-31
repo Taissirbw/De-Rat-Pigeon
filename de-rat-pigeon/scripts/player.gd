@@ -171,11 +171,10 @@ func glissade():
 	# 1 - Enregistrer la dir actuelle du joueur (ou à défaut, la vélocité X)
 	# 2 - Dans l'état running, empecher la lecture de dir, et à la place, faire glisser
 	# 3 - désactiver le saut et le wall sliding.
-	sounds_loop = 0
-	audio_player.stream = oil_sound
-	audio_player.volume_db=-1
-	audio_player.pitch_scale=1
-	audio_player.play()
+	audio_player2.stream = oil_sound
+	audio_player2.volume_db=-1
+	audio_player2.pitch_scale=1
+	audio_player2.play()
 	if !glissade_state:
 		glissade_state = true
 		var buf_speed = SPEED
