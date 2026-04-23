@@ -1,8 +1,10 @@
-[gd_scene load_steps=18 format=4 uid="uid://qi5sgrgq52ih"]
+[gd_scene load_steps=20 format=4 uid="uid://qi5sgrgq52ih"]
 
 [ext_resource type="Script" uid="uid://drf3w115vbgqc" path="res://scripts/game.gd" id="1_fc0e3"]
 [ext_resource type="TileSet" uid="uid://b1c0h6ykoneay" path="res://Ressources/TileSet.tres" id="3_p57ef"]
 [ext_resource type="Texture2D" uid="uid://dgy62xbl1voii" path="res://Assets/Tiles/props.png" id="4_kvpfn"]
+[ext_resource type="Texture2D" uid="uid://cx4to2t5csgkb" path="res://Assets/Tiles/Deco/high-2.png" id="5_ir15t"]
+[ext_resource type="Texture2D" uid="uid://dugolicu4m3th" path="res://Assets/Tiles/Deco/step.png" id="6_ir15t"]
 [ext_resource type="PackedScene" uid="uid://cy5an5ksxdq7f" path="res://scenes/player.tscn" id="6_j5wjh"]
 [ext_resource type="AudioStream" uid="uid://clka62atn24vy" path="res://Assets/Sounds/body hits metal 12.wav" id="6_kvuet"]
 [ext_resource type="PackedScene" uid="uid://truyffsrng0" path="res://scenes/tile_map_layer.tscn" id="6_ryrav"]
@@ -62,6 +64,14 @@ visible = false
 position = Vector2(13, -13)
 tile_map_data = PackedByteArray("AADn/woAAAAAAAEAAADt/wkAAAAAAAEAAADs/wkAAAAAAAAAAADu/wwAAAAAAAAAAADv/w0AAAAAAAAAAADp/wwAAAAAAAEAAADv/wsAAAAAAAEAAADz/wUAAAAAAAIAAADx/wEAAAAAAAIAAAD2/wAAAAAAAAAAAAD4//7/AAAAAAIAAAD4/wAAAAAAAAEAAAD2//7/AAAAAAEAAADz/wIAAAAAAAEAAAD+/wIAAAAAAAAAAAADAP7/AAAAAAAAAAD///7/AAAEAAQAAAD6/wIAAAACAAEAAAD+////AAAEAAQAAAD/////AAAFAAQAAAAKAPX/AAAAAAQAAAAJAPX/AAAAAAQAAAAMAPf/AAAAAAQAAAARAPj/AAAAAAQAAAD5//P/AAAAAAQAAAD7//P/AAAAAAQAAAD6//P/AAAAAAQAAAD7//L/AAAAAAMAAAD7/+//AAABAAMAAAD9/+z/AAABAAMAAAD+/+v/AAABAAMAAAD7/+v/AAABAAMAAAD2/+3/AAACAAIAAAD6/+r/AAACAAIAAAD3/+v/AAAAAAEAAAD4/+7/AAAAAAEAAAA=")
 tile_set = SubResource("TileSet_kvuet")
+
+[node name="High" type="Sprite2D" parent="TileMapLayerB"]
+position = Vector2(-1533, 814)
+texture = ExtResource("5_ir15t")
+
+[node name="Step" type="Sprite2D" parent="TileMapLayerB"]
+position = Vector2(-273, -1338)
+texture = ExtResource("6_ir15t")
 
 [node name="TileMapLayer4" type="TileMapLayer" parent="."]
 visible = false
