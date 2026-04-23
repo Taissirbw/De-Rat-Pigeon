@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=4 uid="uid://qi5sgrgq52ih"]
+[gd_scene load_steps=21 format=4 uid="uid://qi5sgrgq52ih"]
 
 [ext_resource type="Script" uid="uid://drf3w115vbgqc" path="res://scripts/game.gd" id="1_fc0e3"]
 [ext_resource type="TileSet" uid="uid://b1c0h6ykoneay" path="res://Ressources/TileSet.tres" id="3_p57ef"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://cy5an5ksxdq7f" path="res://scenes/player.tscn" id="6_j5wjh"]
 [ext_resource type="AudioStream" uid="uid://clka62atn24vy" path="res://Assets/Sounds/body hits metal 12.wav" id="6_kvuet"]
 [ext_resource type="PackedScene" uid="uid://truyffsrng0" path="res://scenes/tile_map_layer.tscn" id="6_ryrav"]
+[ext_resource type="Texture2D" uid="uid://bc5bei8hxq6ik" path="res://Assets/Tiles/Deco/up-up-up-2.png" id="7_ca42v"]
 [ext_resource type="Script" uid="uid://ccsfs81eaeamc" path="res://scripts/camera_area.gd" id="7_gee14"]
 [ext_resource type="PackedScene" uid="uid://c4rt56iyjjpx1" path="res://scenes/electric_trap.tscn" id="7_u5sy4"]
 [ext_resource type="PackedScene" uid="uid://bhusu3f2sp4sg" path="res://scenes/oil.tscn" id="9_0tnpc"]
@@ -72,6 +73,10 @@ texture = ExtResource("5_ir15t")
 [node name="Step" type="Sprite2D" parent="TileMapLayerB"]
 position = Vector2(-273, -1338)
 texture = ExtResource("6_ir15t")
+
+[node name="UpUpUp" type="Sprite2D" parent="TileMapLayerB"]
+position = Vector2(-320, 14)
+texture = ExtResource("7_ca42v")
 
 [node name="TileMapLayer4" type="TileMapLayer" parent="."]
 visible = false
