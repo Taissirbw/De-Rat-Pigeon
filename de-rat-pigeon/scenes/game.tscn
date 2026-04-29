@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=4 uid="uid://qi5sgrgq52ih"]
+[gd_scene load_steps=21 format=4 uid="uid://qi5sgrgq52ih"]
 
 [ext_resource type="Script" uid="uid://drf3w115vbgqc" path="res://scripts/game.gd" id="1_fc0e3"]
 [ext_resource type="AudioStream" uid="uid://b5t5qdx7aaaa3" path="res://Assets/Sounds/music1.wav" id="2_rysoc"]
@@ -14,7 +14,6 @@
 [ext_resource type="PackedScene" uid="uid://c4rt56iyjjpx1" path="res://scenes/electric_trap.tscn" id="7_u5sy4"]
 [ext_resource type="PackedScene" uid="uid://bhusu3f2sp4sg" path="res://scenes/oil.tscn" id="9_0tnpc"]
 [ext_resource type="Texture2D" uid="uid://cne4owllmhon4" path="res://Assets/carpe/carpe_1.png" id="10_vtaks"]
-[ext_resource type="Texture2D" uid="uid://sbfhj5f58svl" path="res://Assets/GUI/NinePatchRect.PNG" id="13_kvuet"]
 [ext_resource type="PackedScene" uid="uid://ckg5kpbfsttto" path="res://scenes/mort_au_rats.tscn" id="14_7sc4i"]
 [ext_resource type="PackedScene" uid="uid://4irxpill6ri2" path="res://scenes/tapette_a_souris.tscn" id="15_80cx4"]
 
@@ -44,9 +43,6 @@ size = Vector2(1055.5, 769)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gee14"]
 size = Vector2(804, 156)
-
-[sub_resource type="LabelSettings" id="LabelSettings_kvuet"]
-font_size = 50
 
 [node name="game" type="Node"]
 script = ExtResource("1_fc0e3")
@@ -192,68 +188,8 @@ texture_filter = 1
 position = Vector2(510, -1230)
 texture = ExtResource("10_vtaks")
 
-[node name="Menu_pause" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="NinePatchRect" type="NinePatchRect" parent="Menu_pause"]
-texture_filter = 1
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("13_kvuet")
-region_rect = Rect2(-1, 0, 253, 252)
-patch_margin_left = 60
-patch_margin_top = 60
-patch_margin_right = 60
-patch_margin_bottom = 60
-
-[node name="Volume" type="Control" parent="Menu_pause"]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -365.0
-offset_top = -234.0
-offset_right = 366.0
-offset_bottom = -44.0
-grow_horizontal = 2
-grow_vertical = 0
-
-[node name="volume" type="HSlider" parent="Menu_pause/Volume"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = -488.3333
-offset_bottom = -114.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(3, 3)
-size_flags_horizontal = 4
-max_value = 1.5
-step = 0.001
-metadata/_edit_lock_ = true
-
-[node name="Label" type="Label" parent="Menu_pause/Volume"]
-layout_mode = 1
-offset_right = 184.0
-offset_bottom = 69.0
-text = "Volume"
-label_settings = SubResource("LabelSettings_kvuet")
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="Ambiant_Music" type="AudioStreamPlayer" parent="."]
+process_mode = 3
 stream = ExtResource("2_rysoc")
 autoplay = true
 

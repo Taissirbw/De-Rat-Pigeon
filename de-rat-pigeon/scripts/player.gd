@@ -101,12 +101,13 @@ func _ready():
 	state_machine.init(self, UseStateMachine)
 	physic_label.text = "Velocity X : " + str(velocity.x) + "\n Velocity Y : " + str(velocity.y)
 
+
 func _physics_process(delta):
 	
 	# Met à jour l'affichage de la velocité
 	physic_label_update()
-	
-	
+		
+			
 	if show_wall_debug:
 		# Permet de visualiser (en utilisant des couleurs) l'état du joueur :
 		# Rouge si le joueur est sur le mur, vert si le coyote >0, et jaune si
