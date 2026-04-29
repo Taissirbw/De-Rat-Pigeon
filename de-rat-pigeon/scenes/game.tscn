@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=4 uid="uid://qi5sgrgq52ih"]
+[gd_scene load_steps=23 format=4 uid="uid://qi5sgrgq52ih"]
 
 [ext_resource type="Script" uid="uid://drf3w115vbgqc" path="res://scripts/game.gd" id="1_fc0e3"]
 [ext_resource type="AudioStream" uid="uid://b5t5qdx7aaaa3" path="res://Assets/Sounds/music1.wav" id="2_rysoc"]
@@ -9,13 +9,14 @@
 [ext_resource type="PackedScene" uid="uid://cy5an5ksxdq7f" path="res://scenes/player.tscn" id="6_j5wjh"]
 [ext_resource type="AudioStream" uid="uid://clka62atn24vy" path="res://Assets/Sounds/body hits metal 12.wav" id="6_kvuet"]
 [ext_resource type="PackedScene" uid="uid://truyffsrng0" path="res://scenes/tile_map_layer.tscn" id="6_ryrav"]
-[ext_resource type="Texture2D" uid="uid://bi2e0wsm8v58c" path="res://Assets/Tiles/Deco/up-up-up-2.png" id="7_ca42v"]
+[ext_resource type="Texture2D" uid="uid://bc5bei8hxq6ik" path="res://Assets/Tiles/Deco/up-up-up-2.png" id="7_ca42v"]
 [ext_resource type="Script" uid="uid://ccsfs81eaeamc" path="res://scripts/camera_area.gd" id="7_gee14"]
 [ext_resource type="PackedScene" uid="uid://c4rt56iyjjpx1" path="res://scenes/electric_trap.tscn" id="7_u5sy4"]
 [ext_resource type="PackedScene" uid="uid://bhusu3f2sp4sg" path="res://scenes/oil.tscn" id="9_0tnpc"]
 [ext_resource type="Texture2D" uid="uid://cne4owllmhon4" path="res://Assets/carpe/carpe_1.png" id="10_vtaks"]
 [ext_resource type="PackedScene" uid="uid://ckg5kpbfsttto" path="res://scenes/mort_au_rats.tscn" id="14_7sc4i"]
 [ext_resource type="PackedScene" uid="uid://4irxpill6ri2" path="res://scenes/tapette_a_souris.tscn" id="15_80cx4"]
+[ext_resource type="Texture2D" uid="uid://b3njdtrv348el" path="res://Assets/Tiles/Deco/dragon.png" id="18_ssvqc"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dinhu"]
 texture = ExtResource("4_kvpfn")
@@ -78,6 +79,10 @@ texture = ExtResource("6_ir15t")
 [node name="UpUpUp" type="Sprite2D" parent="TileMapLayerB"]
 position = Vector2(-320, 14)
 texture = ExtResource("7_ca42v")
+
+[node name="Dragon" type="Sprite2D" parent="TileMapLayerB"]
+position = Vector2(928, -757)
+texture = ExtResource("18_ssvqc")
 
 [node name="TileMapLayer4" type="TileMapLayer" parent="."]
 visible = false
