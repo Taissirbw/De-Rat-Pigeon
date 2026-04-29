@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="De-Rat-Pigeon"
-run/main_scene="uid://qi5sgrgq52ih"
+run/main_scene="uid://c3dk4q7ppmou3"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://Assets/icon.svg"
 

@@ -1,6 +1,7 @@
-[gd_scene load_steps=18 format=4 uid="uid://qi5sgrgq52ih"]
+[gd_scene load_steps=23 format=4 uid="uid://qi5sgrgq52ih"]
 
 [ext_resource type="Script" uid="uid://drf3w115vbgqc" path="res://scripts/game.gd" id="1_fc0e3"]
+[ext_resource type="AudioStream" uid="uid://b5t5qdx7aaaa3" path="res://Assets/Sounds/music1.wav" id="2_rysoc"]
 [ext_resource type="TileSet" uid="uid://b1c0h6ykoneay" path="res://Ressources/TileSet.tres" id="3_p57ef"]
 [ext_resource type="Texture2D" uid="uid://dgy62xbl1voii" path="res://Assets/Tiles/props.png" id="4_kvpfn"]
 [ext_resource type="Texture2D" uid="uid://cx4to2t5csgkb" path="res://Assets/Tiles/Deco/high-2.png" id="5_ir15t"]
@@ -8,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://cy5an5ksxdq7f" path="res://scenes/player.tscn" id="6_j5wjh"]
 [ext_resource type="AudioStream" uid="uid://clka62atn24vy" path="res://Assets/Sounds/body hits metal 12.wav" id="6_kvuet"]
 [ext_resource type="PackedScene" uid="uid://truyffsrng0" path="res://scenes/tile_map_layer.tscn" id="6_ryrav"]
-[ext_resource type="Texture2D" uid="uid://bc5bei8hxq6ik" path="res://Assets/Tiles/Deco/up-up-up-2.png" id="7_ca42v"]
+[ext_resource type="Texture2D" uid="uid://bi2e0wsm8v58c" path="res://Assets/Tiles/Deco/up-up-up-2.png" id="7_ca42v"]
 [ext_resource type="Script" uid="uid://ccsfs81eaeamc" path="res://scripts/camera_area.gd" id="7_gee14"]
 [ext_resource type="PackedScene" uid="uid://c4rt56iyjjpx1" path="res://scenes/electric_trap.tscn" id="7_u5sy4"]
 [ext_resource type="PackedScene" uid="uid://bhusu3f2sp4sg" path="res://scenes/oil.tscn" id="9_0tnpc"]
@@ -49,6 +50,7 @@ font_size = 50
 
 [node name="game" type="Node"]
 script = ExtResource("1_fc0e3")
+Music = ExtResource("2_rysoc")
 metadata/_edit_horizontal_guides_ = [814.0]
 
 [node name="TileMapLayerA" parent="." instance=ExtResource("6_ryrav")]
@@ -251,5 +253,10 @@ label_settings = SubResource("LabelSettings_kvuet")
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Ambiant_Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_rysoc")
+autoplay = true
+
 [connection signal="body_entered" from="Level/LabyrinthArea" to="Level/LabyrinthArea" method="_on_body_entered"]
 [connection signal="body_exited" from="Level/LabyrinthArea" to="Level/LabyrinthArea" method="_on_body_exited"]
+[connection signal="finished" from="Ambiant_Music" to="." method="_on_audio_stream_player_2d_finished"]
