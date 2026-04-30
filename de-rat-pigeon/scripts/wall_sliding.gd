@@ -105,14 +105,13 @@ func physics_update(delta: float) -> void:
 
 			if sign(dir) == sign(player.get_wall_normal().x):
 				player.wall_change_coyote = player.WALL_CHANGE_COYOTE_TIME
-			else:
-				if player.wall_change_coyote > 0.:
+			elif player.wall_change_coyote > 0.:
 					player.wall_change_coyote -= delta
 
 			# Stocke le dernier saut
 			if Input.is_action_just_pressed("jump"):
 				player.wall_jump_buffer = player.WALL_JUMP_BUFFER_TIME
-			else:
+			elif player.wall_jump_buffer >0:
 				player.wall_jump_buffer -= delta
 			
 			# Wall jump logic :
@@ -121,7 +120,7 @@ func physics_update(delta: float) -> void:
 				# Grand saut vers le mur opposé
 				if player.wall_change_coyote > 0.:
 						#state_print("Jump on wall")
-						var jump = linear_jump(1.25, 1.)
+						var jump = linear_jump(0.25, 1.)
 						player.velocity.y = jump.y
 						
 						# Repousse vers la direction opposée au mur
@@ -145,8 +144,9 @@ func physics_update(delta: float) -> void:
 			if player.is_on_wall_only(): 
 				player.wall_contact_coyote = player.WALL_CONTACT_COYOTE_TIME
 				last_wall_dir = player.look_dir_x
-			else:
+			elif player.wall_contact_coyote > 0:
 				player.wall_contact_coyote -= delta
+
 			
 			## WALL GRIP
 			# Empeche le joueur de glisser vers le bas lors de l'atterissage

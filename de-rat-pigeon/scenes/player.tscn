@@ -574,13 +574,13 @@ collision_layer = 2
 slide_on_ceiling = false
 platform_wall_layers = 1
 script = ExtResource("1_op7ga")
-UseStateMachine = true
 running_sound = ExtResource("2_j2b1d")
 land_on_floor_sound = ExtResource("3_j2b1d")
 wall_touch_sound = ExtResource("2_jc3p3")
 oil_sound = ExtResource("3_hax0n")
 WALL_JUMP_BUFFER_TIME = 1.0
-WALL_CHANGE_COYOTE_TIME = 0.2
+WALL_CHANGE_COYOTE_TIME = 1.0
+WALL_CONTACT_COYOTE_TIME = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_e36ub")
@@ -651,7 +651,6 @@ offset_left = 546.728
 offset_top = 757.20807
 offset_right = 819.728
 offset_bottom = 831.20807
-text = "gfdsfgfs"
 
 [node name="change_coyote" type="Label" parent="CanvasLayer"]
 offset_left = 18.0

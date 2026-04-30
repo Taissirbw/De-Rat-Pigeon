@@ -103,8 +103,9 @@ enabled = false
 tile_set = ExtResource("3_p57ef")
 
 [node name="Player" parent="." instance=ExtResource("6_j5wjh")]
-position = Vector2(-2536, 986)
+position = Vector2(-399, -1043)
 land_on_floor_sound = ExtResource("6_kvuet")
+WALL_GRIP_COYOTE_TIME = 5.0
 
 [node name="Level" type="Node2D" parent="."]
 

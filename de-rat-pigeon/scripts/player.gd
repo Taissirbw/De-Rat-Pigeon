@@ -1,12 +1,15 @@
 class_name Player extends CharacterBody2D
 
 @export_category("Debug Tools")
-# Active l'implémentation Machine à etats
-@export var UseStateMachine = false
-# Colore la sprite en fonction de l'état par rapport aux murs
+## Active l'implémentation Machine à etats
+@export var UseStateMachine = true
+## Colore la sprite en fonction de l'état par rapport aux murs
 @export var show_wall_debug = false
-# Imprime les transitions d'états dans la console.
+## Imprime les transitions d'états dans la console.
 @export var print_state_transition = false
+
+## Affiche en jeu les valeur du vecteur vélocité
+@export var show_velocities = false 
 
 @export_category("Sounds")
 @export var running_sound:AudioStreamWAV
@@ -44,24 +47,26 @@ var small_wall_jump_cpt = MAX_SMALL_WALL_JUMP
 var floor_wall_jump_cpt = MAX_FLOOR_WALL_JUMP
 
 
-# Lorsque le joueur viens d'attérir sur un mur, 
-# il a un petit peu de temps avant de subir la gravité à nouveau.
+## Lorsque le joueur viens d'attérir sur un mur, 
+## il a un petit peu de temps avant de subir la gravité à nouveau.
 @export var WALL_GRIP_COYOTE_TIME = 0.3 
-# Pour wall-jump, il faut un saut enregistré + le joueur change de sens
+## Pour wall-jump, il faut un saut enregistré + le joueur change de sens
 @export var WALL_JUMP_BUFFER_TIME = 0.5 # temps durant lequel un saut est enregistré
-@export var WALL_CHANGE_COYOTE_TIME = 0.1 # temps durant lequel le changement de dir est valable
-
-@export var WALL_CONTACT_COYOTE_TIME:float = 0.2 # record last contact with a wall
-# apres un wall-jump, le joueur ne peut pas ressauter immédiatement.
-@export var WALL_JUMP_LOCK_TIME:float= 0.05
+## temps durant lequel le changement de dir est valable
+@export var WALL_CHANGE_COYOTE_TIME = 0.5 
+## Temps de contact au mur max durant lequel on peut resauter.
+@export var WALL_CONTACT_COYOTE_TIME:float = 0.2 
+## apres un wall-jump, le joueur ne peut pas ressauter immédiatement.
+@export var WALL_JUMP_LOCK_TIME:float= 0.0
 
 
 
 var wall_grip_coyote:float =0.
 var wall_change_coyote:float = 0.
 var wall_jump_buffer:float = 0.
+## Temps depuis le dernier contact au mur
 var wall_contact_coyote:float = 0.
-
+## Temps depuis le dernier wall jump
 var wall_jump_lock:float = 0.
 
 var look_dir_x:int = 1
@@ -99,15 +104,18 @@ var compteur = 1
 
 func _ready():
 	state_machine.init(self, UseStateMachine)
-	physic_label.text = "Velocity X : " + str(velocity.x) + "\n Velocity Y : " + str(velocity.y)
-
+	if show_velocities:
+		physic_label.text = "Velocity X : " + str(velocity.x) + "\n Velocity Y : " + str(velocity.y)
+	else:
+		physic_label.visible = false
+		coyote_label.visible=false
 
 func _physics_process(delta):
 	
 	# Met à jour l'affichage de la velocité
-	physic_label_update()
+	if show_velocities:
+		physic_label_update()
 		
-			
 	if show_wall_debug:
 		# Permet de visualiser (en utilisant des couleurs) l'état du joueur :
 		# Rouge si le joueur est sur le mur, vert si le coyote >0, et jaune si
