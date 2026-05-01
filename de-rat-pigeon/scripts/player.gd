@@ -5,9 +5,10 @@ class_name Player extends CharacterBody2D
 @export var UseStateMachine = true
 ## Colore la sprite en fonction de l'état par rapport aux murs
 @export var show_wall_debug = false
+## Affiche l'état en jeu.
+@export var display_state_transition = false
 ## Imprime les transitions d'états dans la console.
 @export var print_state_transition = false
-
 ## Affiche en jeu les valeur du vecteur vélocité
 @export var show_velocities = false 
 
@@ -49,7 +50,7 @@ var floor_wall_jump_cpt = MAX_FLOOR_WALL_JUMP
 
 ## Lorsque le joueur viens d'attérir sur un mur, 
 ## il a un petit peu de temps avant de subir la gravité à nouveau.
-@export var WALL_GRIP_COYOTE_TIME = 0.3 
+@export var WALL_GRIP_TIME = 0.3 
 ## Pour wall-jump, il faut un saut enregistré + le joueur change de sens
 @export var WALL_JUMP_BUFFER_TIME = 0.5 # temps durant lequel un saut est enregistré
 ## temps durant lequel le changement de dir est valable
@@ -60,14 +61,16 @@ var floor_wall_jump_cpt = MAX_FLOOR_WALL_JUMP
 @export var WALL_JUMP_LOCK_TIME:float= 0.0
 
 
-
-var wall_grip_coyote:float =0.
+## Temps durant lequel le joueur reste accrocher au mur qd il atteris
+var wall_grip:float =0.
 var wall_change_coyote:float = 0.
 var wall_jump_buffer:float = 0.
 ## Temps depuis le dernier contact au mur
 var wall_contact_coyote:float = 0.
 ## Temps depuis le dernier wall jump
 var wall_jump_lock:float = 0.
+## Indique si je joueur saute a la frame physique
+var wall_jumped:bool = false
 
 var look_dir_x:int = 1
 
@@ -109,6 +112,7 @@ func _ready():
 	else:
 		physic_label.visible = false
 		coyote_label.visible=false
+	state_label.visible = display_state_transition
 
 func _physics_process(delta):
 	

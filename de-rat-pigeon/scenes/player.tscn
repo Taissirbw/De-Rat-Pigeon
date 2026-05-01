@@ -571,7 +571,6 @@ font_size = 50
 material = SubResource("ShaderMaterial_e8heu")
 rotation = -1.5707964
 collision_layer = 2
-slide_on_ceiling = false
 platform_wall_layers = 1
 script = ExtResource("1_op7ga")
 running_sound = ExtResource("2_j2b1d")
@@ -800,5 +799,6 @@ bus = &"SFX1"
 
 [connection signal="pressed" from="CanvasLayer/Menu_pauseg/Quitter" to="CanvasLayer/Menu_pauseg" method="_on_quitter_pressed"]
 [connection signal="pressed" from="CanvasLayer/Menu_pauseg/Reprendre" to="CanvasLayer/Menu_pauseg" method="_on_reprendre_pressed"]
+[connection signal="state_transition" from="StateMachine" to="." method="_on_state_machine_state_transition"]
 [connection signal="finished" from="AudioPlayer1" to="." method="_on_audio_player_finished"]
 [connection signal="finished" from="AudioPlayer1" to="StateMachine/Running" method="_on_audio_player_finished"]
